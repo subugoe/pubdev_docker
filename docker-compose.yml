@@ -1,0 +1,18 @@
+version: '2'
+services:
+    librecat:
+        build: .
+        ports:
+            - "5000:5000"
+#        links:
+#            - mongodb
+#            - elasticsearch
+    mongodb:
+        build: mongodb
+        ports:
+            - "27017:27017"
+    elasticsearch:
+        build: elasticsearch
+        ports:
+            - "9300:9300"
+            - "9200:9200"
