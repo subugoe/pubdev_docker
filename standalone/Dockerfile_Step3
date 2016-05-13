@@ -1,0 +1,23 @@
+FROM librecat_gosu:devel
+MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
+# 
+#   Step 3: Installing Java JRE-8
+#
+
+# Environment Variables
+ENV LANG C.UTF-8
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
+ENV JAVA_VERSION 8u72
+ENV JAVA_DEBIAN_VERSION 8u72-b15-1~bpo8+1
+ENV CA_CERTIFICATES_JAVA_VERSION 20140324
+
+# Installing Java JRE-8
+RUN set -x \
+    && apt-get install -y \
+        openjdk-8-jre-headless="$JAVA_DEBIAN_VERSION" \
+        ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION" \
+    && [ "$JAVA_HOME" = "$(docker-java-home)" ]
+    && rm -rf /var/lib/apt/lists/*
+
+# see CA_CERTIFICATES_JAVA_VERSION notes above
+RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
