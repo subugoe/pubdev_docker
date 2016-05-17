@@ -4,19 +4,22 @@ MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
 #   Step 1: Adding different repostories and install different tools i.e. build-essentials and so on
 #
 
+# Adding 'multiverse' in order to be able to install OpenJDK later
+RUN sed -i '/multiverse/s/#[\ ]*deb/deb/g' /etc/apt/sources.list
+
 # Prerequisites
 RUN set -x \
     && apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         wget \
-        numctl \
+        numactl \
         bzip2 \
         unzip \
         xz-utils \
         curl \
         sudo \
-        cpanmius \
-        build-essentials \
+        cpanminus \
+        build-essential \
         libexpat1-dev \
         libssl-dev \
         libxml2-dev \
@@ -32,16 +35,6 @@ RUN set -x \
         libdbd-mysql-perl \
     && rm -rf /var/lib/apt/lists/*
 
-# Environment Variables
-ENV GOSU_VERSION 1.7
-
-# Adding different keys
-# GoSu:
-    && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
-    && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-    && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
 # MongoDB
 RUN set -ex \
     apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys DFFA3DCF326E302C4787673A01C4E7FAAAB2461C \

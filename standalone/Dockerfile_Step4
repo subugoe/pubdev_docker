@@ -1,4 +1,4 @@
-FROM librecat_java:devel
+FROM librecat_jre:devel
 MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
 # 
 #   Step 4: Installing ElasticSearch 1.7

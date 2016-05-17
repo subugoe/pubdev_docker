@@ -7,24 +7,26 @@ u!/bin/bash
 # Different images are related to each other, do not mess with the order of creating them!
 
 # Step 1: Base
-# docker build -t librecat_base:devel -f Dockerfile_Step1 --force-rm
+# docker build -t librecat_base:devel --force-rm - < Dockerfile_Step1
 
 # Step 2: GoSu
-# docker build -t librecat_gosu:devel -f Dockerfile_Step2 --force-rm
+# docker build -t librecat_gosu:devel --force-rm - < Dockerfile_Step2
 
 # Step 3: Java JRE-8
-# docker build -t librecat_jre:devel -f Dockerfile_Step3 --force-rm
+# docker build -t librecat_jre:devel --force-rm - < Dockerfile_Step3
 
 # Step 4: ElasticSearch
-# docker build -t librecat_elastic:devel -f Dockerfile_Step4 --force-rm
+# docker build -t librecat_elastic:devel --force-rm - < Dockerfile_Step4
 
 # Step 5: MongoDB
-# docker build -t librecat_mongo:devel -f Dockerfile_Step5 --force-rm
+# docker build -t librecat_mongo:devel --force-rm - < Dockerfile_Step5
 
 # Step 6: Git Clone
-# docker build -t librecat_github:devel -f Dockerfile_Step6 --force-rm
+# docker build -t librecat_github:devel --force-rm - < Dockerfile_Step6
 
 # Step 7: Finally, LibreCat
-# docker build -t librecat_standalone:devel -f Dockerfile_Step7 --force-rm
+# docker build -t librecat_standalone:devel --force-rm - < Dockerfile_Step7
 
+# Cleaning house
+# docker rmi $(docker images -qf "dangling=true")
 exit 0
