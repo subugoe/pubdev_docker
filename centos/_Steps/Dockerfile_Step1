@@ -1,0 +1,38 @@
+FROM centos:7
+MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
+# 
+#   Step 1: Adding different repostories and install different tools i.e. build-essentials and so on
+#
+
+# Add extra Repository for ElasticSearch
+COPY elasticsearch-1.7.repo /etc/yum.repos.d
+COPY .profile /root
+
+RUN sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/CentOS-Base.repo
+
+# Setting locale
+COPY bashrc .
+RUN cat ./bashrc >> /etc/bashrc
+
+# Prepare to install
+RUN yum update -y \
+    && yum groupinstall -y "Development Tools" \
+    && yum install -y wget tar \
+    perl-ExtUtils-MakeMaker \
+    perl-CPAN \
+    tcp_wrappers-devel \
+    perl-YAML \
+    perl-Module-Build \
+    perl-Env \
+    expat-devel expat \
+    openssl-devel openssl \
+    libxml2 libxml2-devel \
+    libxslt libxslt-devel \
+    libgearman libgearman-devel gearmand \
+    gdbm gdbm-devel \
+    ImageMagick \
+    mariadb-devel mariadb-libs \
+    mongodb-devel -y \
+    && yum clean all
+
+RUN rm ./bashrc

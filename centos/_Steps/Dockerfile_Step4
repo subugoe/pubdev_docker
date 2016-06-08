@@ -1,0 +1,20 @@
+FROM librecat_jre
+MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
+# 
+#   Step 4: Installing ElasticSearch 1.7
+#
+
+# Installing ElasticSearch
+RUN set -x \
+    && yum update -y \
+    && yum install elasticsearch -y\
+    && yum clean all
+
+ENV PATH /usr/share/elasticsearch/bin:$PATH
+
+VOLUME /usr/share/elasticsearch/data
+
+COPY elasticsearch-entrypoint.sh ./elasticsearch-startup.sh
+
+EXPOSE 9200 9300
+ENTRYPOINT ["/elasticsearch-startup.sh"]
