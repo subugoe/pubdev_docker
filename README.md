@@ -1,5 +1,5 @@
 # pub_dev
-PUB/LibreCat docker image
+**PUB/LibreCat docker image**
 
 I used different official and unofficial docker-images as template and built my own:
 
@@ -13,12 +13,15 @@ I used different official and unofficial docker-images as template and built my 
 
 * MySQL 5.5 @: https://github.com/docker-library/mysql/tree/f7a67d7634a68d319988ad6f99729bfeaa84ceb2/5.5
 
-- 2016.06.08
+
+**__2016.06.08__**
 
 As of right now only the centOS version is functional. Though it will take a while, one Dockerfile suffices
 building the functional Image:
 
-$> docker build -t librecat --force-rm .
+```
+$ docker build -t librecat --force-rm .
+```
 
 Regards,
 
