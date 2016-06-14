@@ -1,0 +1,56 @@
+host: "http://localhost:5001"
+
+tmp_dir: '/data2/tmp'
+upload_dir: '/data2/librecat/file_uploads'
+
+thesis:
+    urn_prefix: 'urn:thesis-'
+
+store:
+  builtin_users:
+    package: Hash
+    options:
+      init_data:
+        # stored password authentication
+        - login: einstein
+          # password is same as login
+          # crypt a password with 'bmkpasswd [password]' in the shell
+          password: '$2a$08$p1zhJInkNqy9nvMFsEPde./hU4ERNQuX2UQUjZA/ddrp1uUXikn/6'
+          _id: 1234
+          super_admin: 1
+        # LDAP authentication
+        - login: nsteenla
+          _id: 4321
+
+authentication:
+  package: LibreCat::Auth::Multi
+  options:
+    methods:
+      # password auth against users in config
+      - package: LibreCat::Auth::Bag
+        options:
+          store: builtin_users
+          username_attr: login
+      # password auth against database users
+      - package: LibreCat::Auth::Bag
+        options:
+          bag: researcher
+          username_attr: login
+      # LDAP auth
+      - package: LibreCat::Auth::LDAP
+        options:
+          host: 'ldaps://ldaps.gwdg.de'
+          base: '********'
+          password: '********'
+          auth_base: 'ugentID=%s,ou=people,dc=Uni-Goettingen,dc=de'
+          search_filter: '(uid=%s)'
+          search_base: 'dc=ugent, dc=de'
+          search_attr: 'ugentID'
+
+user:
+  sources:
+    - store: builtin_users
+      username_attr: login
+    - bag: researcher
+      username_attr: login
+
