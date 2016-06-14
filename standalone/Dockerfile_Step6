@@ -1,9 +1,0 @@
-FROM librecat_mongo:devel
-MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
-# 
-#   Step 6: Adding LibreCat
-#
-
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN cd /srv \
-     && git clone --recursive https://github.com/LibreCat/LibreCat.git

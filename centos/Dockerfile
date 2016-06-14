@@ -42,7 +42,7 @@ RUN yum install -y tcp_wrappers-devel \
     gdbm gdbm-devel \
     ImageMagick \
     mariadb mariadb-libs mariadb-server mariadb-devel \
-    mongodb-devel -y \
+    mongodb-devel \
     java-1.7.0-openjdk \
     elasticsearch \
     sudo \

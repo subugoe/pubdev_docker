@@ -3,16 +3,22 @@ services:
     librecat:
         build: .
         ports:
-            - "5000:5000"
-#        links:
-#            - mongodb
-#            - elasticsearch
-    mongodb:
-        build: mongodb
+            - "5001:5001"
+        links:
+            - "mysql:mysqldb"
+            - "elasticsearch:searchnode"
+        env_file:
+            - ./conf/mysql.env
+    mysql:
+        build: mysql
+        image: mysql:5.5
         ports:
-            - "27017:27017"
+            - "3306:3306"
+        env_file:
+            - ./conf/mysql.env
     elasticsearch:
         build: elasticsearch
+        image: elasticsearch:1.7
         ports:
             - "9300:9300"
             - "9200:9200"
