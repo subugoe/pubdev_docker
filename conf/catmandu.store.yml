@@ -42,7 +42,8 @@ metrics:
 search:
   package: ElasticSearch
   options:
-    url: http://searchnode:9200/
+    nodes:
+        - searchnode:9200
     bags:
       project:
         cql_mapping:

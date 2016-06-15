@@ -34,7 +34,7 @@ RUN yum install -y tcp_wrappers-devel \
     libxml2 libxml2-devel \
     libxslt libxslt-devel \
     libgearman libgearman-devel gearmand \
-    mariadb-devel \
+    mariadb mariadb-devel \
     mongodb-devel \
     gdbm gdbm-devel \
     ImageMagick \
@@ -62,6 +62,7 @@ RUN cpanm -n -q Carton
 
 COPY gearman-entrypoint.sh ./gearboot.sh
 COPY docker-entrypoint.sh ./entrypoint.sh
+COPY conf/mysql-init.sql .
 RUN sed -i "s/NEW_PASSWORD/$MYSQL_ROOT_PASSWORD/g" entrypoint.sh
 
 #   Installing Perl-Modules and compiling everything
