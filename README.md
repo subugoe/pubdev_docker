@@ -24,7 +24,7 @@ $ docker-compose up -d
 
 after a while you can access the LibreCat as usual under:
 
-http://localhost:5001/
+    http://localhost:5001/
 
 **__2016.06.08__**
 
