@@ -16,22 +16,20 @@ I used different official and unofficial docker-images as template and built my 
 
 **_2016.06.15_**
 
-    `docker-compose` with _centos_ is moved to `centos-compose`. There are SymLinks to related folders created
+ `docker-compose` with _centos_ is moved to `centos-compose`. There are SymLinks to related folders created
 there. If the links won't work you may want to copy two folders `mysql` and `elasticsearch` from root up there.
 
-    There is an _ubuntu_ standalone version under `ubuntu` zu finden. The current `docker-compose` is based on _ubuntu_
+ There is an _ubuntu_ standalone version under `ubuntu` zu finden. The current `docker-compose` is based on _ubuntu_
 and `elasticsearch`.
 
-    **NOTE**: Remember to change the MYSQL_PASSWORD and/or MYSQL_ROOT_PASSWORD to somethingelse before you put the bundle
+ **NOTE**: Remember to change the MYSQL_PASSWORD and/or MYSQL_ROOT_PASSWORD to somethingelse before you put the bundle
 online.
 
 **_2016.06.15_**
 
 The 1st `docker-compose` version is ready:
 
-```
-$ docker-compose up -d
-```
+    $ docker-compose up -d
 
 after a while you can access the LibreCat as usual under:
 
@@ -42,9 +40,7 @@ after a while you can access the LibreCat as usual under:
 As of right now only the centOS version is functional. Though it will take a while, one Dockerfile suffices
 building the functional Image:
 
-```
-$ docker build -t librecat --force-rm .
-```
+    $ docker build -t librecat --force-rm .
 
 Regards,
 
