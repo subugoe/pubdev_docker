@@ -1,0 +1,128 @@
+FROM pub_pre
+MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
+# 
+# creating a predecessor for the LibreCat Image
+#
+
+ENV LIBRECATHOME /srv/LibreCat
+ENV MYSQL_USER root
+ENV MYSQL_PASSWORD $MYSQL_ROOT_PASSWORD
+
+
+RUN apt-get clean \
+    && apt-get --purge autoremove -y \
+    && apt-get update
+#   Installing Perl-Modules and compiling everything
+#   Finalizing setup and run Web-Interface under :5001
+#
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en.UTF-8
+ENV LC_COLLATE en_US.UTF-8
+ENV LC_CTYPE en_US.UTF-8
+ENV LC_PAPER en_US.UTF-8
+ENV LC_ADDRESS en_US.UTF-8
+ENV LC_MONETARY en_US.UTF-8
+ENV LC_NUMERIC en_US.UTF-8
+ENV LC_TELEPHONE en_US.UTF-8
+ENV LC_IDENTIFICATION en_US.UTF-8
+ENV LC_MEASUREMENT en_US.UTF-8
+ENV LC_TIME en_US.UTF-8
+ENV LC_NAME en_US.UTF-8
+RUN locale-gen en_US.UTF-8
+RUN apt-get update \
+    && apt install -y g++
+
+RUN mkdir /tmp/Catmandu
+WORKDIR /tmp/Catmandu
+
+RUN apt-get install -y dh-make-perl \
+    liblocal-lib-perl \
+    apt-file
+RUN apt-file update
+RUN apt-get install -y libtest-fatal-perl \
+    libmodule-build-tiny-perl \
+    libmoo-perl \
+    libmodule-pluggable-perl \
+    libcapture-tiny-perl \
+    libclass-load-perl \
+    libgetopt-long-descriptive-perl \
+    libio-tiecombine-perl \
+    libstring-rewriteprefix-perl \
+    libio-handle-util-perl
+RUN cpan2deb --vcs '' MooX::Aliases \
+    && cpan2deb --vcs '' Log::Any \
+    && cpan2deb --vcs '' App::Cmd \
+    && cpan2deb --vcs '' LaTeX::ToUnicode \
+    && cpan2deb --vcs '' PICA::Data \
+    && cpan2deb --vcs '' LV \
+    && cpan2deb --vcs '' MODS::Record
+RUN dpkg -i lib*-perl_*.deb \
+    && cpan2deb --vcs '' BibTeX::Parser
+RUN dpkg -i libbibtex-parser-perl_*.deb
+RUN apt-get install -y libexporter-tiny-perl \
+    && cpan2deb --vcs '' JSON::Path
+RUN dpkg -i libjson-path-perl_*.deb \
+    && cpan2deb --vcs '' JSON::Hyper
+RUN dpkg -i libjson-hyper-perl_*.deb
+RUN apt-get install -y libhttp-link-parser-perl \
+    libautovivification-perl \
+    libmatch-simple-perl \
+    && cpan2deb --vcs '' JSON::Schema
+RUN dpkg -i libjson-schema-perl_*.deb
+RUN apt-get install -y libjson-xs-perl \
+    libtest-exception-perl \
+    libtest-deep-perl \
+    libfile-slurp-tiny-perl \
+    liburi-template-perl \
+    libtry-tiny-byclass-perl \
+    libdata-util-perl \
+    libdata-compare-perl \
+    libhash-merge-simple-perl \
+    libthrowable-perl \
+    libclone-perl \
+    libdata-uuid-perl \
+    libmarpa-r2-perl \
+    libconfig-onion-perl \
+    libmodule-info-perl \
+    libtext-csv-perl \
+    libcgi-expand-perl
+RUN dh-make-perl --vcs '' --cpan Catmandu \
+    && perl -i -pe 's/libossp-uuid-perl[^,\n]*/libdata-uuid-perl/g' libcatmandu-perl/debian/control \
+    ( cd libcatmandu-perl && dpkg-buildpackage -b -us -uc -d )
+RUN dpkg -i libcatmandu-perl_*.deb \
+    && dh-make-perl --vcs '' --cpan Catmandu::Twitter \
+    && perl -i -pe 's/liburi-perl\K[^,\n]*//g' libcatmandu-twitter-perl/debian/control \
+    ( cd libcatmandu-twitter-perl && dpkg-buildpackage -b -us -uc -d )
+RUN apt-get install -y libchi-perl \
+    libnet-ldap-perl \
+    libdatetime-format-strptime-perl \
+    libxml-libxslt-perl \
+    libxml-struct-perl \
+    libnet-twitter-perl \
+    libxml-parser-perl \
+    libspreadsheet-xlsx-perl \
+    libexcel-writer-xlsx-perl \
+   libdevel-repl-perl \
+   libio-pty-easy-perl \
+   && cpan2deb --recursive --vcs '' Task::Catmandu
+RUN apt install -y 'libcatmandu-*'
+RUN dpkg -i libcatmandu-twitter-perl_*.deb
+RUN dpkg -i ~/.cpan/build/libcatmandu-*-perl_*.deb
+    && rm -Rf /tmp/Catmandu
+
+WORKDIR $LIBRECATHOME
+RUN cpanm -n --installdeps Test::More 
+RUN cpanm -n --installdeps .
+RUN cpanm -n --installdeps Gearman::XS Net::Telnet::Gearman
+RUN cpanm -n Carton
+
+# Building LibreCat
+RUN carton install
+RUN chmod +x bin/generate_forms.pl \
+    && perl bin/generate_forms.pl
+
+VOLUME /usr/share/elasticsearch/data /var/lib/mysql
+
+EXPOSE 5001 3306 9200 9300 4730
+
+CMD ["./entrypoint.sh"]
