@@ -3,7 +3,7 @@ cd /srv/LibreCat
 
 # Wait a number of seconds for all dependencies to catch up
 # Depend on your system you may want to reduce or enlarge this
-sleep 10
+sleep 15
 
 # Starting gearman
 ./gearboot.sh 2>&1 > /var/log/gearmand.log &

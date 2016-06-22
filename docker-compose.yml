@@ -12,9 +12,9 @@ services:
 #        --> If you make any configuration hanges after building the image,
 #               you can simply remove the comments.
 #        volumes:
-#            - "/path/to/local/conf/catmandu.store.yml:/srv/LibreCat/catmandu.store.yml"
-#            - "/path/to/local/conf/mysql-init.sql:/srv/LibreCat/devel/mysql-init.sql"
-#            - "/path/to/local/docker-entrypoint.sh:/srv/LibreCat/entrypoint.sh"
+#            - "/path/to/local/deposit/catmandu.store.yml:/srv/LibreCat/catmandu.store.yml"
+#            - "/path/to/local/deposit/mysql-init.sql:/srv/LibreCat/devel/mysql-init.sql"
+#            - "/path/to/local/deposit/docker-entrypoint.sh:/srv/LibreCat/entrypoint.sh"
         depends_on:
             - mysql
             - elasticsearch
