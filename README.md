@@ -5,7 +5,7 @@ I used different official and unofficial docker-images as template and built my 
 
 * Java JRE-8 (https://github.com/docker-library/openjdk/tree/89851f0abc3a83cfad5248102f379d6a0bd3951a/8-jre)
 
-* mongoDB (https://github.com/docker-library/mongo/tree/4bb17b336a05ad85c9bf83b103d21529e27e62f9/3.2)
+* ongoDB (https://github.com/docker-library/mongo/tree/4bb17b336a05ad85c9bf83b103d21529e27e62f9/3.2)
 
 * elasticsearch (https://github.com/docker-library/elasticsearch/tree/master/1.7)
 
@@ -16,13 +16,13 @@ I used different official and unofficial docker-images as template and built my 
 
 **_2016.06.15_**
 
- `docker-compose` with _centos_ is moved to `centos-compose`. There are SymLinks to related folders created
+ `docker-compose` with `centos` is moved to `centos-compose`. There are SymLinks to related folders created
 there. If the links won't work you may want to copy two folders `mysql` and `elasticsearch` from root up there.
 
- There is an _ubuntu_ standalone version under `ubuntu` zu finden. The current `docker-compose` is based on _ubuntu_
+ There is an `ubuntu` standalone version under `ubuntu` zu finden. The current `docker-compose` is based on `ubuntu`
 and `elasticsearch`.
 
- **NOTE**: Remember to change the MYSQL_PASSWORD and/or MYSQL_ROOT_PASSWORD to somethingelse before you put the bundle
+ **NOTE**: Remember to change the **MYSQL_PASSWORD** and/or **MYSQL_ROOT_PASSWORD** to somethingelse before you put the bundle
 online.
 
 **_2016.06.15_**
