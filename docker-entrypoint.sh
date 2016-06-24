@@ -9,7 +9,7 @@ sleep 15
 ./gearboot.sh 2>&1 > /var/log/gearmand.log &
 
 # New databases for LibreCat
-mysql -u root --password=$MYSQL_ROOT_PASSWORD -h mysqldb < devel/mysql-init.sql
+mysql -u $MYSQL_USERNAME --password=$MYSQL_PASSWORD -h mysqldb < devel/mysql-init.sql
 
 # creating 1st scripts
 ./index.sh drop

@@ -14,7 +14,7 @@ I used different official and unofficial docker-images as template and built my 
 * MySQL 5.5 (https://github.com/docker-library/mysql/tree/f7a67d7634a68d319988ad6f99729bfeaa84ceb2/5.5)
 
 
-**_2016.06.15_**
+**_2016.06.23_**
 
  `docker-compose` with `centos` is moved to `centos-compose`. There are SymLinks to related folders created
 there. If the links won't work you may want to copy two folders `mysql` and `elasticsearch` from root up there.
