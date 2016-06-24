@@ -5,26 +5,26 @@ services:
         ports:
             - "5001:5001"
         links:
-#            - "mysql:mysqldb"
+            - "mysql:mysqldb"
             - "elasticsearch:searchnode"
         env_file:
             - ./conf/mysql.env
 #        --> If you make any configuration hanges after building the image,
 #               you can simply remove the comments.
-        volumes:
-            - "/home/UG-SUB/samadi/LibreCat/conf/catmandu.store.yml:/srv/LibreCat/catmandu.store.yml"
+#        volumes:
+#            - "/path/to/local/deposit/catmandu.store.yml:/srv/LibreCat/catmandu.store.yml"
 #            - "/path/to/local/deposit/mysql-init.sql:/srv/LibreCat/devel/mysql-init.sql"
 #            - "/path/to/local/deposit/docker-entrypoint.sh:/srv/LibreCat/entrypoint.sh"
         depends_on:
-#            - mysql
+            - mysql
             - elasticsearch
-#    mysql:
-#        build: mysql
-#        image: mysql:5.5
-#        ports:
-#            - "3306:3306"
-#        env_file:
-#            - ./conf/mysql.env
+    mysql:
+        build: mysql
+        image: mysql:5.5
+        ports:
+            - "3306:3306"
+        env_file:
+            - ./conf/mysql.env
 #        volumes:
 #            - "/path/to/local/deposit:/var/lib/mysql"
     elasticsearch:
@@ -33,5 +33,5 @@ services:
         ports:
             - "9300:9300"
             - "9200:9200"
-        volumes:
-            - "/home/UG-SUB/samadi/LibreCat/index:/usr/share/elasticsearch/data"
+#        volumes:
+#            - "/path/to/local/deposit:/usr/share/elasticsearch/data"
