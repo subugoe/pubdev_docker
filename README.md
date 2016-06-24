@@ -22,7 +22,7 @@ there. If the links won't work you may want to copy two folders `mysql` and `ela
  There is an `ubuntu` standalone version under `ubuntu` zu finden. The current `docker-compose` is based on `ubuntu`
 and `elasticsearch`.
 
- **NOTE**: Remember to change the **MYSQL_PASSWORD** and/or **MYSQL_ROOT_PASSWORD** to somethingelse before you put the bundle
+ **NOTE**: Remember to change the **MYSQL_PASSWORD** and/or **MYSQL_ROOT_PASSWORD** to something else before you put the bundle
 online.
 
 **_2016.06.15_**

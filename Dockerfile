@@ -85,8 +85,9 @@ ENV LC_NAME en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 
 # Building LibreCat
-RUN sed -i 's/==/\>=/g' cpanfile
-RUN sed -i '/Gearman::XS/ d' cpanfile
+RUN sed -i 's/==/\>=/g' cpanfile \
+    && sed -i '/Gearman::XS/ d' cpanfile
+
 RUN cpanm -nq --installdeps Catmandu
 RUN cpanm -nq --installdeps Catmandu::MARC
 RUN cpanm -nq --installdeps .
