@@ -11,7 +11,6 @@ RUN sed -i '/multiverse/s/#[\ ]*deb/deb/g' /etc/apt/sources.list
 
 ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
-ENV MYSQL_PASSWORD alaki
 
 # Prepare to install
 RUN apt-get clean \
