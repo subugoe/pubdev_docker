@@ -50,7 +50,8 @@ RUN apt install -y perl-doc \
     carton
 RUN apt install -y gearman \
     gearman-server \
-    gearman-tools
+    gearman-tools \
+    libgearman-dev
 RUN apt install -y mysql-client \
     libmysqlclient-dev
 
@@ -84,13 +85,10 @@ ENV LC_NAME en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 
 # Building LibreCat
-RUN sed -i 's/==/\>=/g' cpanfile \
-    && sed -i '/Gearman::XS/ d' cpanfile
-
 RUN cpanm -nq --installdeps Catmandu
 RUN cpanm -nq --installdeps Catmandu::MARC
+RUN sed -i 's/==/\>=/g' cpanfile
 RUN cpanm -nq --installdeps .
-RUN cpanm -nq --installdeps Gearman::XS Net::Telnet::Gearman
 RUN carton install
 RUN chmod +x bin/generate_forms.pl \
     && perl bin/generate_forms.pl

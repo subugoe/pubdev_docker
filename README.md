@@ -20,7 +20,11 @@ I used different official and unofficial docker-images as template and built my 
 there. If the links won't work you may want to copy two folders `mysql` and `elasticsearch` from root up there.
 
  There is an `ubuntu` standalone version under `ubuntu` zu finden. The current `docker-compose` is based on `ubuntu`
-and `elasticsearch`.
+and `elasticsearch`. In order to make everthing work, just follow these simple steps:
+
+    $ git clone https://github.com/subugoe/pub_dev
+    $ cd pub_dev
+    $ docker-compose up -d
 
  **NOTE**: Remember to change the **MYSQL_PASSWORD** and/or **MYSQL_ROOT_PASSWORD** to something else before you put the bundle
 online.
