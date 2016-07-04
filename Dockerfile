@@ -89,6 +89,7 @@ RUN cpanm -nq --installdeps Catmandu
 RUN cpanm -nq --installdeps Catmandu::MARC
 RUN sed -i 's/==/\>=/g' cpanfile
 RUN cpanm -nq --installdeps .
+RUN cpanm -nq Gearman::XS::Worker
 RUN carton install
 RUN chmod +x bin/generate_forms.pl \
     && perl bin/generate_forms.pl
