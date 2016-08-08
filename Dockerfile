@@ -88,6 +88,7 @@ RUN locale-gen en_US.UTF-8
 RUN cpanm -nq --installdeps Catmandu
 RUN cpanm -nq --installdeps Catmandu::MARC
 RUN sed -i 's/==/\>=/g' cpanfile
+RUN sed -i '/CrossRef/ d' cpanfile
 RUN cpanm -nq --installdeps .
 RUN cpanm -nq Gearman::XS::Worker
 RUN carton install
