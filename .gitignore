@@ -1,9 +1,5 @@
 certs/
 dev/
-dev/server.key
-dev/server.crt
-dev/ldap-ca.pem
-dev/conf/catmandu.local.yml
 mongodb/
 os/
 sub_pub/

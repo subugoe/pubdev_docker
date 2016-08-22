@@ -8,6 +8,8 @@ MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4 \
     && echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" > /etc/apt/sources.list.d/elasticsearch-1.7.list
 RUN sed -i '/multiverse/s/#[\ ]*deb/deb/g' /etc/apt/sources.list
+RUN groupadd -g 5000 librecat \
+    && useradd -g 5000 -u 5000 -d /srv/LibreCat -s /bin/nologin -c "LibreCat User" librecat
 
 ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
@@ -39,7 +41,10 @@ RUN apt install -y ca-certificates \
     zlib1g-dev \
     binutils \
     pwgen \
-    libaio1
+    libaio1 \
+    curl
+RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
+    && apt install -y nodejs
 RUN apt install -y perl-doc \
     cpanminus \
     libcapture-tiny-perl \
@@ -66,6 +71,7 @@ RUN cd /srv \
      && git checkout dev
 
 WORKDIR $LIBRECATHOME
+RUN mkdir import
 #   Installing Perl-Modules and compiling everything
 #   Finalizing setup and run Web-Interface under :5001
 #
@@ -85,15 +91,22 @@ ENV LC_NAME en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 
 # Building LibreCat
+RUN sed -i 's/==/\>=/g' cpanfile \
+    && sed -i '/CrossRef/ d' cpanfile
 RUN cpanm -nq --installdeps Catmandu
 RUN cpanm -nq --installdeps Catmandu::MARC
-RUN sed -i 's/==/\>=/g' cpanfile
-RUN sed -i '/CrossRef/ d' cpanfile
+RUN cpanm -nq --installdeps Catmandu::Solr
+RUN cpanm -nq --installdeps Catmandu::Store::Solr
+RUN cpanm -nq --installdeps Catmandu::Importer::OAI
+RUN cpanm -nq --installdeps Catmandu::Importer::Solr
 RUN cpanm -nq --installdeps .
-RUN cpanm -nq Gearman::XS::Worker
+RUN cpanm -nq --installdeps Gearman::XS::Worker
 RUN carton install
 RUN chmod +x bin/generate_forms.pl \
     && perl bin/generate_forms.pl
+# Building the FrontEnd
+RUN npm install
+RUN npm run build-css prefix-css
 
 # Clean up
 RUN apt-get clean \
@@ -105,14 +118,21 @@ RUN apt-get clean \
     && apt-get --purge autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
+# Configuration files
+COPY conf/config.yml .
+COPY conf/log4perl.conf .
 COPY conf/catmandu.local.yml .
 COPY conf/catmandu.store.yml .
-COPY conf/mysql-init.sql .
+# Services and Settings
 COPY gearman-entrypoint.sh ./gearboot.sh
-COPY docker-entrypoint.sh ./entrypoint.sh
+COPY conf/mysql-init.sql .
+COPY docker-entrypoint.sh .
+
+RUN chown -R librecat:librecat /srv/LibreCat
+USER librecat:librecat
 
 VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql"]
 
 EXPOSE 5001 3306 9200 9300 4730
 
-CMD ["./entrypoint.sh"]
+CMD ["./docker-entrypoint.sh"]
