@@ -119,7 +119,6 @@ RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Configuration files
-COPY conf/config.yml .
 COPY conf/log4perl.conf .
 COPY conf/catmandu.local.yml .
 COPY conf/catmandu.store.yml .
