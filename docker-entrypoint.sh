@@ -13,7 +13,7 @@ mysql -u $MYSQL_USERNAME --password=$MYSQL_ROOT_PASSWORD -h mysqldb < mysql-init
 
 # Starting SSH-Service
 export TERM=screen
-sudo /usr/sbin/sshd 2>&1 >> /srv/LibreCat/logs/sshd.log &
+sudo /usr/sbin/sshd &
 
 # creating 1st scripts
 ./index.sh drop

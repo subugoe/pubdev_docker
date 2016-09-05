@@ -114,19 +114,18 @@ COPY gearman-entrypoint.sh ./gearboot.sh
 COPY conf/mysql-init.sql .
 COPY docker-entrypoint.sh .
 
-RUN touch /srv/LibreCat/sshd.log \
-    && chown -R librecat:librecat /srv/LibreCat
+RUN chown -R librecat:librecat /srv/LibreCat
 
 # Install & configure SSH
 RUN mkdir /var/run/sshd \
     && apt install -y openssh-server \
     && sed -i 's/PermitRootLogin without-password/PermitRootLogin no/' /etc/ssh/sshd_config \
-    && sed -i 's/Port 22/Port 2022/g' /etc/ssh/sshd_config \
-    && sed -i '/requiretty/ d' /etc/ssh/sshd_config 
+    && sed -i '/Port/ s/22/2022/g' /etc/ssh/sshd_config
 # SSH login fix. Otherwise user is kicked off after login
 # For Use in Production, change the Password 'librecat:<New_Password>'
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd \
+RUN sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd \
     && sed -i '/\%sudo/ s/$/\nlibrecat  ALL=(ALL) NOPASSWD:ALL/' /etc/sudoers \
+    && sed -i '/requiretty/ d' /etc/sudoers \
     && echo "export VISIBLE=now" >> /etc/profile \
     && echo 'librecat:Top$3cr3T' | chpasswd
 
