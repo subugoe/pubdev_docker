@@ -119,18 +119,18 @@ COPY docker-entrypoint.sh .
 RUN touch /srv/LibreCat/sshd.log \
     && chown -R librecat:librecat /srv/LibreCat
 
-# For Use in Production, change the Password 'librecat:<New_Password>'
-# Install & Configure SSH
+# Install & configure SSH
 RUN mkdir /var/run/sshd \
     && apt install -y openssh-server \
     && sed -i 's/PermitRootLogin without-password/PermitRootLogin no/' /etc/ssh/sshd_config \
     && sed -i 's/Port 22/Port 2022/g' /etc/ssh/sshd_config \
-    && echo 'librecat:Top$3cr3T' | chpasswd
+    && sed -i '/requiretty/ d' /etc/ssh/sshd_config
 # SSH login fix. Otherwise user is kicked off after login
+# For Use in Production, change the Password 'librecat:<New_Password>'
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd \
-    && sed -i '/requiretty/ d' /etc/ssh/sshd_config \
     && sed -i '/\%sudo/ s/$/\nlibrecat  ALL=(ALL) NOPASSWD:ALL/' /etc/sudoers \
-    && echo "export VISIBLE=now" >> /etc/profile
+    && echo "export VISIBLE=now" >> /etc/profile \
+    && echo 'librecat:Top$3cr3T' | chpasswd
 
 VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql"]
 
