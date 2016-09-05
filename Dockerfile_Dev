@@ -1,0 +1,34 @@
+# Change the Base, if you've already created it under another name
+FROM librecat_base
+MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
+
+ENV LIBRECATHOME /srv/LibreCat
+
+WORKDIR $LIBRECATHOME
+RUN git pull \
+    && npm install \
+    && npm run build-css prefix-css
+RUN chown -R librecat:librecat public views node_modules
+
+# Clean up
+RUN apt-get clean \
+    && apt purge -y binutils \
+    wget \
+    git \
+    pwgen \
+    binutils \
+    build-essential \
+    nodejs \
+    g++ \
+    man-db \
+    perl-doc \
+   && apt-get --purge -y autoremove \
+   && rm -rf /var/lib/apt/lists/*
+
+USER librecat:librecat
+
+VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql", "/srv/LibreCat/logs"]
+
+EXPOSE 2022 3306 4730 5001 9200 9300
+
+ENTRYPOINT ["./docker-entrypoint.sh"]
