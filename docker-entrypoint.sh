@@ -6,14 +6,18 @@ cd /srv/LibreCat
 sleep 15
 
 # Starting gearman
-./gearboot.sh 2>&1 > /var/log/gearmand.log &
+./gearboot.sh 2>&1 >> /srv/LibreCat/logs/gearmand.log &
 
 # New databases for LibreCat
 mysql -u $MYSQL_USERNAME --password=$MYSQL_ROOT_PASSWORD -h mysqldb < mysql-init.sql
+
+# Starting SSH-Service
+export TERM=screen
+sudo /usr/sbin/sshd 2>&1 >> /srv/LibreCat/logs/sshd.log &
 
 # creating 1st scripts
 ./index.sh drop
 ./index.sh create
 
 # Starting librecat
-./boot.sh 
+./boot.sh starman

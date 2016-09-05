@@ -13,6 +13,29 @@ I used different official and unofficial docker-images as template and built my 
 
 * MySQL 5.5 (https://github.com/docker-library/mysql/tree/f7a67d7634a68d319988ad6f99729bfeaa84ceb2/5.5)
 
+**_2016.09.05_**
+ Another feature: Now there is a **OpneSSH-Server** inside the Image, which will help in establishing a
+developement procedure. If you want to use this in production, just change the password for the _librecat_.
+
+**_2016.08.24_**
+ In order to make the development faster, we decided to break-apart the Dockerfiles. With this, before you
+use `docker-compose` to start the bundle, you need to first create a **Base**-Image of it:
+
+    $ docker build --tag librecat_base --force-rm -f Dockerfile_Base .
+
+Afterwards is the same as before:
+
+    $ docker-compose up
+
+Now, if there would be any changes, you just need to rebuild the last images:
+
+    $ docker build --no-cache --tag librecat --force-rm -f Dockerfile_Dev .
+
+_Note:_ If you create the Base image under another name, you should just change the `From`-line in `Dockerfile` to the proper Image-Name.
+
+Obviously you could still do everything in one single step:
+
+    $ docker build --no-cache --tag librecat --force-rm -f Dockerfile_Full .
 
 **_2016.06.23_**
 
