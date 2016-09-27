@@ -13,13 +13,14 @@ RUN groupadd -g 5000 librecat \
 
 ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
-ENV NOTVISIBLE "in users profile"
+ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
+ENV PERL5LIB $PERL5LIB:$LIBRECATHOME/local/lib/perl5
 
 # Prepare to install
 RUN apt-get clean \
-    && apt-get update \
-    && apt-get upgrade -y \
-    && apt-get dist-upgrade -y
+    && apt update \
+    && apt upgrade -y \
+    && apt dist-upgrade -y
 
 RUN apt install -y build-essential
 RUN apt install -y ca-certificates \
@@ -44,7 +45,7 @@ RUN apt install -y ca-certificates \
     pwgen \
     libaio1 \
     curl
-RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
+RUN curl -sL $NODEJS_URL | sudo -E bash - \
     && apt install -y nodejs
 RUN apt install -y perl-doc \
     cpanminus \
@@ -60,18 +61,15 @@ RUN apt install -y gearman \
     libgearman-dev
 RUN apt install -y mysql-client \
     libmysqlclient-dev
+#RUN echo y | perl -MCPAN -e 'upgrade'
 
 RUN sed -i '/socket/ d' /etc/mysql/my.cnf \
     && sed -i '/\[mysqld\]/a bind-address\ =\ 0.0.0.0' /etc/mysql/my.cnf
 
-# git clone LibreCat
+# Clone LibreCat
 RUN cd /srv \
-     && git clone --recursive https://github.com/subugoe/LibreCat.git \
-     && cd LibreCat \
-     && git fetch \
-     && git checkout dev
+     && git clone --recursive https://github.com/LibreCat/LibreCat.git
 
-WORKDIR $LIBRECATHOME
 #   Installing Perl-Modules and compiling everything
 #   Finalizing setup and run Web-Interface under :5001
 #
@@ -90,49 +88,16 @@ ENV LC_TIME en_US.UTF-8
 ENV LC_NAME en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 
+WORKDIR $LIBRECATHOME
 # Building LibreCat
-RUN sed -i 's/==/\>=/g' cpanfile \
-    && sed -i '/CrossRef/ d' cpanfile
-RUN cpanm -nq --installdeps --skip-installed Catmandu
-RUN cpanm -nq --installdeps --skip-installed Catmandu::MARC
-RUN cpanm -nq --installdeps --skip-installed Catmandu::Solr
-RUN cpanm -nq --installdeps --skip-installed Catmandu::Store::Solr
-RUN cpanm -nq --installdeps --skip-installed Catmandu::Importer::OAI
-RUN cpanm -nq --installdeps --skip-installed Catmandu::Importer::Solr
-RUN cpanm -nq --installdeps --skip-installed .
-RUN cpanm -nq --installdeps --skip-installed Gearman::XS::Worker
+RUN sed -i 's/==/\>=/g' cpanfile 
+
 RUN carton install
 RUN chmod +x bin/generate_forms.pl \
     && perl bin/generate_forms.pl
-# Building the FrontEnd
-RUN npm install
 
-# Configuration files
-COPY conf/log4perl.conf .
-COPY conf/catmandu.local.yml .
-COPY conf/catmandu.store.yml .
-# Services and Settings
-COPY gearman-entrypoint.sh ./gearboot.sh
-COPY conf/mysql-init.sql .
+COPY conf/layers.yml .
 COPY docker-entrypoint.sh .
+COPY gearman-entrypoint.sh gearboot.sh
 
-RUN chown -R librecat:librecat /srv/LibreCat
-
-# Install & configure SSH
-RUN mkdir /var/run/sshd \
-    && apt install -y openssh-server \
-    && sed -i 's/PermitRootLogin without-password/PermitRootLogin no/' /etc/ssh/sshd_config \
-    && sed -i '/Port/ s/22/2022/g' /etc/ssh/sshd_config
-# SSH login fix. Otherwise user is kicked off after login
-# For Use in Production, change the Password 'librecat:<New_Password>'
-RUN sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd \
-    && sed -i '/\%sudo/ s/$/\nlibrecat  ALL=(ALL) NOPASSWD:ALL/' /etc/sudoers \
-    && sed -i '/requiretty/ d' /etc/sudoers \
-    && echo "export VISIBLE=now" >> /etc/profile \
-    && echo 'librecat:Top$3cr3T' | chpasswd
-
-VOLUME ["/usr/share/elasticsearch/data","/srv/LibreCat/logs"]
-
-EXPOSE 2022 3306 4730 5001 9200 9300
-
-CMD ["./docker-entrypoint.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]

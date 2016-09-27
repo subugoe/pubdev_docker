@@ -1,14 +1,14 @@
-# Change the Base, if you've already created it under another name
 FROM librecat_base
 MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
+# 
+# Finalizing the LibreCat Image with SUB Layer
+#
 
-ENV LIBRECATHOME /srv/LibreCat
-
-WORKDIR $LIBRECATHOME
-RUN git pull \
-    && npm install \
+RUN git clone https://github.com/subugoe/goefis.git
+WORKDIR /srv/LibreCat/goefis
+RUN npm install \
     && npm run build-css prefix-css
-RUN chown -R librecat:librecat public views node_modules
+RUN chown -R librecat:librecat config public views node_modules
 
 # Clean up
 RUN apt-get clean \
@@ -24,6 +24,8 @@ RUN apt-get clean \
     perl-doc \
    && apt-get --purge -y autoremove \
    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR $LIBRECATHOME
 
 USER librecat:librecat
 
