@@ -95,4 +95,6 @@ RUN carton install
 RUN chmod +x bin/generate_forms.pl \
     && perl bin/generate_forms.pl
 
+RUN chown -R librecat:librecat ${LIBRECATHOME}
+
 ENTRYPOINT ["./docker-entrypoint.sh"]
