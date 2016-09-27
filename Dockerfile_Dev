@@ -8,6 +8,7 @@ RUN git clone https://github.com/subugoe/goefis.git
 WORKDIR /srv/LibreCat/goefis
 RUN npm install \
     && npm run build-css prefix-css
+RUN chown -R librecat:librecat gofis
 
 # Clean up
 RUN apt-get clean \
@@ -28,12 +29,11 @@ WORKDIR ${LIBRECATHOME}
 COPY conf/layers.yml .
 COPY docker-entrypoint.sh .
 COPY gearman-entrypoint.sh gearboot.sh
-RUN chown -R librecat:librecat ${LIBRECATHOME}
 
 USER librecat:librecat
 
 VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql", "/srv/LibreCat/logs"]
 
-EXPOSE 2022 3306 4730 5001 9200 9300
+EXPOSE 3306 4730 5001 9200 9300
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
