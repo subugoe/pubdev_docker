@@ -7,7 +7,6 @@ services:
         image: librecat:latest
         ports:
             - "5001:5001"
-            - "2022:2022"
         links:
             - "mysql:mysqldb"
             - "elasticsearch:searchnode"
