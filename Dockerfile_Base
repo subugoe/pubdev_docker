@@ -14,7 +14,7 @@ RUN groupadd -g 5000 librecat \
 ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
-ENV PERL5LIB $PERL5LIB:$LIBRECATHOME/local/lib/perl5
+ENV PERL5LIB ${PERL5LIB}:${LIBRECATHOME}/local/lib/perl5
 
 # Prepare to install
 RUN apt-get clean \
@@ -45,7 +45,7 @@ RUN apt install -y ca-certificates \
     pwgen \
     libaio1 \
     curl
-RUN curl -sL $NODEJS_URL | sudo -E bash - \
+RUN curl -sL ${NODEJS_URL} | sudo -E bash - \
     && apt install -y nodejs
 RUN apt install -y perl-doc \
     cpanminus \
@@ -61,7 +61,6 @@ RUN apt install -y gearman \
     libgearman-dev
 RUN apt install -y mysql-client \
     libmysqlclient-dev
-#RUN echo y | perl -MCPAN -e 'upgrade'
 
 RUN sed -i '/socket/ d' /etc/mysql/my.cnf \
     && sed -i '/\[mysqld\]/a bind-address\ =\ 0.0.0.0' /etc/mysql/my.cnf
@@ -88,16 +87,12 @@ ENV LC_TIME en_US.UTF-8
 ENV LC_NAME en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 
-WORKDIR $LIBRECATHOME
+WORKDIR ${LIBRECATHOME}
 # Building LibreCat
 RUN sed -i 's/==/\>=/g' cpanfile 
 
 RUN carton install
 RUN chmod +x bin/generate_forms.pl \
     && perl bin/generate_forms.pl
-
-COPY conf/layers.yml .
-COPY docker-entrypoint.sh .
-COPY gearman-entrypoint.sh gearboot.sh
 
 ENTRYPOINT ["./docker-entrypoint.sh"]

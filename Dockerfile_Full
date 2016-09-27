@@ -14,7 +14,7 @@ RUN groupadd -g 5000 librecat \
 ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
-ENV PERL5LIB $PERL5LIB:$LIBRECATHOME/local/lib/perl5
+ENV PERL5LIB ${PERL5LIB}:${LIBRECATHOME}/local/lib/perl5
 
 # Prepare to install
 RUN apt-get clean \
@@ -45,7 +45,7 @@ RUN apt install -y ca-certificates \
     pwgen \
     libaio1 \
     curl
-RUN curl -sL $NODEJS_URL | sudo -E bash - \
+RUN curl -sL ${NODEJS_URL} | sudo -E bash - \
     && apt install -y nodejs
 RUN apt install -y perl-doc \
     cpanminus \
@@ -88,7 +88,7 @@ ENV LC_TIME en_US.UTF-8
 ENV LC_NAME en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 
-WORKDIR $LIBRECATHOME
+WORKDIR ${LIBRECATHOME}
 # Building LibreCat
 RUN sed -i 's/==/\>=/g' cpanfile 
 
@@ -101,10 +101,10 @@ COPY docker-entrypoint.sh .
 COPY gearman-entrypoint.sh gearboot.sh
 
 RUN git clone https://github.com/subugoe/goefis.git
-WORKDIR /srv/LibreCat/goefis
+WORKDIR ${LIBRECATHOME}/goefis
 RUN npm install \
     && npm run build-css prefix-css
-RUN chown -R librecat:librecat config public views node_modules
+RUN chown -R librecat:librecat ${LIBRECATHOME}
 
 # Clean up
 RUN apt-get clean \
@@ -121,7 +121,7 @@ RUN apt-get clean \
    && apt-get --purge -y autoremove \
    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR $LIBRECATHOME
+WORKDIR ${LIBRECATHOME}
 
 USER librecat:librecat
 
