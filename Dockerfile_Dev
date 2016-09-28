@@ -5,9 +5,9 @@ MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
 #
 
 RUN git clone https://github.com/subugoe/goefis.git
-WORKDIR ${LIBRECATHOME}/goefis
-RUN npm install \
-    && npm run build-css prefix-css
+#WORKDIR ${LIBRECATHOME}/goefis
+#RUN npm install \
+#    && npm run build-css prefix-css
 RUN chown -R librecat:librecat ${LIBRECATHOME}/goefis
 
 # Clean up
