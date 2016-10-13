@@ -17,7 +17,7 @@ services:
 #        volumes:
 #            - "/path/to/local/deposit/catmandu.store.yml:/srv/LibreCat/catmandu.store.yml"
 #            - "/path/to/local/deposit/mysql-init.sql:/srv/LibreCat/devel/mysql-init.sql"
-#            - "/path/to/local/deposit/docker-entrypoint.sh:/srv/LibreCat/entrypoint.sh"
+#            - "/path/to/local/deposit/docker-entrypoint.sh:/srv/LibreCat/docker-entrypoint.sh"
         depends_on:
             - mysql
             - elasticsearch
@@ -30,7 +30,7 @@ services:
         env_file:
             - ./conf/mysql.env
 #        volumes:
-#            - "/path/to/local/deposit/mysql:/var/lib/mysql"
+#            - "/path/to/local/deposit/data:/var/lib/mysql"
         restart: always
     elasticsearch:
         build: elasticsearch
