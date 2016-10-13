@@ -4,14 +4,7 @@ MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
 # Finalizing the LibreCat Image with SUB Layer
 #
 RUN git clone https://github.com/subugoe/goefis.git
-<<<<<<< HEAD
 ENV GOETTINGEN_LAYER ${LIBRECATHOME}/goefis
-=======
-#WORKDIR ${LIBRECATHOME}/goefis
-#RUN npm install \
-#    && npm run build-css prefix-css
-RUN chown -R librecat:librecat ${LIBRECATHOME}/goefis
->>>>>>> 0feb14f50f0dc335e57e6d864445151ceef8c01e
 
 # Clean up
 RUN apt-get clean \
@@ -32,18 +25,14 @@ WORKDIR ${LIBRECATHOME}
 COPY conf/layers.yml .
 COPY gearman-entrypoint.sh ./gearboot.sh
 COPY docker-entrypoint.sh .
-<<<<<<< HEAD
 
 RUN mv config/catmandu.local.yml-example config/catmandu.local.yml
 RUN chown -R librecat:librecat ${LIBRECATHOME}
-=======
-COPY gearman-entrypoint.sh gearboot.sh
->>>>>>> 0feb14f50f0dc335e57e6d864445151ceef8c01e
 
 USER librecat:librecat
 
 VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql", "/srv/LibreCat/logs"]
 
-EXPOSE 3306 4730 5001 9200 9300
+EXPOSE 2022 3306 4730 5001 9200 9300
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
