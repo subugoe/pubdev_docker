@@ -14,7 +14,7 @@ RUN groupadd -g 5000 librecat \
 ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
-ENV PERL5LIB ${PERL5LIB}:${LIBRECATHOME}/local/lib/perl5
+ENV PERL5LIB ${LIBRECATHOME}/local/lib/perl5:${LIBRECATHOME}/lib
 
 # Prepare to install
 RUN apt-get clean \
@@ -89,7 +89,9 @@ RUN locale-gen en_US.UTF-8
 
 WORKDIR ${LIBRECATHOME}
 # Building LibreCat
+COPY boot.sh .
 RUN sed -i 's/==/\>=/g' cpanfile 
+
 
 RUN carton install
 RUN chmod +x bin/generate_forms.pl \
