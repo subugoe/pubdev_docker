@@ -2,6 +2,9 @@
 
 There is already a complete documentaion how to install and use this bundle in the wiki. Here you can find the **Release-Notes**:
 
+## 2016.10.20
+ Now there is a boot-script as well as layer-config which has been introduced by the end of September. Besides, the volumes(=external folders) per default in the `docker-compose.yml` file.
+
 ## 2016.09.26
  For now we abondoned the notion of having **OpenSSH-Server** inside docker. Right now having a working system based on orignal development of [LibreCat Core-Developers](https://github.com/LibreCat/LibreCat) is highly prioritized. Thus in the new version the git-repository of LibreCat -not our fork!- will be used with our layer and extras on top of that.
 

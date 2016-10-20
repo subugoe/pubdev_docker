@@ -12,12 +12,8 @@ services:
             - "elasticsearch:searchnode"
         env_file:
             - ./conf/mysql.env
-#        --> If you make any configuration hanges after building the image,
-#               you can simply remove the comments.
-#        volumes:
-#            - "/path/to/local/deposit/catmandu.store.yml:/srv/LibreCat/catmandu.store.yml"
-#            - "/path/to/local/deposit/mysql-init.sql:/srv/LibreCat/devel/mysql-init.sql"
-#            - "/path/to/local/deposit/docker-entrypoint.sh:/srv/LibreCat/docker-entrypoint.sh"
+        #volumes:
+            - "~/librecat-logs:/srv/LibreCat/logs"
         depends_on:
             - mysql
             - elasticsearch
@@ -29,8 +25,8 @@ services:
             - "3306:3306"
         env_file:
             - ./conf/mysql.env
-#        volumes:
-#            - "/path/to/local/deposit/data:/var/lib/mysql"
+        volumes:
+            - "~/librecat-mysql:/var/lib/mysql"
         restart: always
     elasticsearch:
         build: elasticsearch
@@ -38,6 +34,6 @@ services:
         ports:
             - "9300:9300"
             - "9200:9200"
-#        volumes:
-#            - "/path/to/local/deposit/index:/usr/share/elasticsearch/data"
+        volumes:
+            - "~/librecat-index:/usr/share/elasticsearch/data"
         restart: always

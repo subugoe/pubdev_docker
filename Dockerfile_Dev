@@ -3,36 +3,40 @@ MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
 # 
 # Finalizing the LibreCat Image with SUB Layer
 #
-RUN git clone https://github.com/subugoe/goefis.git
-ENV GOETTINGEN_LAYER ${LIBRECATHOME}/goefis
+# Local Layer
+ENV LOCAL_LAYER /opt/local
+RUN git clone https://github.com/subugoe/goefis.git ${LOCAL_LAYER}
+WORKDIR ${LOCAL_LAYER}
+RUN npm install \
+    && npm run build-css prefix-css
 
 # Clean up
-RUN apt-get clean \
-    && apt purge -y binutils \
-    wget \
-    git \
-    pwgen \
-    binutils \
-    build-essential \
-    nodejs \
-    g++ \
-    man-db \
-    perl-doc \
-   && apt-get --purge -y autoremove \
-   && rm -rf /var/lib/apt/lists/*
+#RUN apt-get clean \
+#    && apt purge -y binutils \
+#    wget \
+#    git \
+#    pwgen \
+#    binutils \
+#    build-essential \
+#    nodejs \
+#    g++ \
+#    man-db \
+#    perl-doc \
+#   && apt-get --purge -y autoremove \
+#   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR ${LIBRECATHOME}
-COPY conf/layers.yml .
-COPY gearman-entrypoint.sh ./gearboot.sh
+COPY layers.yml .
+COPY boot.sh .
+COPY gearman-entrypoint.sh .
 COPY docker-entrypoint.sh .
 
-RUN mv config/catmandu.local.yml-example config/catmandu.local.yml
-RUN chown -R librecat:librecat ${LIBRECATHOME}
+RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER}
 
 USER librecat:librecat
 
 VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql", "/srv/LibreCat/logs"]
 
-EXPOSE 2022 3306 4730 5001 9200 9300
+EXPOSE 3306 4730 5001 9200 9300
 
 ENTRYPOINT ["./docker-entrypoint.sh"]

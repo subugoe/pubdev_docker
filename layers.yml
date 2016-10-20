@@ -10,4 +10,4 @@
 #   mkdir -p /opt/librecat-myorg/lib
 #
 # The YAML below should evaluate to an ARRAY of local configuration directories
-- goefis
+- /opt/local

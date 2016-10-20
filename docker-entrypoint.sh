@@ -6,7 +6,7 @@ cd /srv/LibreCat
 sleep 15
 
 # Starting gearman
-./gearboot.sh 2>&1 >> /srv/LibreCat/logs/gearmand.log &
+./gearman-entrypoint.sh 2>&1 >> /srv/LibreCat/logs/gearmand.log &
 
 # New databases for LibreCat
 mysql -u $MYSQL_USERNAME --password=$MYSQL_ROOT_PASSWORD -h mysqldb < goefis/config/mysql-init.sql
