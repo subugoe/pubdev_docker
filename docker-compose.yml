@@ -12,7 +12,7 @@ services:
             - "elasticsearch:searchnode"
         env_file:
             - ./conf/mysql.env
-        #volumes:
+        volumes:
             - "~/librecat-logs:/srv/LibreCat/logs"
         depends_on:
             - mysql

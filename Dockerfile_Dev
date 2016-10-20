@@ -10,6 +10,15 @@ WORKDIR ${LOCAL_LAYER}
 RUN npm install \
     && npm run build-css prefix-css
 
+# Configurations
+WORKDIR ${LIBRECATHOME}
+COPY layers.yml .
+COPY boot.sh .
+COPY gearman-entrypoint.sh .
+COPY docker-entrypoint.sh .
+
+RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER}
+
 # Clean up
 #RUN apt-get clean \
 #    && apt purge -y binutils \
@@ -24,14 +33,6 @@ RUN npm install \
 #    perl-doc \
 #   && apt-get --purge -y autoremove \
 #   && rm -rf /var/lib/apt/lists/*
-
-WORKDIR ${LIBRECATHOME}
-COPY layers.yml .
-COPY boot.sh .
-COPY gearman-entrypoint.sh .
-COPY docker-entrypoint.sh .
-
-RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER}
 
 USER librecat:librecat
 
