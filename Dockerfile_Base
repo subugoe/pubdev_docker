@@ -71,7 +71,7 @@ RUN sed -i '/socket/ d' /etc/mysql/my.cnf \
 
 # Clone LibreCat
 RUN mkdir -p ${LIBRECATHOME} \
-     && git clone --recursive https://github.com/LibreCat/LibreCat.git ${LIBRECATHOME}
+     && git clone https://github.com/LibreCat/LibreCat.git ${LIBRECATHOME}
 
 #   Installing Perl-Modules and compiling everything
 #   Finalizing setup and run Web-Interface under :5001

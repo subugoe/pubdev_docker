@@ -10,6 +10,10 @@ WORKDIR ${LOCAL_LAYER}
 RUN npm install \
     && npm run build-css prefix-css
 
+COPY felix.tgz /tmp
+RUN rm -Rf /srv/LibreCat
+RUN tar xfvz /tmp/felix.tgz -C /srv 
+
 # Configurations
 WORKDIR ${LIBRECATHOME}
 COPY layers.yml .

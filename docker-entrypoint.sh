@@ -10,6 +10,7 @@ sleep 15
 
 # New databases for LibreCat
 mysql -u $MYSQL_USERNAME --password=$MYSQL_ROOT_PASSWORD -h mysqldb < ${LOCAL_LAYER}/config/mysql-init.sql
+#sed -i 's/localhost:5001/141.5.101.220/g' ${LOCAL_LAYER}/config/catmandu.local.yml
 
 # creating 1st scripts
 ./index.sh drop
