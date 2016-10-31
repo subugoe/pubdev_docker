@@ -2,6 +2,13 @@
 
 There is already a complete documentaion how to install and use this bundle in the wiki. Here you can find the **Release-Notes**:
 
+## 2016.10.31
+ Now we have a Perl debugger integrated with docker, to run with the debugger just start with:
+
+    $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+Learn how to set up your IDE at the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki)
+
 ## 2016.10.20
  Now there is a boot-script as well as layer-config which has been introduced by the end of September. Besides, the volumes(=external folders) per default in the `docker-compose.yml` file.
 

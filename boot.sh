@@ -3,6 +3,8 @@
 #	Settings variables & arguments
 #
 
+echo "Starting LibreCat"
+
 CARTON=/usr/bin/carton
 PID=./plackup.librecat.pid
 SERVER_PORT=5001
@@ -23,8 +25,15 @@ simple_args="-E $PLACK_ENV -R lib -p $SERVER_PORT --access-log $ACCESS_LOG"
 
 export DANCER_APP LAYER_DIR CARTON plackup_args simple_args
 
-if [ "$1" == "starman" ]; then
-    LIBRECAT_LAYERS=${LAYER_DIR} $CARTON exec plackup $plackup_args -a $DANCER_APP -D
+if [ -z ${PERL5_DEBUG_ROLE+x} ]; then
+    if [ "$1" == "starman" ]; then
+        LIBRECAT_LAYERS=${LAYER_DIR} $CARTON exec plackup $plackup_args -a $DANCER_APP -D
+    else
+        LIBRECAT_LAYERS==${LAYER_DIR} $CARTON exec plackup $simple_args -a $DANCER_APP -D
+    fi
 else
-    LIBRECAT_LAYERS==${LAYER_DIR} $CARTON exec plackup $simple_args -a $DANCER_APP -D
+    echo "Debugger configuration detected - Role: $PERL5_DEBUG_ROLE, Host: $PERL5_DEBUG_HOST, Port: $PERL5_DEBUG_PORT"
+    LIBRECAT_LAYERS==${LAYER_DIR} $CARTON exec 'perl -d:Camelcadedb plackup $plackup_args -a $DANCER_APP -D'
 fi
+
+
