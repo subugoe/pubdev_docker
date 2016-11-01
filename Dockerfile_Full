@@ -111,13 +111,15 @@ COPY docker-entrypoint.sh .
 
 # Prepare LibreCat
 RUN sed -i 's/==/\>=/g' cpanfile 
+RUN echo "requires 'Devel::Camelcadedb';" >> cpanfile
 RUN carton install
 RUN chmod +x bin/generate_forms.pl \
     && perl bin/generate_forms.pl
 RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER}
 
 #Install perl debug module: https://github.com/Camelcade/Perl5-IDEA/wiki
-RUN cpanm install Devel::Camelcadedb
+#RUN cpanm install Devel::Camelcadedb
+RUN carton install Devel::Camelcadedb
 
 # Clean up
 RUN apt-get clean \
