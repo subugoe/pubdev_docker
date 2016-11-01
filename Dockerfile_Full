@@ -113,6 +113,7 @@ COPY docker-entrypoint.sh .
 RUN sed -i 's/==/\>=/g' cpanfile 
 #Install perl debug module: https://github.com/Camelcade/Perl5-IDEA/wiki
 RUN echo "requires 'Devel::Camelcadedb';" >> cpanfile
+RUN cpanm install Devel::Camelcadedb
 RUN carton install
 RUN chmod +x bin/generate_forms.pl \
     && perl bin/generate_forms.pl
