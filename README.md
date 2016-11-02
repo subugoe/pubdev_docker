@@ -9,6 +9,8 @@ There is already a complete documentaion how to install and use this bundle in t
 
 Learn how to set up your IDE at the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki)
 
+![Camelcade configuration](docs/img/Camelcade.png)
+
 ## 2016.10.20
  Now there is a boot-script as well as layer-config which has been introduced by the end of September. Besides, the volumes(=external folders) per default in the `docker-compose.yml` file.
 
