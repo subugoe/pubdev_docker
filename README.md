@@ -18,7 +18,7 @@ There is already a documentation how to install and use this bundle in the wiki.
 
 ##Starting
 
-  Afterwards you might start the sytem without any debugger support.
+  Afterwards you might start the bundle without any debugger support.
 
     $ docker-compose up
 
@@ -30,13 +30,13 @@ There is already a documentation how to install and use this bundle in the wiki.
 
     $ ./setup-dev.sh
 
-  After this you need to follow the instruchtions for setting up a new project in the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki/Getting-started:-IntelliJ-IDEA). Use this directory as the root for the new project and create a module with the contents of the `src` populated by the script.
+  **Keep in mind that you need to rerun this script if you build a need base iamge with a newer checkout of the Librecat master branch.** After this you need to follow the instruchtions for setting up a new project in the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki/Getting-started:-IntelliJ-IDEA). Use this directory as the root for the new project and create a module with the contents of the `src` populated by the script.
 
-  The next step is to set up a debug configuration as in the screen shot.
+  The next step is to set up a debug configuration as in the screenshot.
 
 ![Camelcade configuration](docs/img/Camelcade.png)
 
-  Then start the system with a modified call of `docker-compose`:
+  Then start the bundle with a modified call of `docker-compose`:
 
     $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up 
 
