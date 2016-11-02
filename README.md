@@ -1,6 +1,55 @@
 # PUB/LibreCat docker image
 
-There is already a complete documentaion how to install and use this bundle in the wiki. Here you can find the **Release-Notes**:
+There is already a documentation how to install and use this bundle in the wiki. Here you can find the **Release-Notes**:
+
+# Development Workflow
+
+## Setup
+
+  To speed up the build of a development container, which only contains Göttingen specific changes, there are now two Docker images, a base image and a dev image.
+  **You need to keep in mind, that you need to rebuild both images if you want to pull in changes made to the master branch of LibreCat.**
+  First run:
+
+    $ docker build --tag librecat_base --force-rm -f Dockerfile_Base .
+
+ And then (also if there would be any changes, you just need to rebuild the last images):
+
+    $ docker build --no-cache --tag librecat --force-rm -f Dockerfile_Dev .
+
+##Starting
+
+  Afterwards you might start the sytem without any debugger support.
+
+    $ docker-compose up
+
+## Using a debugger
+
+  You can also attach a IDE with Perl debugger, currently the [Camelcade Debugger](https://github.com/Camelcade) is supported, we recommend [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+  
+  First you need to set up the source files, to do the you just need to run a script which pulls together the sources and Perl modules from GitHub and CPAN in a structure similar to the one inside the container. You just need to run
+
+    $ ./setup-dev.sh
+
+  After this you need to follow the instruchtions for setting up a new project in the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki/Getting-started:-IntelliJ-IDEA). Use this directory as the root for the new project and create a module with the contents of the `src` populated by the script.
+
+  The next step is to set up a debug configuration as in the screen shot.
+
+![Camelcade configuration](docs/img/Camelcade.png)
+
+  Then start the system with a modified call of `docker-compose`:
+
+    $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up 
+
+  After that wait until you see a line that the debugger is waiting for connections and launch the debug configuration from IntelliJ IDEA (screenshot above). You should see the position where the execution of the scripts starts.
+
+# Release Notes
+
+## 2016.11.02
+  Added a script which pulls together the sources from GitHub and CPAN, which can be used in the debugger. You just need to run
+
+    $ ./setup-dev.sh
+    
+And then follow the instruchtions for setting up a new project in the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki/Getting-started:-IntelliJ-IDEA). Use this directory as the root for the new project and create a module with the contents of the `src` populated by the script.
 
 ## 2016.10.31
  Now we have a Perl debugger integrated with docker, to run with the debugger just start with:
@@ -9,7 +58,7 @@ There is already a complete documentaion how to install and use this bundle in t
 
 Learn how to set up your IDE at the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki)
 
-![Camelcade configuration](docs/img/Camelcade.png)
+
 
 ## 2016.10.20
  Now there is a boot-script as well as layer-config which has been introduced by the end of September. Besides, the volumes(=external folders) per default in the `docker-compose.yml` file.
@@ -77,4 +126,4 @@ building the functional Image:
 
 Regards,
 
-A.
+A. and C.
