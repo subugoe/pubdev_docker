@@ -44,7 +44,8 @@ RUN apt-get clean \
     binutils \
     pwgen \
     libaio1 \
-    curl
+    curl \
+    telnet
 # Perl
 RUN apt install -y perl-doc \
     cpanminus \
@@ -102,8 +103,7 @@ RUN chmod +x bin/generate_forms.pl \
     && perl bin/generate_forms.pl
 
 #Install perl debug module: https://github.com/Camelcade/Perl5-IDEA/wiki
-#The module is now added to the cpan file to place the dependency into the local directory by carton
+#The module is now also added to the cpan file to place the dependency into the local directory by carton
 RUN cpanm install Devel::Camelcadedb
-#RUN carton install Devel::Camelcadedb
 
 ENTRYPOINT ["./docker-entrypoint.sh"]

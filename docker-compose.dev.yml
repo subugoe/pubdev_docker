@@ -5,7 +5,7 @@ services:
             - "5005:5005"
         environment:
             DEBUG: 'true'
-            PERL5_DEBUG_HOST: 'localhost'
+            PERL5_DEBUG_HOST: '0.0.0.0'
             PERL5_DEBUG_ROLE: 'server'
             PERL5_DEBUG_PORT: '5005'
 
