@@ -44,8 +44,8 @@ mkdir -p $LIBDIR
 
 if [ -f $PERL_VERSION_FILE ]; then
     if [ "$(perl -version | sed '2,2!d')" -ne "$(cat $PERL_VERSION_FILE)" ]; then
-        echo "Perl version changes, rebuild of modules will be forced"
-	    rm -rf $LIBDIR && mkdir -p $LIBDIR
+        echo "Perl version changed, rebuild of modules will be forced"
+	    rm -rf $LIBDIR && mkdir $LIBDIR
     fi
 fi
 

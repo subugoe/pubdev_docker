@@ -30,7 +30,7 @@ There is already a documentation how to install and use this bundle in the wiki.
 
     $ ./setup-dev.sh
 
-  **Keep in mind that you need to rerun this script if you build a need base iamge with a newer checkout of the Librecat master branch.** After this you need to follow the instruchtions for setting up a new project in the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki/Getting-started:-IntelliJ-IDEA). Use this directory as the root for the new project and create a module with the contents of the `src` populated by the script.
+  **Keep in mind that you need to rerun this script if you build a need base image with a newer checkout of the Librecat master branch.** After this you need to follow the instruchtions for setting up a new project in the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki/Getting-started:-IntelliJ-IDEA). Use this directory as the root for the new project and create a module with the contents of the `src` subdirectory populated by the script.
 
   The next step is to set up a debug configuration as in the screenshot.
 
@@ -42,6 +42,10 @@ There is already a documentation how to install and use this bundle in the wiki.
 
   After that wait until you see a line that the debugger is waiting for connections and launch the debug configuration from IntelliJ IDEA (screenshot above). You should see the position where the execution of the scripts starts.
 
+## TODO list
+
+  * Currently the debugger seems to be stuck in the frameworks
+
 # Release Notes
 
 ## 2016.11.02
@@ -49,7 +53,7 @@ There is already a documentation how to install and use this bundle in the wiki.
 
     $ ./setup-dev.sh
     
-And then follow the instruchtions for setting up a new project in the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki/Getting-started:-IntelliJ-IDEA). Use this directory as the root for the new project and create a module with the contents of the `src` populated by the script.
+And then follow the instruchtions for setting up a new project in the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki/Getting-started:-IntelliJ-IDEA). Use this directory as the root for the new project and create a module with the contents of the `src` subdirectory populated by the script.
 
 ## 2016.10.31
  Now we have a Perl debugger integrated with docker, to run with the debugger just start with:
@@ -57,8 +61,6 @@ And then follow the instruchtions for setting up a new project in the [Camelcade
     $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
 Learn how to set up your IDE at the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki)
-
-
 
 ## 2016.10.20
  Now there is a boot-script as well as layer-config which has been introduced by the end of September. Besides, the volumes(=external folders) per default in the `docker-compose.yml` file.
