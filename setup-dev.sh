@@ -6,9 +6,11 @@ GOEFIS_REMOTE=https://github.com/subugoe/goefis.git
 #Directories
 LIBRECATHOME=./src
 LIBDIR=$LIBRECATHOME/local
+LAYERDIR=$LIBRECATHOME/goefis
 
 #Other Variables
 PERL_VERSION_FILE=$LIBRECATHOME/.perl-version
+WD=`pwd`
 
 #Set call to the cpanm script here if guessing doesn't work
 #CPANM=
@@ -30,20 +32,30 @@ if [ -z ${CPANM+x} ]; then
 fi
 
 #Checkout LibreCat
-mkdir -p ${LIBRECATHOME} 
+mkdir -p $LIBRECATHOME
 #Check if directory is empty
 if [ "$(ls -A $LIBRECATHOME)" ]; then 
     echo "Pulling in Changes"
-    cd ${LIBRECATHOME} && git pull
+    cd $LIBRECATHOME && git pull && cd $WD
 else
     git clone $LIBRECAT_REMOTE $LIBRECATHOME
+fi
+
+#Checkout GoeFIS Layer
+mkdir -p $LAYERDIR
+#Check if directory is empty
+if [ "$(ls -A $LAYERDIR)" ]; then 
+    echo "Pulling in Changes"
+    cd $LAYERDIR && git pull && cd $WD
+else
+    git clone $GOEFIS_REMOTE $LAYERDIR
 fi
 
 #Create directory for Perl modules
 mkdir -p $LIBDIR
 
 if [ -f $PERL_VERSION_FILE ]; then
-    if [ "$(perl -version | sed '2,2!d')" -ne "$(cat $PERL_VERSION_FILE)" ]; then
+    if [ "$(perl -version | sed '2,2!d')" != "$(cat $PERL_VERSION_FILE)" ]; then
         echo "Perl version changed, rebuild of modules will be forced"
 	    rm -rf $LIBDIR && mkdir $LIBDIR
     fi
