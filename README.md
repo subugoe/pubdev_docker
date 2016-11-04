@@ -41,6 +41,8 @@ There is already a documentation how to install and use this bundle in the wiki.
     $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up 
 
   After that wait until you see a line that the debugger is waiting for connections and launch the debug configuration from IntelliJ IDEA (screenshot above). You should see the position where the execution of the scripts starts.
+  
+  The first debugger connection stops inside `carton`, you need to resume the execution since `carton` to let it start the interesting Perl process which runs `Plack`. Connect a second time from the IDE and start from there...
 
 ## TODO list
 
