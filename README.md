@@ -26,7 +26,7 @@ There is already a documentation how to install and use this bundle in the wiki.
 
   You can also attach a IDE with Perl debugger, currently the [Camelcade Debugger](https://github.com/Camelcade) is supported, we recommend [IntelliJ IDEA](https://www.jetbrains.com/idea/)
   
-  First you need to set up the source files, to do the you just need to run a script which pulls together the sources and Perl modules from GitHub and CPAN in a structure similar to the one inside the container. You just need to run
+  First you need to set up the source files, to do the you just need to run a script which pulls together the sources and Perl modules from GitHub and CPAN in a structure similar to the one inside the container. You just need to run, make sure you have `cpanm` on path:
 
     $ ./setup-dev.sh
 
@@ -35,6 +35,8 @@ There is already a documentation how to install and use this bundle in the wiki.
   The next step is to set up a debug configuration as in the screenshot.
 
 ![Camelcade configuration](docs/img/Camelcade.png)
+
+  Make sure, that 'Single Instance only' is set, enabling non-interactive debugging allows you to suspend the execution at any point, if you take the Docker bundle as provided, the remote project root is `/srv/LibreCat_`, the remote process will wait for the debugger to attach, the host will be 'localhost' and the port is '5005'.  
 
   Then start the bundle with a modified call of `docker-compose`:
 
@@ -46,7 +48,7 @@ There is already a documentation how to install and use this bundle in the wiki.
 
 ## TODO list
 
-  * Currently the debugger seems to be stuck in the frameworks
+  * Currently the debugger seems to be stuck in the frameworks, pass the debugging module directly to `Plack`.
 
 # Release Notes
 
