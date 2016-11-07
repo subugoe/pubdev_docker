@@ -36,7 +36,7 @@ There is already a documentation how to install and use this bundle in the wiki.
 
 ![Camelcade configuration](docs/img/Camelcade.png)
 
-  Make sure, that 'Single Instance only' is set, enabling non-interactive debugging allows you to suspend the execution at any point, if you take the Docker bundle as provided, the remote project root is `/srv/LibreCat_`, the remote process will wait for the debugger to attach, the host will be 'localhost' and the port is '5005'.  
+  Make sure, that 'Single Instance only' is set, enabling non-interactive debugging allows you to suspend the execution at any point, if you take the Docker bundle as provided, the remote project root is `/srv/LibreCat`, the remote process will wait for the debugger to attach, the host will be 'localhost' and the port is '5005'.  
 
   Then start the bundle with a modified call of `docker-compose`:
 
@@ -44,11 +44,11 @@ There is already a documentation how to install and use this bundle in the wiki.
 
   After that wait until you see a line that the debugger is waiting for connections and launch the debug configuration from IntelliJ IDEA (screenshot above). You should see the position where the execution of the scripts starts.
   
-  The first debugger connection stops inside `carton`, you need to resume the execution since `carton` to let it start the interesting Perl process which runs `Plack`. Connect a second time from the IDE and start from there...
+  The first debugger connection  used to stop inside `carton`, but now we are getting directly into `Plack`.
 
 ## TODO list
 
-  * Currently the debugger seems to be stuck in the frameworks, pass the debugging module directly to `Plack`.
+  * Currently the debugger seems to be stuck in the frameworks, even  wa are now capable to get directly into `Plack`.
 
 # Release Notes
 

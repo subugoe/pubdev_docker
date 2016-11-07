@@ -33,8 +33,9 @@ if [ -z ${PERL5_DEBUG_ROLE+x} ]; then
     fi
 else
     echo "Debugger configuration detected - Role: $PERL5_DEBUG_ROLE, Host: $PERL5_DEBUG_HOST, Port: $PERL5_DEBUG_PORT"
-    #LIBRECAT_LAYERS==${LAYER_DIR} $CARTON exec 'perl -d:Camelcadedb plackup $plackup_args -a $DANCER_APP -D'
-    PERL5OPT=-d:Camelcadedb LIBRECAT_LAYERS==${LAYER_DIR} $CARTON exec plackup $simple_args -a $DANCER_APP -D
+    #This will result in debugging carton at first
+    #PERL5OPT=-d:Camelcadedb LIBRECAT_LAYERS==${LAYER_DIR} $CARTON exec plackup $simple_args -a $DANCER_APP -D
+    LIBRECAT_LAYERS==${LAYER_DIR} $CARTON exec perl -d:Camelcadedb local/bin/plackup $simple_args -a $DANCER_APP -D
 fi
 
 
