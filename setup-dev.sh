@@ -64,9 +64,9 @@ fi
 #Install dependencies to lib dir
 echo "Using cpanm at $CPANM"
 #this can be done faster, if you skip the tests (-n)
-$CPANM -L $LIBDIR --installdeps $LIBRECATHOME
-$CPANM -L $LIBDIR install Devel::Camelcadedb
-$CPANM -L $LIBDIR install Carton
+$CPANM -L $LIBDIR --installdeps -qn $LIBRECATHOME
+$CPANM -L $LIBDIR -qn install Devel::Camelcadedb
+$CPANM -L $LIBDIR -qn install Carton
 
 echo "If something fails to install you might need some additional libraries, since some Perl modules aren't selfconrtained! Look at the logs."
 
