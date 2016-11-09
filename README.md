@@ -48,7 +48,7 @@ There is already a documentation how to install and use this bundle in the wiki.
 
 ## TODO list
 
-  * Currently the debugger seems to be stuck in the frameworks, even  wa are now capable to get directly into `Plack`.
+  * Currently the debugger seems to be stuck in the frameworks, even we are now capable to get directly into `Plack`.
 
 # Release Notes
 
