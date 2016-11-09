@@ -9,8 +9,10 @@ sleep 15
 ./gearman-entrypoint.sh 2>&1 >> ${LIBRECATHOME}/logs/gearmand.log &
 
 # New databases for LibreCat
-mysql -u $MYSQL_USERNAME --password=$MYSQL_ROOT_PASSWORD -h mysqldb < ${LOCAL_LAYER}/config/mysql-init.sql
-#sed -i 's/localhost:5001/141.5.101.220/g' ${LOCAL_LAYER}/config/catmandu.local.yml
+sed -i 's/localhost:5001/141.5.101.219/g' ${LOCAL_LAYER}/config/catmandu.local.yml
+mysql -u $MYSQL_USERNAME --password=$MYSQL_PASSWORD --host=$MYSQL_HOST --port=$MYSQL_PORT < ${LOCAL_LAYER}/config/mysql-remote.sql
+sed -i 's/mysqldb/'$MYSQL_HOST'/g' ${LOCAL_LAYER}/config/store.yml
+sed -i 's/3306/'$MYSQL_PORT'/g' ${LOCAL_LAYER}/config/store.yml
 
 # creating 1st scripts
 ./index.sh drop
