@@ -36,7 +36,7 @@ There is already a documentation how to install and use this bundle in the wiki.
 
 ![Camelcade configuration](docs/img/Camelcade.png)
 
-  Make sure, that 'Single Instance only' is set, enabling non-interactive debugging allows you to suspend the execution at any point, if you take the Docker bundle as provided, the remote project root is `/srv/LibreCat`, the remote process will wait for the debugger to attach, the host will be 'localhost' and the port is '5005'.  
+  Make sure, that 'Single Instance only' is set, enabling non-interactive debugging allows you to suspend the execution at any point, if you take the Docker bundle as provided, the remote project root is `/srv/LibreCat/`, the remote process will wait for the debugger to attach, the host will be 'localhost' and the port is '5005'.  
 
   Then start the bundle with a modified call of `docker-compose`:
 
