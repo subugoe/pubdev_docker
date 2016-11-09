@@ -44,7 +44,7 @@ There is already a documentation how to install and use this bundle in the wiki.
 
   After that wait until you see a line that the debugger is waiting for connections and launch the debug configuration from IntelliJ IDEA (screenshot above). You should see the position where the execution of the scripts starts.
   
-  The first debugger connection  used to stop inside `carton`, but now we are getting directly into `Plack`.
+  The first debugger connection used to stop inside `carton`, but now we are getting directly into `Plack`.
 
 ## TODO list
 
