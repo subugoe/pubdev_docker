@@ -2,54 +2,6 @@
 
 There is already a documentation how to install and use this bundle in the wiki. Here you can find the **Release-Notes**:
 
-# Development Workflow
-
-## Setup
-
-  To speed up the build of a development container, which only contains Göttingen specific changes, there are now two Docker images, a base image and a dev image.
-  **You need to keep in mind, that you need to rebuild both images if you want to pull in changes made to the master branch of LibreCat.**
-  First run:
-
-    $ docker build --tag librecat_base --force-rm -f Dockerfile_Base .
-
- And then (also if there would be any changes, you just need to rebuild the last images):
-
-    $ docker build --no-cache --tag librecat --force-rm -f Dockerfile_Dev .
-
-##Starting
-
-  Afterwards you might start the bundle without any debugger support.
-
-    $ docker-compose up
-
-## Using a debugger
-
-  You can also attach a IDE with Perl debugger, currently the [Camelcade Debugger](https://github.com/Camelcade) is supported, we recommend [IntelliJ IDEA](https://www.jetbrains.com/idea/)
-  
-  First you need to set up the source files, to do the you just need to run a script which pulls together the sources and Perl modules from GitHub and CPAN in a structure similar to the one inside the container. You just need to run, make sure you have `cpanm` on path:
-
-    $ ./setup-dev.sh
-
-  **Keep in mind that you need to rerun this script if you build a need base image with a newer checkout of the Librecat master branch.** After this you need to follow the instruchtions for setting up a new project in the [Camelcade Wiki](https://github.com/Camelcade/Perl5-IDEA/wiki/Getting-started:-IntelliJ-IDEA). Use this directory as the root for the new project and create a module with the contents of the `src` subdirectory populated by the script.
-
-  The next step is to set up a debug configuration as in the screenshot.
-
-![Camelcade configuration](docs/img/Camelcade.png)
-
-  Make sure, that 'Single Instance only' is set, enabling non-interactive debugging allows you to suspend the execution at any point, if you take the Docker bundle as provided, the remote project root is `/srv/LibreCat/`, the remote process will wait for the debugger to attach, the host will be 'localhost' and the port is '5005'.  
-
-  Then start the bundle with a modified call of `docker-compose`:
-
-    $ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up 
-
-  After that wait until you see a line that the debugger is waiting for connections and launch the debug configuration from IntelliJ IDEA (screenshot above). You should see the position where the execution of the scripts starts.
-  
-  The first debugger connection used to stop inside `carton`, but now we are getting directly into `Plack`.
-
-## TODO list
-
-  * Currently the debugger seems to be stuck in the frameworks, even we are now capable to get directly into `Plack`.
-
 # Release Notes
 
 ## 2016.11.02
