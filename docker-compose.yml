@@ -11,18 +11,24 @@ services:
             - "mysql:mysqldb"
             - "elasticsearch:searchnode"
         env_file:
-            - ./conf/mysql.env
+            - ./conf/local.env
         volumes:
             - "~/librecat-logs:/srv/LibreCat/logs"
+	# If you want to tweak around or have permanent data, according to
+	# instruction in wiki-page, you should comment in the line below.
+        #    - "docker-entrypoint.sh:/srv/LibreCat/docker-entrypoint.sh"
         depends_on:
             - mysql
             - elasticsearch
         restart: always
+# if you with to use remote Database or Index, please
+# comment out the related section. that includes `links`
+# as well as `depends on` above.
     mysql:
         build: mysql
         image: mysql:5.5
         ports:
-            - "3306:3306"
+            - "3360:3360"
         env_file:
             - ./conf/mysql.env
         volumes:

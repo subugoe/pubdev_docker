@@ -4,6 +4,13 @@ There is already a documentation how to install and use this bundle in the wiki.
 
 # Release Notes
 
+## 2016.11.10
+  There some new changes:
+  1. The MySQL now listens per default on port 3360.
+  2. Made proper changes to the `docker-files` to make the Goettingen-Layer work smoothly.
+  3. There are options, which allow the usage of MySQL remotely or only a single Database.
+  4. Add more comments to different files, in order to make them better readable.
+
 ## 2016.11.02
   Added a script which pulls together the sources from GitHub and CPAN, which can be used in the debugger. You just need to run
 
