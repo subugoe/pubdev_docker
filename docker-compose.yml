@@ -16,7 +16,7 @@ services:
             - "~/librecat-logs:/srv/LibreCat/logs"
 # If you want to tweak around or have permanent data, according to
 # instruction in wiki-page, you should comment in the line below.
-        #    - "docker-entrypoint.sh:/srv/LibreCat/docker-entrypoint.sh"
+        #    - "./docker-entrypoint.sh:/srv/LibreCat/docker-entrypoint.sh"
         depends_on:
             - mysql
             - elasticsearch
