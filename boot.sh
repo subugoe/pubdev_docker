@@ -17,7 +17,7 @@ PLACK_ENV="development"
 ACCESS_LOG="logs/access.log"
 ERROR_LOG="logs/error.log"
 # If a config.yml is in a layers directory, use this line: 
-LAYER_DIR="/opt/settings/,/opt/local"
+LAYER_DIR="${LOCAL_LAYER},${SETTIGNS_LAYER}"
 
 starman_args="--pid $PID --workers $SERVER_WORKERS --user $SERVER_USER --group $SERVER_GROUP --error-log $ERROR_LOG --max-requests 20"
 plackup_args="-E $PLACK_ENV -R lib -p $SERVER_PORT --access-log $ACCESS_LOG -s Starman $starman_args"
