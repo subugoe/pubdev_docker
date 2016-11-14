@@ -11,7 +11,8 @@ WORKDIR ${LOCAL_LAYER}
 RUN npm install \
     && npm run build-css prefix-css
 
-COPY settings /opt
+RUN mkdir -p ${SETTINGS_LAYER}
+COPY settings ${SETTINGS_LAYER}
 
 # Configurations
 WORKDIR ${LIBRECATHOME}
