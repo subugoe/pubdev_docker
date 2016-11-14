@@ -5,14 +5,13 @@ MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
 #
 # Local Layer
 ENV LOCAL_LAYER /opt/local
+ENV SETTINGS_LAYER /opt/settings
 RUN git clone https://github.com/subugoe/goefis.git ${LOCAL_LAYER}
 WORKDIR ${LOCAL_LAYER}
 RUN npm install \
     && npm run build-css prefix-css
 
-#COPY felix.tgz /tmp
-#RUN rm -Rf /srv/LibreCat
-#RUN tar xfvz /tmp/felix.tgz -C /srv 
+COPY settings /opt
 
 # Configurations
 WORKDIR ${LIBRECATHOME}
