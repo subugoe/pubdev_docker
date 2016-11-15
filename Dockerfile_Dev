@@ -13,7 +13,6 @@ RUN npm install \
 
 RUN mkdir -p ${SETTINGS_LAYER}
 COPY settings ${SETTINGS_LAYER}
-COPY conf/log4perl.yml ${SETTINGS_LAYER}/config
 
 # Configurations
 WORKDIR ${LIBRECATHOME}
