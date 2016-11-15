@@ -1,6 +1,6 @@
 # PUB/LibreCat docker image
 
-There is already a documentation how to install and use this bundle in the [wiki](https://github.com/subugoe/pubdev_docker/wiki), you can find the [develoopment documentation](https://github.com/subugoe/pubdev_docker/wiki/Development) there as well. Here you can find the **Release-Notes**:
+There is already a documentation how to install and use this bundle in the [wiki](https://github.com/subugoe/pubdev_docker/wiki), you can find the [development documentation](https://github.com/subugoe/pubdev_docker/wiki/Development) there as well. Here you can find the **Release-Notes**:
 
 # Release Notes
 
