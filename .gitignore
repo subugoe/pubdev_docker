@@ -8,3 +8,4 @@ sub_pub/
 nohup.out
 *~
 **/.DS_Store
+.idea
