@@ -21,22 +21,17 @@ COPY boot.sh .
 COPY gearman-entrypoint.sh .
 COPY docker-entrypoint.sh .
 
-RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER}
+RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
 
 # Clean up
+# As a result the created image would be much smaller. It's our recommendation to
+# uncomment the few lines below in a production environment.
 #RUN apt-get clean \
-#    && apt purge -y binutils \
-#    wget \
-#    git \
-#    pwgen \
-#    binutils \
-#    build-essential \
-#    nodejs \
-#    g++ \
-#    man-db \
+#    && apt purge -y ${PRE_BUILD} \
 #    perl-doc \
-#   && apt-get --purge -y autoremove \
-#   && rm -rf /var/lib/apt/lists/*
+#    nodejs
+#    && apt-get --purge -y autoremove \
+#    && rm -rf /var/lib/apt/lists/*
 
 USER librecat:librecat
 

@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
 # 
 # creating a predecessor for the LibreCat Image
@@ -15,15 +15,7 @@ ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
 ENV PERL5LIB ${LIBRECATHOME}/local/lib/perl5:${LIBRECATHOME}/lib
-ENV LOCAL_LAYER /opt/local
-
-# Prepare to install
-# OS
-RUN apt-get clean \
-    && apt update \
-    && apt upgrade -y \
-    && apt dist-upgrade -y \
-    && apt install -y build-essential \
+ENV PRE_BUILD build-essential \
     ca-certificates \
     wget \
     g++ \
@@ -32,7 +24,7 @@ RUN apt-get clean \
     bsdmainutils \
     git \
     man-db \
-    ImageMagick \
+    imagemagick \
     libexpat1-dev \
     libssl-dev \
     libxml2-dev \
@@ -45,7 +37,17 @@ RUN apt-get clean \
     binutils \
     pwgen \
     libaio1 \
-    curl
+    curl \
+    telnet \
+    sudo
+
+# Prepare to install
+# OS
+RUN apt-get clean \
+    && apt update \
+    && apt upgrade -y \
+    && apt dist-upgrade -y \
+    && apt install -y ${PRE_BUILD}
 # Perl
 RUN apt install -y perl-doc \
     cpanminus \
@@ -67,40 +69,41 @@ RUN apt install -y mysql-client \
 RUN curl -sL ${NODEJS_URL} | sudo -E bash - \
     && apt install -y nodejs
 
-RUN sed -i '/socket/ d' /etc/mysql/my.cnf \
-    && sed -i '/\[mysqld\]/a bind-address\ =\ 0.0.0.0' /etc/mysql/my.cnf
-
 # Clone LibreCat
 RUN mkdir -p ${LIBRECATHOME} \
-     && git clone --recursive https://github.com/LibreCat/LibreCat.git ${LIBRECATHOME}
+     && git clone https://github.com/LibreCat/LibreCat.git ${LIBRECATHOME}
 
 #   Installing Perl-Modules and compiling everything
 #   Finalizing setup and run Web-Interface under :5001
 #
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en.UTF-8
-ENV LC_COLLATE en_US.UTF-8
-ENV LC_CTYPE en_US.UTF-8
-ENV LC_PAPER en_US.UTF-8
-ENV LC_ADDRESS en_US.UTF-8
-ENV LC_MONETARY en_US.UTF-8
-ENV LC_NUMERIC en_US.UTF-8
-ENV LC_TELEPHONE en_US.UTF-8
-ENV LC_IDENTIFICATION en_US.UTF-8
-ENV LC_MEASUREMENT en_US.UTF-8
-ENV LC_TIME en_US.UTF-8
-ENV LC_NAME en_US.UTF-8
-RUN locale-gen en_US.UTF-8
-
 # Building LibreCat
+WORKDIR ${LIBRECATHOME}
+# Goettingen specific: start ########
+RUN git checkout 0.01_felix
+# Goettingen specific: end ########
+RUN sed -i 's/==/\>=/g' cpanfile 
+RUN echo "requires 'Devel::Camelcadedb';" >> cpanfile
+RUN carton install
+RUN chmod +x bin/generate_forms.pl \
+    && perl bin/generate_forms.pl
+
+#Install perl debug module: https://github.com/Camelcade/Perl5-IDEA/wiki
+#The module is now also added to the cpan file to place the dependency into the local directory by carton
+RUN cpanm install Devel::Camelcadedb
+
 # 
 # Finalizing the LibreCat Image with SUB Layer
 #
 # Local Layer
+ENV LOCAL_LAYER /opt/local
+ENV SETTINGS_LAYER /opt/settings
 RUN git clone https://github.com/subugoe/goefis.git ${LOCAL_LAYER}
 WORKDIR ${LOCAL_LAYER}
 RUN npm install \
     && npm run build-css prefix-css
+
+RUN mkdir -p ${SETTINGS_LAYER}
+COPY settings ${SETTINGS_LAYER}
 
 # Configurations
 WORKDIR ${LIBRECATHOME}
@@ -109,36 +112,20 @@ COPY boot.sh .
 COPY gearman-entrypoint.sh .
 COPY docker-entrypoint.sh .
 
-# Prepare LibreCat
-RUN sed -i 's/==/\>=/g' cpanfile 
-#Install perl debug module: https://github.com/Camelcade/Perl5-IDEA/wiki
-RUN echo "requires 'Devel::Camelcadedb';" >> cpanfile
-RUN cpanm install Devel::Camelcadedb
-RUN carton install
-RUN chmod +x bin/generate_forms.pl \
-    && perl bin/generate_forms.pl
-RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER}
-
+RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
 
 # Clean up
 RUN apt-get clean \
-    && apt purge -y binutils \
-    wget \
-    git \
-    pwgen \
-    binutils \
-    build-essential \
-    nodejs \
-    g++ \
-    man-db \
+    && apt purge -y ${PRE_BUILD} \
     perl-doc \
-   && apt-get --purge -y autoremove \
-   && rm -rf /var/lib/apt/lists/*
+    nodejs
+    && apt-get --purge -y autoremove \
+    && rm -rf /var/lib/apt/lists/*
 
 USER librecat:librecat
 
 VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql", "/srv/LibreCat/logs"]
 
-EXPOSE 3306 4730 5001 9200 9300
+EXPOSE 3360 4730 5001 9200 9300
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
