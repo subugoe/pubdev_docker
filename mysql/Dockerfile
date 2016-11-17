@@ -73,8 +73,7 @@ VOLUME /var/lib/mysql
 
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
-RUN sed -i '/mysqld/ a port = 3360' /etc/mysql/my.cnf
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-EXPOSE 3360
+EXPOSE 3306
 CMD ["mysqld"]

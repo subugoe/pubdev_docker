@@ -4,7 +4,7 @@ _prefix:
 default:
   package: DBI
   options:
-    data_source: "DBI:mysql:host=mysqldb:port=3360:database=librecat_system"
+    data_source: "DBI:mysql:host=mysqldb:port=3306:database=librecat_system"
     username: librecat
     password: librecat
     bags:
@@ -14,7 +14,7 @@ default:
 backup:
   package: DBI
   options:
-    data_source: "DBI:mysql:host=mysqldb:port=3360:database=librecat_backup"
+    data_source: "DBI:mysql:host=mysqldb:port=3306:database=librecat_backup"
     username: librecat
     password: librecat
     bags:
@@ -29,7 +29,7 @@ backup:
 metrics:
   package: DBI
   options:
-    data_source: "DBI:mysql:host=mysqldb:port=3360:database=librecat_metrics"
+    data_source: "DBI:mysql:host=mysqldb:port=3306:database=librecat_metrics"
     username: librecat
     password: librecat
     bags:

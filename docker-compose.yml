@@ -28,7 +28,7 @@ services:
         build: mysql
         image: mysql:5.5
         ports:
-            - "3360:3360"
+            - "3306:3306"
         env_file:
             - ./conf/mysql.env
         volumes:

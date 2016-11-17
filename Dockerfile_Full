@@ -126,6 +126,6 @@ USER librecat:librecat
 
 VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql", "/srv/LibreCat/logs"]
 
-EXPOSE 3360 4730 5001 9200 9300
+EXPOSE 3306 4730 5001 9200 9300
 
 ENTRYPOINT ["./docker-entrypoint.sh"]

@@ -17,7 +17,7 @@ then
 	sed -i 's/username:\ librecat/username:\ '${MYSQL_USERNAME}'/g' ${SETTINGS_LAYER}/config/store.yml
 	sed -i 's/password:\ librecat/password:\ '${MYSQL_PASSWORD}'/g' ${SETTINGS_LAYER}/config/store.yml
 	sed -i 's/mysqldb/'${MYSQL_HOST}'/g' ${SETTINGS_LAYER}/config/store.yml
-	sed -i 's/3360/'${MYSQL_PORT}'/g' ${SETTINGS_LAYER}/config/store.yml
+	sed -i 's/3306/'${MYSQL_PORT}'/g' ${SETTINGS_LAYER}/config/store.yml
 	sed -i 's/librecat_system/'${MYSQL_LIBRECAT_SYSTEM_DATABASE}'/g' ${SETTINGS_LAYER}/config/store.yml
 	sed -i 's/librecat_metrics/'${MYSQL_LIBRECAT_METRICS_DATABASE}'/g' ${SETTINGS_LAYER}/config/store.yml
 	sed -i 's/librecat_backup/'${MYSQL_LIBRECAT_BACKUP_DATABASE}'/g' ${SETTINGS_LAYER}/config/store.yml

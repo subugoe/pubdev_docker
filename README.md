@@ -5,6 +5,9 @@ There is already a documentation how to install and use this bundle in the [wiki
 # Release Notes
 
 ## 2016.11.16
+  MySQL port back to the standard 3306. This way one can pull the default image and use it.
+
+## 2016.11.16
   The new Image is based on Ubuntu:16.04. some small matters like directory-permissions and such are being fixed. The installation on CentOS is not supported anymore, since it was not convinent to have a docker-version for all the Linux derivates.
 
 ## 2016.11.10
