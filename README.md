@@ -4,7 +4,7 @@ There is already a documentation how to install and use this bundle in the [wiki
 
 # Release Notes
 
-## 2016.11.16
+## 2016.11.17
   MySQL port back to the standard 3306. This way one can pull the default image and use it.
 
 ## 2016.11.16
