@@ -26,11 +26,9 @@ RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
 # Clean up
 # As a result the created image would be much smaller. It's our recommendation to
 # uncomment the few lines below in a production environment.
-#RUN apt-get clean \
-#    && apt purge -y ${PRE_BUILD} \
-#    perl-doc \
-#    nodejs
-#    && apt-get --purge -y autoremove \
+#RUN apt purge -y ${PRE_BUILD} \
+#    && apt --purge autoremove -y \
+#    && apt clean \
 #    && rm -rf /var/lib/apt/lists/*
 
 USER librecat:librecat

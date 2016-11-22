@@ -5,8 +5,7 @@ MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
 #
 
 # Add extra Repository for ElasticSearch
-RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4 \
-    && echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" > /etc/apt/sources.list.d/elasticsearch-1.7.list
+#    && echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" > /etc/apt/sources.list.d/elasticsearch-1.7.list
 RUN sed -i '/multiverse/s/#[\ ]*deb/deb/g' /etc/apt/sources.list
 RUN groupadd -g 5000 librecat \
     && useradd -g 5000 -u 5000 -d /srv/LibreCat -s /bin/bash -c "LibreCat User" librecat
@@ -15,6 +14,9 @@ ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
 ENV PERL5LIB ${LIBRECATHOME}/local/lib/perl5:${LIBRECATHOME}/lib
+ENV REQ_BUILD sudo \
+    zlib1g \
+    libaio1 
 ENV PRE_BUILD build-essential \
     ca-certificates \
     wget \
@@ -32,24 +34,21 @@ ENV PRE_BUILD build-essential \
     libgdbm-dev \
     libyaz-dev \
     libwrap0-dev \
-    zlib1g \
     zlib1g-dev \
     binutils \
     pwgen \
-    libaio1 \
     curl \
-    telnet \
-    sudo
+    telnet
 
 # Prepare to install
 # OS
-RUN apt-get clean \
+RUN apt clean \
     && apt update \
     && apt upgrade -y \
     && apt dist-upgrade -y \
-    && apt install -y ${PRE_BUILD}
+    && apt install --assume-yes --no-install-recommends ${PRE_BUILD} ${REQ_BUILD}
 # Perl
-RUN apt install -y perl-doc \
+RUN apt install --assume-yes --no-install-recommends perl-doc \
     cpanminus \
     libcapture-tiny-perl \
     libdbd-mysql-perl \
@@ -58,16 +57,23 @@ RUN apt install -y perl-doc \
     libb-utils-perl \
     carton
 # Workers' Manager
-RUN apt install -y gearman \
+RUN apt install --assume-yes --no-install-recommends gearman \
     gearman-server \
     gearman-tools \
     libgearman-dev
 # MySQL
-RUN apt install -y mysql-client \
+RUN apt install --assume-yes --no-install-recommends mysql-client \
     libmysqlclient-dev
+
 # NodeJS
-RUN curl -sL ${NODEJS_URL} | sudo -E bash - \
-    && apt install -y nodejs
+#RUN curl -sL ${NODEJS_URL} | sudo -E bash - \
+RUN curl -sL ${NODEJS_URL} > /tmp/nodejs_preinstall \
+    && sed -i 's/apt\-get/apt/g' /tmp/nodejs_preinstall \
+    && sed -i 's/apt\ install\ -y/apt\ install\ \-\-assume\-yes\ \-\-no\-install\-recommends/g' /tmp/nodejs_preinstall \
+    && chmod +x /tmp/nodejs_preinstall \
+    && bash - /tmp/nodejs_preinstall \
+    && apt install --assume-yes --no-install-recommends nodejs \
+    && rm /tmp/nodejs_preinstall
 
 # Clone LibreCat
 RUN mkdir -p ${LIBRECATHOME} \
