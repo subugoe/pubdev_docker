@@ -26,7 +26,10 @@ RUN wget -O - http:$(wget -O - https://grid.ac/downloads | tidy -asxml -q --clea
     "//x:script[@type = 'application/ld+json']" | jq ".distribution[0].contentUrl" | \
     xargs wget -O grid.zip && unzip grid.zip
 
-RUN bin/solr start && bin/solr create -c grid  && sleep 30 \
+#Clear the input file. Fixes a literal \t 
+RUN sed -i -e 's/\\t//g' grid.json
+
+RUN bin/solr start && bin/solr create -c grid  && sleep 20 \
    && curl 'http://0.0.0.0:8983/solr/grid/update/json/docs\
 ?split=/institutes\
 &f=id:/institutes/id\
