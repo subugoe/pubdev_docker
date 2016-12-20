@@ -13,7 +13,7 @@ services:
         env_file:
             - ./conf/local.env
         volumes:
-            - "~/librecat-logs:/srv/LibreCat/logs"
+            - librecat-logs:/srv/LibreCat/logs
 # If you want to tweak around or have permanent data, according to
 # instruction in wiki-page, you should comment in the line below.
         #    - "./docker-entrypoint.sh:/srv/LibreCat/docker-entrypoint.sh"
@@ -32,7 +32,7 @@ services:
         env_file:
             - ./conf/mysql.env
         volumes:
-            - "~/librecat-mysql:/var/lib/mysql"
+            - mysql-data:/var/lib/mysql
         restart: always
     elasticsearch:
         build: elasticsearch
@@ -41,5 +41,9 @@ services:
             - "9300:9300"
             - "9200:9200"
         volumes:
-            - "~/librecat-index:/usr/share/elasticsearch/data"
+            - elasticsearch-index:/usr/share/elasticsearch/data
         restart: always
+volumes:
+    mysql-data:
+    elasticsearch-index:
+    librecat-logs:
