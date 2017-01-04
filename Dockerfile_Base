@@ -11,6 +11,8 @@ RUN groupadd -g 5000 librecat \
     && useradd -g 5000 -u 5000 -d /srv/LibreCat -s /bin/bash -c "LibreCat User" librecat
 
 ENV LIBRECATHOME /srv/LibreCat
+# Sets the version of LibreCat to check out
+ENV LIBRECAT_TAG 0.04
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
 ENV PERL5LIB ${LIBRECATHOME}/local/lib/perl5:${LIBRECATHOME}/lib
@@ -85,7 +87,7 @@ RUN mkdir -p ${LIBRECATHOME} \
 # Building LibreCat
 WORKDIR ${LIBRECATHOME}
 # Goettingen specific: start ########
-RUN git checkout 0.01_felix
+RUN git checkout  $LIBRECAT_TAG
 # Goettingen specific: end ########
 RUN sed -i 's/==/\>=/g' cpanfile 
 RUN echo "requires 'Devel::Camelcadedb';" >> cpanfile
