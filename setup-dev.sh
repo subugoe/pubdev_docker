@@ -11,6 +11,7 @@ LAYERDIR=$LIBRECATHOME/goefis
 #Other Variables
 PERL_VERSION_FILE=$LIBRECATHOME/.perl-version
 WD=`pwd`
+LIBRECAT_TAG="$1"
 
 #Set call to the cpanm script here if guessing doesn't work
 #CPANM=
@@ -39,6 +40,13 @@ if [ "$(ls -A $LIBRECATHOME)" ]; then
     cd $LIBRECATHOME && git pull && cd $WD
 else
     git clone $LIBRECAT_REMOTE $LIBRECATHOME
+fi
+
+if [ -n "$LIBRECAT_TAG" ]; then
+    cd $LIBRECATHOME
+    echo "Checking out tag $LIBRECAT_TAG"
+    git checkout $LIBRECAT_TAG
+    cd $WD
 fi
 
 #Checkout GoeFIS Layer
