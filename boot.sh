@@ -18,6 +18,7 @@ ACCESS_LOG="logs/access.log"
 ERROR_LOG="logs/error.log"
 # If a config.yml is in a layers directory, use this line: 
 LAYER_DIR="${LOCAL_LAYER},${SETTINGS_LAYER}"
+WD=`pwd`
 
 starman_args="--pid $PID --workers $SERVER_WORKERS --user $SERVER_USER --group $SERVER_GROUP --error-log $ERROR_LOG --max-requests 20"
 plackup_args="-E $PLACK_ENV -R lib -p $SERVER_PORT --access-log $ACCESS_LOG -s Starman $starman_args"
@@ -25,6 +26,14 @@ simple_args="-E $PLACK_ENV -R lib -p $SERVER_PORT --access-log $ACCESS_LOG"
 debug_args="-E $PLACK_ENV -p $SERVER_PORT --access-log $ACCESS_LOG"
 
 export DANCER_APP LAYER_DIR CARTON plackup_args simple_args
+
+#check if a specific version is requested
+if [ -n "$LIBRECAT_TAG" ]; then
+    cd $DANCER_DIR
+    echo "Checking out tag $LIBRECAT_TAG"
+    git checkout $LIBRECAT_TAG
+    cd $WD
+fi 
 
 if [ -z ${PERL5_DEBUG_ROLE+x} ]; then
     if [ "$1" == "starman" ]; then
