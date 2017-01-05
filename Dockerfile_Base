@@ -84,8 +84,8 @@ RUN mkdir -p ${LIBRECATHOME} \
 #
 # Building LibreCat
 WORKDIR ${LIBRECATHOME}
-# Goettingen specific: start ########
-RUN git checkout 0.01_felix
+# Goettingen specific, old version: start ########
+# RUN git checkout 0.01_felix
 # Goettingen specific: end ########
 RUN sed -i 's/==/\>=/g' cpanfile 
 RUN echo "requires 'Devel::Camelcadedb';" >> cpanfile
