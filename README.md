@@ -3,6 +3,14 @@
 There is already a documentation how to install and use this bundle in the [wiki](https://github.com/subugoe/pubdev_docker/wiki), you can find the [development documentation](https://github.com/subugoe/pubdev_docker/wiki/Development) there as well. Here you can find the **Release-Notes**:
 
 # Release Notes
+## 2017.01.10
+  The `/srv/var/log`-mount is being commented out. If you want to make it available, make sure the access-rights are set.
+
+**Note:** Since the last release, the MySQL-Image should have been rebuilt. If you haven't done it yet, make sure to do so now. Just pull the mysql:5.5 from [docker hub](https://hub.docker.com/):
+```
+$ docker rmi mysql:5.5
+$ docker pull mysql:5.5
+```
 
 ## 2016.11.17
   MySQL port back to the standard 3306. This way one can pull the default image and use it.
@@ -56,8 +64,7 @@ Afterwards is the same as before:
 Now, if there would be any changes, you just need to rebuild the last images:
 
     $ docker build --no-cache --tag librecat --force-rm -f Dockerfile_Dev .
-
-_Note:_ If you create the Base image under another name, you should just change the `From`-line in `Dockerfile` to the proper Image-Name.
+**Note:** If you create the Base image under another name, you should just change the `From`-line in `Dockerfile` to the proper Image-Name.
 
 Obviously you could still do everything in one single step:
 
