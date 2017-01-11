@@ -1,6 +1,5 @@
 certs/
 dev/
-mongodb/
 os/
 docker_subpub/
 src/

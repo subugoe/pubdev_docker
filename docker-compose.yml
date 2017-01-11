@@ -25,7 +25,6 @@ services:
 # comment out the related section. that includes `links`
 # as well as `depends on` above.
     mysql:
-        build: mysql
         image: mysql:5.5
         ports:
             - "3306:3306"
@@ -35,7 +34,6 @@ services:
             - mysql-data:/var/lib/mysql
         restart: always
     elasticsearch:
-        build: elasticsearch
         image: elasticsearch:1.7
         ports:
             - "9300:9300"
