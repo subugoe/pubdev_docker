@@ -16,7 +16,7 @@ COPY settings ${SETTINGS_LAYER}
 
 # Configurations
 WORKDIR ${LIBRECATHOME}
-RUM mkdir logs
+RUN mkdir logs
 COPY layers.yml .
 COPY boot.sh .
 COPY gearman-entrypoint.sh .
