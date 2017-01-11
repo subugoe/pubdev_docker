@@ -3,6 +3,11 @@
 There is already a documentation how to install and use this bundle in the [wiki](https://github.com/subugoe/pubdev_docker/wiki), you can find the [development documentation](https://github.com/subugoe/pubdev_docker/wiki/Development) there as well. Here you can find the **Release-Notes**:
 
 # Release Notes
+## 2017.01.11
+  * Since we do not make any changes to **MySQL** and **ElasticSearch**, and not using **MongoDB**, these all has been removed from the repository.
+  * There is no **`Dockerfile_Full`** present anymore, instead there exists a script called __`full_build.sh`__ which creates a single **`Dockerfile`** from the other two.
+  * In order to make the build more dynamic, now it is possible to pass the build arguments for the **Librecat Core Version**. The full documention follows in [Wiki](https://github.com/subugoe/pubdev_docker/wiki).
+
 ## 2017.01.10
   The `/srv/var/log`-mount is being commented out. If you want to make it available, make sure the access-rights are set.
 
