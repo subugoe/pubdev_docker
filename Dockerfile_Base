@@ -39,7 +39,8 @@ ENV PRE_BUILD build-essential \
     binutils \
     pwgen \
     curl \
-    telnet
+    telnet \
+    python
 
 # Prepare to install
 # OS
