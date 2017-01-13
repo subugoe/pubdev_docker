@@ -22,28 +22,27 @@ replacements = collections.OrderedDict()
 # Use Python raw strings (r'') to make sure that strings with backslashes are not interpreted as escape sequences
 # Use the function r() to wrap up things that are regular expressions
 
-replacements.update({r'\\line PUB: {\\field{\\*\\fldinst HYPERLINK http://pub.uni-bielefeld.de/$bag/$pub->{_id}}{\\fldrslt http://pub.uni-bielefeld.de/$bag/$pub->{_id}}}': '',
-                r'\\line PhilLister: {\\field{\\*\\fldinst HYPERLINK http://phillister.ub.uni-bielefeld.de/$bag/$ext->{phillister}}{\\fldrslt $ext->{phillister}}}': '',
-                r'\\line PUB: {\\field{\\*\\fldinst HYPERLINK http://pub.uni-bielefeld.de/$bag/$pub->{_id}}{\\fldrslt http://pub.uni-bielefeld.de/$bag/$pub->{_id}}}': '',
-                r'{\\field{\\*\\fldinst HYPERLINK http://pub.uni-bielefeld.de/$bag/$pub->{_id}}{\\fldrslt ': '',
-                'vitali.peil@uni-bielefeld.de': 'beucke@sub.uni-goettingen.de',
-                'https://pub.uni-bielefeld.de/oai': 'http://pub-dev.sub.uni-goettingen.de/oai',
-                'PUB - Publications at Bielefeld University': 'GRO - Göttingen Research Online',
-                'publikationsdienste.ub@uni-bielefeld.de': 'epu@sub.uni-goettingen.de',
-                'https://ekvv.uni-bielefeld.de/pers_publ/publ/PersonDetail.jsp?personId=': '',
-                'pub.uni-bielefeld.de': 'pub-dev.sub.uni-goettingen.de',
-                'oai:pub.uni-bielefeld.de:1585315': 'oai:pub-dev.sub.uni-goettingen.de:2737399',
-                'https://pub.uni-bielefeld.de': 'https://www.sub.uni-goettingen.de',
-                'LibreCat University': 'Göttingen University',
-                'Bielefeld University': 'Göttingen University',
-                'Universität Bielefeld': 'Georg-August-Universität Göttingen',
-                'Universitätsbibliothek Bielefeld': 'Niedersächsische Staats- und Universitätsbibliothek Göttingen',
-                'Universitätsstr. 25, 33615 Bielefeld': 'Platz der Göttinger Sieben 1, 37073 Göttingen',
-                'Bielefeld': 'Göttingen',
-                r('PUB([^\w])'): r'GRO\1',
-                'L6000-0538': '',
-                '24060-6': '2020450-4'
-               })
+replacements[r'\\line PUB: {\\field{\\*\\fldinst HYPERLINK http://pub.uni-bielefeld.de/$bag/$pub->{_id}}{\\fldrslt http://pub.uni-bielefeld.de/$bag/$pub->{_id}}}'] = ''
+replacements[r'\\line PhilLister: {\\field{\\*\\fldinst HYPERLINK http://phillister.ub.uni-bielefeld.de/$bag/$ext->{phillister}}{\\fldrslt $ext->{phillister}}}'] = ''
+replacements[r'\\line PUB: {\\field{\\*\\fldinst HYPERLINK http://pub.uni-bielefeld.de/$bag/$pub->{_id}}{\\fldrslt http://pub.uni-bielefeld.de/$bag/$pub->{_id}}}'] = ''
+replacements[r'{\\field{\\*\\fldinst HYPERLINK http://pub.uni-bielefeld.de/$bag/$pub->{_id}}{\\fldrslt '] = ''
+replacements['vitali.peil@uni-bielefeld.de'] = 'beucke@sub.uni-goettingen.de'
+replacements['https://pub.uni-bielefeld.de/oai'] = 'http://pub-dev.sub.uni-goettingen.de/oai'
+replacements['PUB - Publications at Bielefeld University'] = 'GRO - Göttingen Research Online'
+replacements['publikationsdienste.ub@uni-bielefeld.de'] = 'epu@sub.uni-goettingen.de'
+replacements['https://ekvv.uni-bielefeld.de/pers_publ/publ/PersonDetail.jsp?personId='] = ''
+replacements['oai:pub.uni-bielefeld.de:1585315'] = 'oai:pub-dev.sub.uni-goettingen.de:2737399'
+replacements['https://pub.uni-bielefeld.de'] = 'https://www.sub.uni-goettingen.de'
+replacements['pub.uni-bielefeld.de'] = 'pub-dev.sub.uni-goettingen.de'
+replacements['LibreCat University'] = 'Göttingen University'
+replacements['Bielefeld University'] = 'Göttingen University'
+replacements['Universität Bielefeld'] = 'Georg-August-Universität Göttingen'
+replacements['Universitätsbibliothek Bielefeld'] = 'Niedersächsische Staats- und Universitätsbibliothek Göttingen'
+replacements['Universitätsstr. 25, 33615 Bielefeld'] = 'Platz der Göttinger Sieben 1, 37073 Göttingen'
+replacements['Bielefeld'] = 'Göttingen'
+replacements[r('PUB([^\w])')] = r'GRO\1'
+replacements['L6000-0538'] = ''
+replacements['24060-6'] = '2020450-4'
 
 #List to count if all replacements have been made
 replaced = []
