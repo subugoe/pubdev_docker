@@ -19,6 +19,9 @@ def r (pattern):
 replacements = collections.OrderedDict()
 
 # What should be replaced
+# Use Python raw strings (r'') to make sure that strings with backslashes are not interpreted as escape sequences
+# Use the function r() to wrap up things that are regular expressions
+
 replacements.update({r'\\line PUB: {\\field{\\*\\fldinst HYPERLINK http://pub.uni-bielefeld.de/$bag/$pub->{_id}}{\\fldrslt http://pub.uni-bielefeld.de/$bag/$pub->{_id}}}': '',
                 r'\\line PhilLister: {\\field{\\*\\fldinst HYPERLINK http://phillister.ub.uni-bielefeld.de/$bag/$ext->{phillister}}{\\fldrslt $ext->{phillister}}}': '',
                 r'\\line PUB: {\\field{\\*\\fldinst HYPERLINK http://pub.uni-bielefeld.de/$bag/$pub->{_id}}{\\fldrslt http://pub.uni-bielefeld.de/$bag/$pub->{_id}}}': '',
@@ -41,6 +44,9 @@ replacements.update({r'\\line PUB: {\\field{\\*\\fldinst HYPERLINK http://pub.un
                 'L6000-0538': '',
                 '24060-6': '2020450-4'
                })
+
+#List to count if all replacements have been made
+replaced = []
 
 def find_files (files):
     ret = []
@@ -72,6 +78,8 @@ def change_file (file, edit, verbose):
                     if verbose:
                         print "Change \"" + line + "\" to \"" + newline + "\"" 
                     line = newline
+                    if fro not in replaced:
+                        replaced.append(fro)
             content = content + newline
     if edit == True:
         resultfile = file + ".new"
@@ -107,6 +115,13 @@ def main(argv):
         for root, dirs, files in os.walk(searchroot):
             for file in files:
                 change_file(os.path.join(root, file), test, verbose)
+    for key in replacements.keys():
+        if key not in replaced:
+            if isinstance(key, str):
+                r = key
+            elif isinstance(key, re._pattern_type):
+                r = key.pattern
+            print "Warning: \"" + r + "\" was not replaced!"
 
 if __name__ == "__main__":
    main(sys.argv[1:])
