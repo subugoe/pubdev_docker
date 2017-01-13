@@ -8,8 +8,8 @@ ENV LOCAL_LAYER /opt/local
 ENV SETTINGS_LAYER /opt/settings
 RUN git clone https://github.com/subugoe/goefis.git ${LOCAL_LAYER}
 WORKDIR ${LOCAL_LAYER}
-RUN npm install \
-    && npm run build-css prefix-css
+# Commented this one out, since it fails after the reset of the goefis layer
+#RUN npm install && npm run build-css prefix-css
 
 RUN mkdir -p ${SETTINGS_LAYER}
 COPY settings ${SETTINGS_LAYER}
