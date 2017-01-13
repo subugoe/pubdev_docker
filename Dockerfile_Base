@@ -15,6 +15,9 @@ ARG LIBRECAT_VERSION=0.04
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
 ENV PERL5LIB ${LIBRECATHOME}/local/lib/perl5:${LIBRECATHOME}/lib
+# Maybe this can speed up carton
+ENV PERL_CPANM_OPT ”–skip-installed –notest –auto-cleanup=0″
+
 ENV REQ_BUILD sudo \
     zlib1g \
     libaio1 
@@ -91,8 +94,7 @@ RUN sed -i 's/==/\>=/g' cpanfile
 RUN echo "requires 'Devel::Camelcadedb';" >> cpanfile
 
 RUN carton install
-RUN chmod +x bin/generate_forms.pl \
-    && perl bin/generate_forms.pl
+RUN perl bin/librecat generate forms
 
 #Install perl debug module: https://github.com/Camelcade/Perl5-IDEA/wiki
 #The module is now also added to the cpan file to place the dependency into the local directory by carton
