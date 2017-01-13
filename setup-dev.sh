@@ -68,7 +68,7 @@ $CPANM -L $LIBDIR --installdeps -qn $LIBRECATHOME
 $CPANM -L $LIBDIR -qn install Devel::Camelcadedb
 $CPANM -L $LIBDIR -qn install Carton
 
-echo "If something fails to install you might need some additional libraries, since some Perl modules aren't selfconrtained! Look at the logs."
+echo "If something fails to install you might need some additional libraries, since some Perl modules aren't selfcontained! Look at the logs."
 
 #Save Version of Perl, to recompile modules if needed
 echo $(perl -version | sed '2,2!d') > $PERL_VERSION_FILE
