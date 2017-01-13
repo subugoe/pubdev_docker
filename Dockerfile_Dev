@@ -9,6 +9,7 @@ ENV SETTINGS_LAYER /opt/settings
 RUN git clone https://github.com/subugoe/goefis.git ${LOCAL_LAYER}
 
 COPY robonils.sh .
+COPY patches .
 RUN chmod +x robonils.sh && bash robonils.sh
 
 WORKDIR ${LOCAL_LAYER}
