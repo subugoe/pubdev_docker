@@ -112,9 +112,12 @@ def main(argv):
          verbose = True
     os.chdir(srcdir)
     for searchroot in find_files(places):
-        for root, dirs, files in os.walk(searchroot):
-            for file in files:
-                change_file(os.path.join(root, file), test, verbose)
+        if os.path.isfile(searchroot):
+            change_file(searchroot, test, verbose)
+        elif os.path.isdir(searchroot):
+            for root, dirs, files in os.walk(searchroot):
+                for file in files:
+                    change_file(os.path.join(root, file), test, verbose)
     for key in replacements.keys():
         if key not in replaced:
             if isinstance(key, str):
