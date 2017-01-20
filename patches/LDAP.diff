@@ -1,0 +1,18 @@
+diff --git a/lib/LibreCat/Auth/LDAP.pm b/lib/LibreCat/Auth/LDAP.pm
+index c0c5dbfb..ddbda733 100644
+--- a/lib/LibreCat/Auth/LDAP.pm
++++ b/lib/LibreCat/Auth/LDAP.pm
+@@ -102,8 +102,11 @@ sub search {
+     if ($query->code != Net::LDAP::LDAP_SUCCESS or $query->count != 1) {
+         return undef;
+     }
+-
+-    $query->entry(0)->get_value($self->search_attr);
++    if ($self->search_attr eq "dn") {
++        $query->entry(0)->dn()
++    } else {
++        $query->entry(0)->get_value($self->search_attr);
++    }
+ }
+ 
+ 1;

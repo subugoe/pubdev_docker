@@ -3,6 +3,9 @@
 There is already a documentation how to install and use this bundle in the [wiki](https://github.com/subugoe/pubdev_docker/wiki), you can find the [development documentation](https://github.com/subugoe/pubdev_docker/wiki/Development) there as well. Here you can find the **Release-Notes**:
 
 # Release Notes
+## 2017.01.16
+  There is now a draft of a patch based development of a local layer in place. This way you can change LibreCat Views and configuration in your test environment as you like. The next step to bring changes to the deployment image is to create a diff and add it to the patches directory. These patches will be applied if you build the Dockerfile_Dev. It is recommended to create a patch per issue that you are fixing. This way you see what breaks if the version number of LibreCat increases. Since a patch that couldn't be applied breaks the build. This should give us an overview of changes we need to incorporate. And it keeps the local layer to minimum amount of files.
+
 ## 2017.01.11
   * Since we do not make any changes to **MySQL** and **ElasticSearch**, and not using **MongoDB**, these all has been removed from the repository.
   * There is no **`Dockerfile_Full`** present anymore, instead there exists a script called __`full_build.sh`__ which creates a single **`Dockerfile`** from the other two.

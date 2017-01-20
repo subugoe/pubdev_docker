@@ -7,6 +7,11 @@ MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
 ENV LOCAL_LAYER /opt/local
 ENV SETTINGS_LAYER /opt/settings
 RUN git clone https://github.com/subugoe/goefis.git ${LOCAL_LAYER}
+
+COPY robonils.sh .
+COPY patches .
+RUN chmod +x robonils.sh && bash robonils.sh
+
 WORKDIR ${LOCAL_LAYER}
 # Commented this one out, since it fails after the reset of the goefis layer
 #RUN npm install && npm run build-css prefix-css
@@ -21,6 +26,10 @@ COPY layers.yml .
 COPY boot.sh .
 COPY gearman-entrypoint.sh .
 COPY docker-entrypoint.sh .
+
+# This is used to replace some Strings with Göttingen specific ones
+COPY goettingenfy.py .
+RUN python goettingenfy.py -s  .
 
 RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
 
