@@ -1,0 +1,75 @@
+diff --git a/views/department/list.tt b/views/department/list.tt
+index cf7b81b..8b00aa1 100644
+--- a/views/department/list.tt
++++ b/views/department/list.tt
+@@ -10,10 +10,6 @@
+     <div id="banner">
+       <h1>[% h.loc("header.title") %]</h1>
+     </div>
+-    <div class="ltIEten">
+-      <h3>Please note that PUB no longer supports Internet Explorer versions 8 or 9 (or earlier).</h3>
+-      <p>We recommend upgrading to the latest <a href="http://windows.microsoft.com/ie" target="_blank">Internet Explorer</a>, <a href="https://chrome.google.com" target="_blank">Google Chrome</a>, or <a href="https=//mozilla.org/firefox/" target="_blank">Firefox</a>.</p>
+-    </div>
+     <div class="row margin-top1">
+       <div class="col-md-12">
+         <ul class="nav nav-tabs" id="indexTab">
+diff --git a/views/index.tt b/views/index.tt
+index d5471df..6f4ae94 100644
+--- a/views/index.tt
++++ b/views/index.tt
+@@ -9,10 +9,6 @@
+     <div id="banner">
+       <h1>[% h.loc("header.title") %]</h1>
+     </div>
+-    <div class="ltIEten">
+-      <h3>Please note that we no longer support Internet Explorer versions 8 or 9 (or earlier).</h3>
+-      <p>We recommend upgrading to the latest <a href="http://windows.microsoft.com/ie" target="_blank">Internet Explorer</a>, <a href="https://chrome.google.com" target="_blank">Google Chrome</a>, or <a href="https=//mozilla.org/firefox/" target="_blank">Firefox</a>.</p>
+-    </div>
+     <div class="row margin-top1">
+       <div class="col-md-12">
+         <ul class="nav nav-tabs" id="indexTab">
+diff --git a/views/person/list.tt b/views/person/list.tt
+index 4414952..a6cf7ec 100644
+--- a/views/person/list.tt
++++ b/views/person/list.tt
+@@ -10,10 +10,6 @@
+     <div id="banner">
+       <h1>[% h.loc("header.title") %]</h1>
+     </div>
+-    <div class="ltIEten">
+-      <h3>Please note that we no longer supports Internet Explorer versions 8 or 9 (or earlier).</h3>
+-      <p>We recommend upgrading to the latest <a href="http://windows.microsoft.com/ie" target="_blank">Internet Explorer</a>, <a href="https://chrome.google.com" target="_blank">Google Chrome</a>, or <a href="https=//mozilla.org/firefox/" target="_blank">Firefox</a>.</p>
+-    </div>
+     <div class="row margin-top1">
+       <div class="col-md-12">
+         <ul class="nav nav-tabs" id="indexTab">
+diff --git a/views/project/list.tt b/views/project/list.tt
+index 1b780b5..7c14b0e 100644
+--- a/views/project/list.tt
++++ b/views/project/list.tt
+@@ -10,10 +10,6 @@
+     <div id="banner">
+       <h1>[% h.loc("header.title") %]</h1>
+     </div>
+-    <div class="ltIEten">
+-      <h3>Please note that PUB no longer supports Internet Explorer versions 8 or 9 (or earlier).</h3>
+-      <p>We recommend upgrading to the latest <a href="http://windows.microsoft.com/ie" target="_blank">Internet Explorer</a>, <a href="https://chrome.google.com" target="_blank">Google Chrome</a>, or <a href="https=//mozilla.org/firefox/" target="_blank">Firefox</a>.</p>
+-    </div>
+     <div class="row margin-top1">
+       <div class="col-md-12">
+         <ul class="nav nav-tabs" id="indexTab">
+diff --git a/views/publication/list.tt b/views/publication/list.tt
+index 09a582b..38082b5 100644
+--- a/views/publication/list.tt
++++ b/views/publication/list.tt
+@@ -10,10 +10,6 @@
+     <div id="banner">
+       <h1>[% h.loc("header.title") %]</h1>
+     </div>
+-    <div class="ltIEten">
+-      <h3>Please note that PUB no longer supports Internet Explorer versions 8 or 9 (or earlier).</h3>
+-      <p>We recommend upgrading to the latest <a href="http://windows.microsoft.com/ie" target="_blank">Internet Explorer</a>, <a href="https://chrome.google.com" target="_blank">Google Chrome</a>, or <a href="https=//mozilla.org/firefox/" target="_blank">Firefox</a>.</p>
+-    </div>
+     <div class="row margin-top1">
+       <div class="col-md-12">
+         <ul class="nav nav-tabs" id="indexTab">
