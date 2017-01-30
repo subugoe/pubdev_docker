@@ -12,7 +12,7 @@ RUN groupadd -g 5000 librecat \
 
 ENV LIBRECATHOME /srv/LibreCat
 # Sets the version of LibreCat to check out
-ARG LIBRECAT_VERSION=0.05
+ARG LIBRECAT_VERSION=0.1.0
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
 ENV PERL5LIB ${LIBRECATHOME}/local/lib/perl5:${LIBRECATHOME}/lib
