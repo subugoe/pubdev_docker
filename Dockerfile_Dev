@@ -8,6 +8,11 @@ MAINTAINER Christian Mahnke (mahnke@sub.uni-goettingen.de)
 ENV LOCAL_LAYER /opt/local
 ENV SETTINGS_LAYER /opt/settings
 #RUN git clone https://github.com/subugoe/goefis.git ${LOCAL_LAYER}
+RUN mkdir -p ${LOCAL_LAYER}
+
+# Prepare our changes layer
+RUN mkdir -p ${SETTINGS_LAYER}
+COPY settings ${SETTINGS_LAYER}
 
 COPY robonils.sh .
 COPY patches .
@@ -20,9 +25,6 @@ RUN python goettingenfy.py -s  .
 WORKDIR ${LOCAL_LAYER}
 # Commented this one out, since it fails after the reset of the goefis layer
 #RUN npm install && npm run build-css prefix-css
-
-RUN mkdir -p ${SETTINGS_LAYER}
-COPY settings ${SETTINGS_LAYER}
 
 # Configurations
 WORKDIR ${LIBRECATHOME}
