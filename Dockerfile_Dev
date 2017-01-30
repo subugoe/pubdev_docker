@@ -7,7 +7,7 @@ MAINTAINER Christian Mahnke (mahnke@sub.uni-goettingen.de)
 # Local Layer
 ENV LOCAL_LAYER /opt/local
 ENV SETTINGS_LAYER /opt/settings
-RUN git clone https://github.com/subugoe/goefis.git ${LOCAL_LAYER}
+#RUN git clone https://github.com/subugoe/goefis.git ${LOCAL_LAYER}
 
 COPY robonils.sh .
 COPY patches .
