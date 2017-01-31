@@ -44,7 +44,8 @@ ENV PRE_BUILD build-essential \
     pwgen \
     curl \
     telnet \
-    python
+    python \
+    unzip
 
 # Prepare to install
 # OS
@@ -100,6 +101,20 @@ RUN chmod +x bin/generate_forms.pl \
     && perl bin/generate_forms.pl
 # The above line generates a warning, but the new command fails :(
 #RUN perl bin/librecat generate forms
+
+# See https://github.com/LibreCat/LibreCat/wiki/Installation#mathjax
+RUN wget https://github.com/mathjax/MathJax/archive/v2.6-latest.zip && \
+    cd public/javascripts && \
+    unzip ../../v2.6-latest.zip && \
+    mv MathJax-2.6-latest MathJax
+
+# See https://github.com/LibreCat/LibreCat/wiki/Installation#markdown
+RUN mkdir -p public/javascripts/commonmarkjs/dist/ && \
+    cd public/javascripts/commonmarkjs/dist/ && \
+    wget --no-check-certificate https://raw.githubusercontent.com/jgm/commonmark.js/master/dist/commonmark.min.js
+
+# Some Cleanups
+RUN rm v2.6-latest.zip
 
 #Install perl debug module: https://github.com/Camelcade/Perl5-IDEA/wiki
 #The module is now also added to the cpan file to place the dependency into the local directory by carton
