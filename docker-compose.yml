@@ -20,6 +20,7 @@ services:
         depends_on:
             - mysql
             - elasticsearch
+            - citeproc
         restart: always
 # if you with to use remote Database or Index, please
 # comment out the related section. that includes `links`
@@ -40,6 +41,11 @@ services:
             - "9200:9200"
         volumes:
             - elasticsearch-index:/usr/share/elasticsearch/data
+        restart: always
+    citeproc:
+        image: citeac/citeproc-node
+        ports:
+            - "8085:8085"
         restart: always
 volumes:
     mysql-data:
