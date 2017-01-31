@@ -64,11 +64,14 @@ do
         echo "Trying git for $file"
         patch -p1 -b < "$file"
         #Move Patched files into the layer and restore the originals
-        for file in **/*.orig 
+        for change in **/*.orig 
         do
-            echo "Moving patched file ${file%.*} to $LOCAL_LAYER"
-            mv "${file%.*}" $LOCAL_LAYER
-            mv "$file" "${file%.*}"
+            PATH_COMPONENT=`dirname $change`
+            FILE_NAME=`basename ${change%.*}`
+            echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT/$FILE_NAME"
+            mkdir -p $LOCAL_LAYER/$PATH_COMPONENT
+            mv "${change%.*}" "$LOCAL_LAYER/$PATH_COMPONENT/$FILE_NAME"
+            mv "$change" "${change%.*}"
         done
     else
         echo "Couldn't apply patch, will fail"
