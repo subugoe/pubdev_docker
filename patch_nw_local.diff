@@ -1,0 +1,13 @@
+diff --git a/docker-compose.yml b/docker-compose.yml
+index 49f422a..9a512f9 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -14,6 +14,8 @@ services:
+             - ./conf/local.env
+         volumes:
+             - librecat-logs:/srv/LibreCat/logs
++            - "/Users/nw/dev/sub/librecat/LibreCat/views:/opt/local/views"
++            - "/Users/nw/dev/sub/librecat/LibreCat/public:/opt/local/public"
+ # If you want to tweak around or have permanent data, according to
+ # instruction in wiki-page, you should comment in the line below.
+         #    - "./docker-entrypoint.sh:/srv/LibreCat/docker-entrypoint.sh"
