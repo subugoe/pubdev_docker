@@ -8,4 +8,4 @@ services:
             PERL5_DEBUG_HOST: '0.0.0.0'
             PERL5_DEBUG_ROLE: 'server'
             PERL5_DEBUG_PORT: '5005'
-
+            TERM: 'xterm'
