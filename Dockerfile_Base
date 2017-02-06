@@ -95,6 +95,7 @@ RUN git checkout ${LIBRECAT_VERSION}
 
 RUN sed -i 's/==/\>=/g' cpanfile 
 RUN echo "requires 'Devel::Camelcadedb';" >> cpanfile
+RUN echo "requires 'Catmandu::Importer::LDAP';" >> cpanfile
 
 RUN carton install
 RUN chmod +x bin/generate_forms.pl \
