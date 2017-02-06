@@ -32,6 +32,7 @@ else
 fi
 # creating 1st scripts
 ./index.sh drop
+# TODO: User our own approach to create the data to be able to hook data in here
 ./index.sh create
 
 # Starting librecat
