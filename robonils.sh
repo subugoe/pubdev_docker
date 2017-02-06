@@ -36,8 +36,7 @@ EXISTING_CHANGES=`git status --porcelain --untracked-files=no | cut -d ' ' -f 3`
 echo "Git tree is at $GIT_TAG, using this to reset the tree"
 echo "Ignoring existing files: $EXISTING_CHANGES"
 
-
-
+DOCKER_CHANGES=`ls *.patch *.diff *entrypoint* *.py layers.yml robonils.sh`
 
 for file in `ls *.patch *.diff`
 do
@@ -50,7 +49,7 @@ do
         #    exit 48
         #fi
         
-        git apply -v --ignore-space-change --ignore-whitespace < "$file"
+        git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
         #Move Patched files into the layer and restore the originals
         for change in `git status --porcelain --untracked-files=no | cut -d ' ' -f 3`
         do 
@@ -62,6 +61,16 @@ do
                 mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
             fi
         done
+        
+        for change in `git ls-files --others --exclude-standard`
+        do 
+            if [[ ! ${DOCKER_CHANGES[*]} =~ "$change" ]] ; then
+                PATH_COMPONENT=`dirname $change`
+                echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT"
+                mkdir -p "$LOCAL_LAYER/$PATH_COMPONENT"
+                mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
+            fi
+        done
         # Reset and remove new created but untracked files
         git reset --hard $GIT_TAG # && git clean -fd
     elif [[ "$file" == *.patch ]] ; then
@@ -69,7 +78,6 @@ do
         patch -p1 -b < "$file"
         #Check if there has been some changes
         echo "Checking if new files have been added"
-        #if `find . -print -name "*.orig" | wc -l` < 1; then
         if test -f **/*.orig ; then
             echo "Changes found"
             #Move Patched files into the layer and restore the originals
@@ -86,12 +94,11 @@ do
             #New files found
             echo "There have been additions"
             
-            for change in `git status --porcelain --untracked-files=no | cut -d ' ' -f 3`
+            for change in `git ls-files --others --exclude-standard`
             do 
-                if [[ ! ${EXISTING_CHANGES[*]} =~ "$change" ]] ; then
+                if [[ ! ${DOCKER_CHANGES[*]} =~ "$change" ]] ; then
                     PATH_COMPONENT=`dirname $change`
                     echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT"
-                
                     mkdir -p "$LOCAL_LAYER/$PATH_COMPONENT"
                     mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
                 fi
