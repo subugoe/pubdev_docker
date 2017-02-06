@@ -1,0 +1,65 @@
+diff --git a/views/department/list.tt b/views/department/list.tt
+index 8b00aa1..3e48d82 100644
+--- a/views/department/list.tt
++++ b/views/department/list.tt
+@@ -15,7 +15,7 @@
+         <ul class="nav nav-tabs" id="indexTab">
+           <li><a href="/">[% h.loc("tabs.home") %]</a></li>
+           <li><a href="/publication[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.publications") %]</a></li>
+-          <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li>
++          <!-- <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li> -->
+           <li><a href="/person">[% h.loc("tabs.authors") %]</a></li>
+           <li><a href="/project">[% h.loc("tabs.projects") %]</a></li>
+           <li class="active"><a href="/department">[% h.loc("tabs.departments") %]</a></li>
+diff --git a/views/index.tt b/views/index.tt
+index 6f4ae94..9126935 100644
+--- a/views/index.tt
++++ b/views/index.tt
+@@ -14,7 +14,7 @@
+         <ul class="nav nav-tabs" id="indexTab">
+           <li class="active"><a href="/">[% h.loc("tabs.home") %]</a></li>
+           <li><a href="/publication[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.publications") %]</a></li>
+-          <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li>
++          <!-- <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li> -->
+           <li><a href="/person">[% h.loc("tabs.authors") %]</a></li>
+           <li><a href="/project">[% h.loc("tabs.projects") %]</a></li>
+           <li><a href="/department">[% h.loc("tabs.departments") %]</a></li>
+diff --git a/views/person/list.tt b/views/person/list.tt
+index a6cf7ec..8f5e644 100644
+--- a/views/person/list.tt
++++ b/views/person/list.tt
+@@ -15,7 +15,7 @@
+         <ul class="nav nav-tabs" id="indexTab">
+           <li><a href="/">[% h.loc("tabs.home") %]</a></li>
+           <li><a href="/publication[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.publications") %]</a></li>
+-          <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li>
++          <!-- <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li> -->
+           <li class="active"><a href="/person">[% h.loc("tabs.authors") %]</a></li>
+           <li><a href="/project">[% h.loc("tabs.projects") %]</a></li>
+           <li><a href="/department">[% h.loc("tabs.departments") %]</a></li>
+diff --git a/views/project/list.tt b/views/project/list.tt
+index 7c14b0e..7f49d45 100644
+--- a/views/project/list.tt
++++ b/views/project/list.tt
+@@ -15,7 +15,7 @@
+         <ul class="nav nav-tabs" id="indexTab">
+           <li><a href="/">[% h.loc("tabs.home") %]</a></li>
+           <li><a href="/publication[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.publications") %]</a></li>
+-          <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li>
++          <!-- <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li> -->
+           <li><a href="/person">[% h.loc("tabs.authors") %]</a></li>
+           <li class="active"><a href="/project">[% h.loc("tabs.projects") %]</a></li>
+           <li><a href="/department">[% h.loc("tabs.departments") %]</a></li>
+diff --git a/views/publication/list.tt b/views/publication/list.tt
+index 38082b5..1c3f247 100644
+--- a/views/publication/list.tt
++++ b/views/publication/list.tt
+@@ -15,7 +15,7 @@
+         <ul class="nav nav-tabs" id="indexTab">
+           <li><a href="/">[% h.loc("tabs.home") %]</a></li>
+           <li [% IF path.match('publication')%]class="active"[% END %]><a href="/publication[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.publications") %]</a></li>
+-          <li [% IF path.match('data')%]class="active"[% END %]><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li>
++          <!-- <li [% IF path.match('data')%]class="active"[% END %]><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li> -->
+           <li><a href="/person">[% h.loc("tabs.authors") %]</a></li>
+           <li><a href="/project">[% h.loc("tabs.projects") %]</a></li>
+           <li><a href="/department">[% h.loc("tabs.departments") %]</a></li>
