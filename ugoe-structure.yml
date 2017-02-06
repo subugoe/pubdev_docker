@@ -1,4 +1,21 @@
 ---
+_id: '5013'
+display: Zentrale Einrichtungen
+layer: 1
+name: Zentrale Einrichtungen
+tree:
+- _id: '5013'
+...
+---
+_id: '5102'
+display: Zentrale Einrichtungen -> Staats- und Universitätsbibliothek
+layer: 2
+name: Staats- und Universitätsbibliothek
+tree:
+- _id: '5013'
+- _id: '5102'
+...
+---
 _id: '2'
 display: Universitätsmedizin Göttingen
 layer: 1
@@ -486,25 +503,6 @@ tree:
 - _id: '2'
 - _id: '9'
 - _id: '117'
-...
----
-_id: '10'
-display: Universitätsmedizin Göttingen -> (frei)
-layer: 2
-name: (frei)
-tree:
-- _id: '2'
-- _id: '10'
-...
----
-_id: '1185'
-display: Universitätsmedizin Göttingen -> (frei) -> Referat Forschung
-layer: 3
-name: Referat Forschung
-tree:
-- _id: '2'
-- _id: '10'
-- _id: '1185'
 ...
 ---
 _id: '11'
@@ -1038,48 +1036,6 @@ tree:
 - _id: '12436'
 ...
 ---
-_id: '20'
-display: Universitätsmedizin Göttingen -> Zentrum 20 Arbeits+Sozial+Umw.med+Dermat
-layer: 2
-name: Zentrum 20 Arbeits+Sozial+Umw.med+Dermat
-tree:
-- _id: '2'
-- _id: '20'
-...
----
-_id: '134'
-display: Universitätsmedizin Göttingen -> Zentrum 20 Arbeits+Sozial+Umw.med+Dermat
-  -> Dermatologie, Venerologie und Allergologie
-layer: 3
-name: Dermatologie, Venerologie und Allergologie
-tree:
-- _id: '2'
-- _id: '20'
-- _id: '134'
-...
----
-_id: '156'
-display: Universitätsmedizin Göttingen -> Zentrum 20 Arbeits+Sozial+Umw.med+Dermat
-  -> Arbeits-, Sozial- und Umweltmedizin
-layer: 3
-name: Arbeits-, Sozial- und Umweltmedizin
-tree:
-- _id: '2'
-- _id: '20'
-- _id: '156'
-...
----
-_id: '157'
-display: Universitätsmedizin Göttingen -> Zentrum 20 Arbeits+Sozial+Umw.med+Dermat
-  -> Allgem. Hyg. und Umweltmedizin
-layer: 3
-name: Allgem. Hyg. und Umweltmedizin
-tree:
-- _id: '2'
-- _id: '20'
-- _id: '157'
-...
----
 _id: '22'
 display: Universitätsmedizin Göttingen -> Betriebseinheiten
 layer: 2
@@ -1151,15 +1107,6 @@ tree:
 - _id: '2'
 - _id: '26'
 - _id: '22453'
-...
----
-_id: '1188'
-display: Universitätsmedizin Göttingen -> Ressort V1 Forschung und Lehre
-layer: 2
-name: Ressort V1 Forschung und Lehre
-tree:
-- _id: '2'
-- _id: '1188'
 ...
 ---
 _id: '2127'
@@ -1315,15 +1262,6 @@ tree:
 - _id: '3283'
 ...
 ---
-_id: '11326'
-display: Universitätsmedizin Göttingen -> Projekte aus D-VERW werden hier gesammelt
-layer: 2
-name: Projekte aus D-VERW werden hier gesammelt
-tree:
-- _id: '2'
-- _id: '11326'
-...
----
 _id: '11412'
 display: Universitätsmedizin Göttingen -> Pharmakologisches-Toxikologisches-Servicezentrum
 layer: 2
@@ -1331,25 +1269,6 @@ name: Pharmakologisches-Toxikologisches-Servicezentrum
 tree:
 - _id: '2'
 - _id: '11412'
-...
----
-_id: '12071'
-display: Universitätsmedizin Göttingen -> Vorstandsressort V3 Wirtschaftsführung und
-  Administration
-layer: 2
-name: Vorstandsressort V3 Wirtschaftsführung und Administration
-tree:
-- _id: '2'
-- _id: '12071'
-...
----
-_id: '12075'
-display: Universitätsmedizin Göttingen -> Vorstandsressort V2 Krankenversorgung
-layer: 2
-name: Vorstandsressort V2 Krankenversorgung
-tree:
-- _id: '2'
-- _id: '12075'
 ...
 ---
 _id: '12434'
@@ -1368,39 +1287,6 @@ name: Herzzentrum
 tree:
 - _id: '2'
 - _id: '12834'
-...
----
-_id: '13136'
-display: 'Universitätsmedizin Göttingen -> Betreuung Wahlfach des "Praktischen Jahres"  -
-  (Intern + Extern: Krankenhaus / Klinik / Praxis)'
-layer: 2
-name: 'Betreuung Wahlfach des "Praktischen Jahres"  - (Intern + Extern: Krankenhaus
-  / Klinik / Praxis)'
-tree:
-- _id: '2'
-- _id: '13136'
-...
----
-_id: '13176'
-display: 'Universitätsmedizin Göttingen -> Betreuung Wahlfach des "Praktischen Jahres"  -
-  (Intern + Extern: Krankenhaus / Klinik / Praxis) -> Klinikum Göttingen'
-layer: 3
-name: Klinikum Göttingen
-tree:
-- _id: '2'
-- _id: '13136'
-- _id: '13176'
-...
----
-_id: '13404'
-display: 'Universitätsmedizin Göttingen -> Betreuung Wahlfach des "Praktischen Jahres"  -
-  (Intern + Extern: Krankenhaus / Klinik / Praxis) -> Universitätsmedizin Göttingen'
-layer: 3
-name: Universitätsmedizin Göttingen
-tree:
-- _id: '2'
-- _id: '13136'
-- _id: '13404'
 ...
 ---
 _id: '15500'
