@@ -1,4 +1,4 @@
-#!env bash
+#!/usr/bin/env bash
 
 #Repositories
 GOEFIS_REMOTE=https://github.com/subugoe/goefis.git
@@ -36,11 +36,15 @@ EXISTING_CHANGES=`git status --porcelain --untracked-files=no | cut -d ' ' -f 3`
 echo "Git tree is at $GIT_TAG, using this to reset the tree"
 echo "Ignoring existing files: $EXISTING_CHANGES"
 
-for file in *.patch *.diff
+
+
+
+for file in `ls *.patch *.diff`
 do
     echo "Applying $file..."
     if [[ "$file" == *.diff ]] ; then
         echo "Trying git for $file"
+        #TODO: This is needed to make the build fail
         #if [[ `git apply -v --check --ignore-space-change --ignore-whitespace < "$file"` != 0 ]] ; then
         #    echo $?
         #    exit 48
@@ -63,16 +67,38 @@ do
     elif [[ "$file" == *.patch ]] ; then
         echo "Trying git for $file"
         patch -p1 -b < "$file"
-        #Move Patched files into the layer and restore the originals
-        for change in **/*.orig 
-        do
-            PATH_COMPONENT=`dirname $change`
-            FILE_NAME=`basename ${change%.*}`
-            echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT/$FILE_NAME"
-            mkdir -p $LOCAL_LAYER/$PATH_COMPONENT
-            mv "${change%.*}" "$LOCAL_LAYER/$PATH_COMPONENT/$FILE_NAME"
-            mv "$change" "${change%.*}"
-        done
+        #Check if there has been some changes
+        echo "Checking if new files have been added"
+        #if `find . -print -name "*.orig" | wc -l` < 1; then
+        if test -f **/*.orig ; then
+            echo "Changes found"
+            #Move Patched files into the layer and restore the originals
+            for change in **/*.orig 
+            do
+                PATH_COMPONENT=`dirname $change`
+                FILE_NAME=`basename ${change%.*}`
+                echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT/$FILE_NAME"
+                mkdir -p $LOCAL_LAYER/$PATH_COMPONENT
+                mv "${change%.*}" "$LOCAL_LAYER/$PATH_COMPONENT/$FILE_NAME"
+                mv "$change" "${change%.*}"
+            done
+        else
+            #New files found
+            echo "There have been additions"
+            
+            for change in `git status --porcelain --untracked-files=no | cut -d ' ' -f 3`
+            do 
+                if [[ ! ${EXISTING_CHANGES[*]} =~ "$change" ]] ; then
+                    PATH_COMPONENT=`dirname $change`
+                    echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT"
+                
+                    mkdir -p "$LOCAL_LAYER/$PATH_COMPONENT"
+                    mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
+                fi
+            done
+            
+        fi 
+        
     else
         echo "Couldn't apply patch, will fail"
         exit 23
