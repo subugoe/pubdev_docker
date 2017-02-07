@@ -36,7 +36,7 @@ EXISTING_CHANGES=`git status --porcelain --untracked-files=no | cut -d ' ' -f 3`
 echo "Git tree is at $GIT_TAG, using this to reset the tree"
 echo "Ignoring existing files: $EXISTING_CHANGES"
 
-DOCKER_CHANGES=`ls *.patch *.diff *entrypoint* *.py layers.yml robonils.sh`
+DOCKER_CHANGES=`ls *.patch *.diff *.py robonils.sh`
 
 for file in `ls *.patch *.diff`
 do
