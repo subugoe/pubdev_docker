@@ -28,7 +28,7 @@ RUN bash robonils.sh && python goettingenfy.py -s  . && rm robonils.sh goettinge
 # Configurations
 WORKDIR ${LIBRECATHOME}
 RUN mkdir -p logs
-COPY ugoe-structure.yml devel/departments.yml
+COPY ugoe-structure.yml devel/department.yml
 COPY researcher.yml devel/researcher.yml
 COPY layers.yml .
 COPY boot.sh .
