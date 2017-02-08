@@ -25,6 +25,11 @@ RUN bash robonils.sh && python goettingenfy.py -s  . && rm robonils.sh goettinge
 #WORKDIR ${LOCAL_LAYER}
 #RUN npm install && npm run build-css prefix-css
 
+#Add debugger here, since it is development related
+#Install perl debug module: https://github.com/Camelcade/Perl5-IDEA/wiki
+#RUN echo "requires 'Devel::Camelcadedb';" >> cpanfile
+RUN cpanm -l ./local Devel::Camelcadedb
+
 # Configurations
 WORKDIR ${LIBRECATHOME}
 RUN mkdir -p logs
