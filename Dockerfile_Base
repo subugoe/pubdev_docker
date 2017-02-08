@@ -1,5 +1,6 @@
 FROM ubuntu:16.04
-MAINTAINER  Arash Samadi (samadi@sub.uni-goettingen.de)
+MAINTAINER Arash Samadi (samadi@sub.uni-goettingen.de)
+MAINTAINER Christian Mahnke (mahnke@sub.uni-goettingen.de)
 # 
 # creating a predecessor for the LibreCat Image
 #
@@ -55,8 +56,7 @@ RUN apt clean \
     && apt dist-upgrade -y \
     && apt install --assume-yes --no-install-recommends ${PRE_BUILD} ${REQ_BUILD}
 # Perl
-RUN apt install --assume-yes --no-install-recommends perl-doc \
-    cpanminus \
+RUN apt install --assume-yes --no-install-recommends cpanminus \
     libcapture-tiny-perl \
     libdbd-mysql-perl \
     libmodule-install-perl \
@@ -91,34 +91,22 @@ RUN mkdir -p ${LIBRECATHOME} \
 #
 # Building LibreCat
 WORKDIR ${LIBRECATHOME}
-RUN git checkout ${LIBRECAT_VERSION}
-
-RUN sed -i 's/==/\>=/g' cpanfile 
-RUN echo "requires 'Devel::Camelcadedb';" >> cpanfile
-RUN echo "requires 'Catmandu::Importer::LDAP';" >> cpanfile
+RUN git checkout ${LIBRECAT_VERSION} &&  sed -i 's/==/\>=/g' cpanfile && \
+    echo "requires 'Devel::Camelcadedb';" >> cpanfile
 
 RUN carton install
-RUN chmod +x bin/generate_forms.pl \
-    && perl bin/generate_forms.pl
-# The above line generates a warning, but the new command fails :(
-#RUN perl bin/librecat generate forms
+RUN perl bin/librecat generate forms
 
 # See https://github.com/LibreCat/LibreCat/wiki/Installation#mathjax
+# See https://github.com/LibreCat/LibreCat/wiki/Installation#markdown
 RUN wget https://github.com/mathjax/MathJax/archive/v2.6-latest.zip && \
     cd public/javascripts && \
     unzip ../../v2.6-latest.zip && \
-    mv MathJax-2.6-latest MathJax
-
-# See https://github.com/LibreCat/LibreCat/wiki/Installation#markdown
-RUN mkdir -p public/javascripts/commonmarkjs/dist/ && \
+    mv MathJax-2.6-latest MathJax && \
+    cd ../.. && \
+    rm v2.6-latest.zip && \
+    mkdir -p public/javascripts/commonmarkjs/dist/ && \
     cd public/javascripts/commonmarkjs/dist/ && \
     wget --no-check-certificate https://raw.githubusercontent.com/jgm/commonmark.js/master/dist/commonmark.min.js
-
-# Some Cleanups
-RUN rm v2.6-latest.zip
-
-#Install perl debug module: https://github.com/Camelcade/Perl5-IDEA/wiki
-#The module is now also added to the cpan file to place the dependency into the local directory by carton
-RUN cpanm install Devel::Camelcadedb
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
