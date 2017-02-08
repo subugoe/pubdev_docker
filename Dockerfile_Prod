@@ -1,0 +1,45 @@
+FROM librecat_base
+MAINTAINER Christian Mahnke (mahnke@sub.uni-goettingen.de)
+
+# Finalizing the LibreCat Image with SUB Layer
+#
+# Local Layer
+ENV LOCAL_LAYER /opt/local
+ENV SETTINGS_LAYER /opt/settings
+RUN mkdir -p ${LOCAL_LAYER}
+
+# Prepare our changes layer
+RUN mkdir -p ${SETTINGS_LAYER}
+COPY settings ${SETTINGS_LAYER}
+COPY robonils.sh .
+COPY patches .
+COPY goettingenfy.py .
+
+# This is used to replace some Strings with Göttingen specific ones and apply the patches
+RUN bash robonils.sh && python goettingenfy.py -s  . && rm robonils.sh goettingenfy.py *.patch *.diff
+
+# Configurations
+WORKDIR ${LIBRECATHOME}
+RUN mkdir -p logs
+COPY layers.yml .
+COPY boot.sh .
+COPY gearman-entrypoint.sh .
+COPY docker-entrypoint.sh .
+
+RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
+
+# Clean up
+# As a result the created image would be much smaller. It's our recommendation to
+# uncomment the few lines below in a production environment.
+RUN apt purge -y ${PRE_BUILD} \
+    && apt --purge autoremove -y \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
+
+USER librecat:librecat
+
+VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql", "/srv/LibreCat/logs"]
+
+EXPOSE 5001
+
+ENTRYPOINT ["./docker-entrypoint.sh"]
