@@ -1,6 +1,8 @@
 FROM librecat_base
 MAINTAINER Arash Samadi (samadi@sub.uni-goettingen.de)
 MAINTAINER Christian Mahnke (mahnke@sub.uni-goettingen.de)
+# Make the work with docker easier
+RUN apt-get install bash-completion
 # 
 # Finalizing the LibreCat Image with SUB Layer
 #
