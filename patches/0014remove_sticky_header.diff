@@ -1,0 +1,26 @@
+diff --git a/views/footer.tt b/views/footer.tt
+index 646d6d6..6705302 100644
+--- a/views/footer.tt
++++ b/views/footer.tt
+@@ -2,8 +2,6 @@
+ 
+ </div><!-- container -->
+ 
+-<div id="push"></div><!-- for sticky footer -->
+-
+ </main>
+ 
+ <footer class="panel-footer">
+diff --git a/views/topbar.tt b/views/topbar.tt
+index bb123b1..4ebf819 100644
+--- a/views/topbar.tt
++++ b/views/topbar.tt
+@@ -8,7 +8,7 @@
+ 
+ <!-- BEGIN navbar.tt -->
+ <header>
+-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
++    <nav class="navbar navbar-default" role="navigation">
+         <div class="navbar-header">
+             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                 <span class="sr-only">Toggle navigation</span>
