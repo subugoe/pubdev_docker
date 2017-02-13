@@ -40,6 +40,8 @@ USER librecat:librecat
 
 VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql", "/srv/LibreCat/logs"]
 
+ENV TERM xterm
+
 EXPOSE 5001
 
-ENTRYPOINT ["./docker-entrypoint.sh"]
+ENTRYPOINT ["./docker-entrypoint_Prod.sh"]
