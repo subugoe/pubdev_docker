@@ -8,17 +8,11 @@ services:
         ports:
             - "5001:5001"
         links:
-#            - "mysql:mysqldb"
             - "elasticsearch:searchnode"
         env_file:
             - ./conf/local.env
         volumes:
             - librecat-logs:/srv/LibreCat/logs
-#            - "/docker/LibreCat/goefis:/opt/local"
-#            - "/docker/LibreCat/docker-entrypoint.sh:/srv/LibreCat/docker-entrypoint.sh"
-# If you want to tweak around or have permanent data, according to
-# instruction in wiki-page, you should comment in the line below.
-        #    - "./docker-entrypoint.sh:/srv/LibreCat/docker-entrypoint.sh"
         depends_on:
             - elasticsearch
             - citeproc
@@ -33,8 +27,6 @@ services:
         restart: always
     citeproc:
         image: citeac/citeproc-node
-        ports:
-            - "8081:8080"
         restart: always
 volumes:
     librecat-logs:
