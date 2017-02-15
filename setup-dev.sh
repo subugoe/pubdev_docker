@@ -39,7 +39,9 @@ mkdir -p $LIBRECATHOME
 #Check if directory is empty
 if [ "$(ls -A $LIBRECATHOME)" ]; then 
     echo "Pulling in Changes"
-    cd $LIBRECATHOME && git pull && cd $WD
+    cd $LIBRECATHOME && git pull 
+    git reset --hard $LIBRECAT_TAG
+    cd $WD
 else
     git clone $LIBRECAT_REMOTE $LIBRECATHOME
 fi
