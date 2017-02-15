@@ -2,7 +2,7 @@ FROM librecat_base
 MAINTAINER Arash Samadi (samadi@sub.uni-goettingen.de)
 MAINTAINER Christian Mahnke (mahnke@sub.uni-goettingen.de)
 # Make the work with docker easier
-RUN apt-get install bash-completion
+RUN apt-get install -y bash-completion less
 # 
 # Finalizing the LibreCat Image with SUB Layer
 #
@@ -15,9 +15,9 @@ RUN mkdir -p ${LOCAL_LAYER}
 # Prepare our changes layer
 RUN mkdir -p ${SETTINGS_LAYER}
 COPY settings ${SETTINGS_LAYER}
-COPY robonils.sh .
 COPY patches .
 COPY goettingenfy.py .
+COPY robonils.sh .
 
 # This is used to replace some Strings with Göttingen specific ones and apply the patches
 RUN bash robonils.sh && python goettingenfy.py -s  . && rm robonils.sh goettingenfy.py *.patch *.diff

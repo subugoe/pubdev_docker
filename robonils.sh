@@ -2,7 +2,10 @@
 
 #Repositories
 GOEFIS_REMOTE=https://github.com/subugoe/goefis.git
-
+#####################
+# The stuff below was used to extract parts of the old layer, it's keept here
+# for potential reuse on top of another infrastructure.
+#####################
 # Directories
 #GOEFIS_OLD=goefis-old
 
@@ -28,6 +31,16 @@ GOEFIS_REMOTE=https://github.com/subugoe/goefis.git
 
 #rm -rf $GOEFIS_OLD
 
+#####################
+# The currently used part start here
+#####################
+
+# Test if we have a path to operate on (TODO: this will be needed to a given path this by setup-dev.sh)
+#if [ -z ${1+x} ] && [ -n $1 ]; then
+#    echo "Using $1 as base for patches"
+#    LIBRECATHOME=$1
+#fi
+
 # Patching
 cd  $LIBRECATHOME
 GIT_TAG=`git describe --tags`
@@ -41,7 +54,8 @@ DOCKER_CHANGES=`ls *.patch *.diff *.py robonils.sh`
 for file in `ls *.patch *.diff`
 do
     echo "Applying $file..."
-    if [[ "$file" == *.diff ]] ; then
+# We started with the `patch`command, but git can do this better and understands the other format as well
+#    if [[ "$file" == *.diff ]] ; then
         echo "Trying git for $file"
         #TODO: This is needed to make the build fail
         #if [[ `git apply -v --check --ignore-space-change --ignore-whitespace < "$file"` != 0 ]] ; then
@@ -50,65 +64,54 @@ do
         #fi
         
         git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
-        #Move Patched files into the layer and restore the originals
-        for change in `git status --porcelain --untracked-files=no | cut -d ' ' -f 3`
-        do 
-            if [[ ! ${EXISTING_CHANGES[*]} =~ "$change" ]] ; then
-                PATH_COMPONENT=`dirname $change`
-                echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT"
-                
-                mkdir -p "$LOCAL_LAYER/$PATH_COMPONENT"
-                mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
-            fi
-        done
-        
-        for change in `git ls-files --others --exclude-standard`
-        do 
-            if [[ ! ${DOCKER_CHANGES[*]} =~ "$change" ]] ; then
-                PATH_COMPONENT=`dirname $change`
-                echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT"
-                mkdir -p "$LOCAL_LAYER/$PATH_COMPONENT"
-                mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
-            fi
-        done
-        # Reset and remove new created but untracked files
-        git reset --hard $GIT_TAG # && git clean -fd
-    elif [[ "$file" == *.patch ]] ; then
-        echo "Trying git for $file"
-        patch -p1 -b < "$file"
-        #Check if there has been some changes
-        echo "Checking if new files have been added"
-        if test -f **/*.orig ; then
-            echo "Changes found"
-            #Move Patched files into the layer and restore the originals
-            for change in **/*.orig 
-            do
-                PATH_COMPONENT=`dirname $change`
-                FILE_NAME=`basename ${change%.*}`
-                echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT/$FILE_NAME"
-                mkdir -p $LOCAL_LAYER/$PATH_COMPONENT
-                mv "${change%.*}" "$LOCAL_LAYER/$PATH_COMPONENT/$FILE_NAME"
-                mv "$change" "${change%.*}"
-            done
-        else
-            #New files found
-            echo "There have been additions"
-            
-            for change in `git ls-files --others --exclude-standard`
-            do 
-                if [[ ! ${DOCKER_CHANGES[*]} =~ "$change" ]] ; then
-                    PATH_COMPONENT=`dirname $change`
-                    echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT"
-                    mkdir -p "$LOCAL_LAYER/$PATH_COMPONENT"
-                    mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
-                fi
-            done
-            
-        fi 
-        
-    else
-        echo "Couldn't apply patch, will fail"
-        exit 23
-    fi
+#    elif [[ "$file" == *.patch ]] ; then
+#        echo "Trying patch for $file"
+#        patch -p1 -b < "$file"
+#    else
+#        echo "Couldn't apply patch, will fail"
+#        exit 23
+#    fi
+    
 done
 
+# Extract changes and move them to layer
+# Move Patched files into the layer and restore the originals from Git
+for change in `git status --porcelain --untracked-files=no | cut -d ' ' -f 3`
+do 
+    if [[ ! ${EXISTING_CHANGES[*]} =~ "$change" ]] ; then
+        PATH_COMPONENT=`dirname $change`
+        echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT"
+                
+        mkdir -p "$LOCAL_LAYER/$PATH_COMPONENT"
+        mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
+    fi
+done
+   
+# Do the same for patched files
+# TODO: This might be removed, since we are not doing patch anymore
+if test -f **/*.orig ; then
+    echo "Changes found"
+    #Move Patched files into the layer and restore the originals
+    for change in **/*.orig 
+    do
+        PATH_COMPONENT=`dirname $change`
+        FILE_NAME=`basename ${change%.*}`
+        echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT/$FILE_NAME"
+        mkdir -p $LOCAL_LAYER/$PATH_COMPONENT
+        mv "${change%.*}" "$LOCAL_LAYER/$PATH_COMPONENT/$FILE_NAME"
+        mv "$change" "${change%.*}"
+    done
+fi
+# Find Changes, that haven't been there before (additions)
+        
+for change in `git ls-files --others --exclude-standard`
+do 
+    if [[ ! ${DOCKER_CHANGES[*]} =~ "$change" ]] ; then
+        PATH_COMPONENT=`dirname $change`
+        echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT"
+        mkdir -p "$LOCAL_LAYER/$PATH_COMPONENT"
+        mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
+    fi
+done
+# Reset and remove new created but untracked files
+git reset --hard $GIT_TAG # && git clean -fd
