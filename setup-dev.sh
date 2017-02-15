@@ -2,11 +2,9 @@
 
 #Repositories
 LIBRECAT_REMOTE=https://github.com/LibreCat/LibreCat.git
-GOEFIS_REMOTE=https://github.com/subugoe/goefis.git
 #Directories
 LIBRECATHOME=${1-./src}
 LIBDIR=$LIBRECATHOME/local
-LAYERDIR=$LIBRECATHOME/goefis
 
 #Other Variables
 PERL_VERSION_FILE=$LIBRECATHOME/.perl-version
@@ -53,16 +51,6 @@ if [ -n "$LIBRECAT_TAG" ]; then
     cd $WD
 fi
 
-#Checkout GoeFIS Layer
-mkdir -p $LAYERDIR
-#Check if directory is empty
-if [ "$(ls -A $LAYERDIR)" ]; then 
-    echo "Pulling in Changes"
-    cd $LAYERDIR && git pull && cd $WD
-else
-    git clone $GOEFIS_REMOTE $LAYERDIR
-fi
-
 #Create directory for Perl modules
 mkdir -p $LIBDIR
 
@@ -86,6 +74,12 @@ echo "If something fails to install you might need some additional libraries, si
 echo $(perl -version | sed '2,2!d') > $PERL_VERSION_FILE
 
 # Build a fully patched version for development
+cd $LIBRECATHOME
+cp $WD/patches/*.patch .
+cp $WD/patches/*.diff .
+cp $WD/robonils.sh .
 LOCAL_LAYER=$LIBRECATHOME
 export LIBRECATHOME LOCAL_LAYER
+echo "Using sources from $LIBRECATHOME to build layer in $LOCAL_LAYER"
 bash ./robonils.sh
+rm *.patch *.diff
