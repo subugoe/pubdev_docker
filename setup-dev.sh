@@ -4,14 +4,18 @@
 LIBRECAT_REMOTE=https://github.com/LibreCat/LibreCat.git
 GOEFIS_REMOTE=https://github.com/subugoe/goefis.git
 #Directories
-LIBRECATHOME=./src
+LIBRECATHOME=${1-./src}
 LIBDIR=$LIBRECATHOME/local
 LAYERDIR=$LIBRECATHOME/goefis
 
 #Other Variables
 PERL_VERSION_FILE=$LIBRECATHOME/.perl-version
 WD=`pwd`
-LIBRECAT_TAG="$1"
+LIBRECAT_TAG=`grep LIBRECAT_VERSION Dockerfile_Base | head -1 | cut -d '=' -f 2`
+
+# Check if there are arguments, this can change the directory where a copy of LibreCat
+# will be placed.
+echo "Using LibreCat installation at $LIBRECATHOME"
 
 #Set call to the cpanm script here if guessing doesn't work
 #CPANM=
@@ -81,4 +85,7 @@ echo "If something fails to install you might need some additional libraries, si
 #Save Version of Perl, to recompile modules if needed
 echo $(perl -version | sed '2,2!d') > $PERL_VERSION_FILE
 
-
+# Build a fully patched version for development
+LOCAL_LAYER=$LIBRECATHOME
+export LIBRECATHOME LOCAL_LAYER
+bash ./robonils.sh
