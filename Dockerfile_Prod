@@ -24,7 +24,7 @@ RUN mkdir -p logs
 COPY layers.yml .
 COPY boot.sh .
 COPY gearman-entrypoint.sh .
-COPY docker-entrypoint.sh .
+COPY docker-entrypoint_Prod.sh .
 
 RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
 
