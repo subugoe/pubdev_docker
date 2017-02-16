@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#Repositories
+# Repositories
 LIBRECAT_REMOTE=https://github.com/LibreCat/LibreCat.git
-#Directories
+# Directories
 LIBRECATHOME=${1-./src}
 LIBDIR=$LIBRECATHOME/local
 
-#Other Variables
+# Other Variables
 PERL_VERSION_FILE=$LIBRECATHOME/.perl-version
 WD=`pwd`
 LIBRECAT_TAG=`grep LIBRECAT_VERSION Dockerfile_Base | head -1 | cut -d '=' -f 2`
@@ -15,7 +15,7 @@ LIBRECAT_TAG=`grep LIBRECAT_VERSION Dockerfile_Base | head -1 | cut -d '=' -f 2`
 # will be placed.
 echo "Using LibreCat installation at $LIBRECATHOME"
 
-#Set call to the cpanm script here if guessing doesn't work
+# Set call to the cpanm script here if guessing doesn't work
 #CPANM=
 if [ -z ${CPANM+x} ]; then
     #Linux
@@ -34,12 +34,13 @@ if [ -z ${CPANM+x} ]; then
     fi
 fi
 
-#Checkout LibreCat
+# Checkout LibreCat
 mkdir -p $LIBRECATHOME
-#Check if directory is empty
+# Check if directory is empty
 if [ "$(ls -A $LIBRECATHOME)" ]; then 
     echo "Pulling in Changes"
-    cd $LIBRECATHOME && git pull 
+    cd $LIBRECATHOME && git pull
+    echo "Reseting tree"
     git reset --hard $LIBRECAT_TAG
     cd $WD
 else
@@ -53,7 +54,7 @@ if [ -n "$LIBRECAT_TAG" ]; then
     cd $WD
 fi
 
-#Create directory for Perl modules
+# Create directory for Perl modules
 mkdir -p $LIBDIR
 
 if [ -f $PERL_VERSION_FILE ]; then
@@ -63,16 +64,16 @@ if [ -f $PERL_VERSION_FILE ]; then
     fi
 fi
 
-#Install dependencies to lib dir
+# Install dependencies to lib dir
 echo "Using cpanm at $CPANM"
-#this can be done faster, if you skip the tests (-n)
+# This lets you skip the tests (-n), might be a bit faster
 $CPANM -L $LIBDIR --installdeps -qn $LIBRECATHOME
 $CPANM -L $LIBDIR -qn install Devel::Camelcadedb
 $CPANM -L $LIBDIR -qn install Carton
 
 echo "If something fails to install you might need some additional libraries, since some Perl modules aren't selfcontained! Look at the logs."
 
-#Save Version of Perl, to recompile modules if needed
+# Save Version of Perl, to recompile modules if needed
 echo $(perl -version | sed '2,2!d') > $PERL_VERSION_FILE
 
 # Build a fully patched version for development
