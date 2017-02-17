@@ -36,13 +36,13 @@ authentication:
       # LDAP auth
       - package: LibreCat::Auth::LDAP
         options:
-          host: 'ldaps://ug-sub-s1.sub.uni-goettingen.de'
+          host: 'ldaps://ldap.gwdg.de'
           #base: '********'
           #password: '********'
-          auth_base: 'UG-SUB\\%s'
-          search_filter: '(sAMAccountName=%s)'
-          search_base: 'DC=DomainDnsZones,DC=sub,DC=uni-goettingen,DC=de'
-          search_attr: 'sAMAccountName'
+          auth_base: '%s'
+          search_filter: '(uid=%s)'
+          search_base: 'Customers,dc=gwdg,dc=de'
+          search_attr: 'entryDn'
 
 user:
   sources:
