@@ -54,6 +54,8 @@ RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
 
 USER librecat:librecat
 
+ENV TERM xterm
+
 VOLUME ["/usr/share/elasticsearch/data","/var/lib/mysql", "/srv/LibreCat/logs"]
 
 EXPOSE 3306 4730 5001 9200 9300
