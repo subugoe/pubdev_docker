@@ -87,7 +87,8 @@ ARG LIBRECAT_VERSION=0.3.2
 
 # Clone LibreCat
 RUN mkdir -p ${LIBRECATHOME} \
-     && git clone https://github.com/LibreCat/LibreCat.git ${LIBRECATHOME}
+     && git clone https://github.com/LibreCat/LibreCat.git ${LIBRECATHOME} \
+     && echo "${LIBRECAT_VERSION}" > ${LIBRECATHOME}/.librecat-version
 
 #   Installing Perl-Modules and compiling everything
 #   Finalizing setup and run Web-Interface under :5001

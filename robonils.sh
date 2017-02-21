@@ -44,6 +44,7 @@ GOEFIS_REMOTE=https://github.com/subugoe/goefis.git
 cd  $LIBRECATHOME
 GIT_TAG=`git describe --tags`
 EXISTING_CHANGES=`git status --porcelain --untracked-files=no | cut -d ' ' -f 3` 
+LIBRECAT_PATCH_LEVEL=`cat .librecat-version | tr -d .`
 
 echo "Git tree is at $GIT_TAG, using this to reset the tree"
 echo "Ignoring existing files: $EXISTING_CHANGES"
@@ -58,7 +59,16 @@ do
     #    echo $?
     #    exit 48
     #fi
-    git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
+    #Test if we have an version specific patch
+    if [[ $file == 9* ]] ; then
+        echo "Got version dependent patch $file"
+    	if [[ $file == 9$LIBRECAT_PATCH_LEVEL* ]] ; then
+    	    echo "LibreCat is at $LIBRECAT_PATCH_LEVEL, patch $file will be applied"
+    	    git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
+    	fi
+    else
+        git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
+    fi
 done
 
 # Extract changes and move them to layer
