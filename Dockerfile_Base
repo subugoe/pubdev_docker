@@ -12,8 +12,8 @@ RUN groupadd -g 5000 librecat \
     && useradd -g 5000 -u 5000 -d /srv/LibreCat -s /bin/bash -c "LibreCat User" librecat
 
 ENV LIBRECATHOME /srv/LibreCat
-# Sets the version of LibreCat to check out
-ARG LIBRECAT_VERSION=0.3.2
+# The version of LibreCat is set directly before the checkout is made to speed up things.
+# This way we can us the cache a bit longer.
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
 ENV PERL5LIB ${LIBRECATHOME}/local/lib/perl5:${LIBRECATHOME}/lib
@@ -81,6 +81,9 @@ RUN curl -sL ${NODEJS_URL} > /tmp/nodejs_preinstall \
     && bash - /tmp/nodejs_preinstall \
     && apt install --assume-yes --no-install-recommends nodejs \
     && rm /tmp/nodejs_preinstall
+
+# Sets the version of LibreCat to check out
+ARG LIBRECAT_VERSION=0.3.2
 
 # Clone LibreCat
 RUN mkdir -p ${LIBRECATHOME} \
