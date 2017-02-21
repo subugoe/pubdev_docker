@@ -85,4 +85,6 @@ LOCAL_LAYER=$LIBRECATHOME
 export LIBRECATHOME LOCAL_LAYER
 echo "Using sources from $LIBRECATHOME to build layer in $LOCAL_LAYER"
 bash ./robonils.sh
+echo "Running goettingenfy"
+python goettingenfy.py -s  .
 rm *.patch *.diff
