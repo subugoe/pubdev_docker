@@ -88,4 +88,4 @@ echo "Using sources from $LIBRECATHOME to build layer in $LOCAL_LAYER"
 bash ./robonils.sh
 echo "Running goettingenfy"
 python goettingenfy.py -s  .
-rm *.patch *.diff
+rm *.patch *.diff robonils.sh goettingenfy.py
