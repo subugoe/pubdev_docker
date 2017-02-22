@@ -49,7 +49,7 @@ LIBRECAT_PATCH_LEVEL=`cat .librecat-version | tr -d .`
 echo "Git tree is at $GIT_TAG, using this to reset the tree"
 echo "Ignoring existing files: $EXISTING_CHANGES"
 
-DOCKER_CHANGES=`ls *.patch *.diff *.py robonils.sh`
+DOCKER_CHANGES=`ls *.patch *.diff *.py robonils.sh .librecat-version`
 
 for file in `ls *.patch *.diff`
 do
@@ -89,7 +89,7 @@ for change in `git ls-files --others --exclude-standard`
 do 
     if [[ ! ${DOCKER_CHANGES[*]} =~ "$change" ]] ; then
         PATH_COMPONENT=`dirname $change`
-        echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT"
+        echo "Moving added file $change to $LOCAL_LAYER/$PATH_COMPONENT"
         mkdir -p "$LOCAL_LAYER/$PATH_COMPONENT"
         mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
     fi
