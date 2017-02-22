@@ -81,6 +81,7 @@ cd $LIBRECATHOME
 cp $WD/patches/*.patch .
 cp $WD/patches/*.diff .
 cp $WD/robonils.sh .
+cp $WD/goettingenfy.py .
 LOCAL_LAYER=$LIBRECATHOME
 export LIBRECATHOME LOCAL_LAYER
 echo "Using sources from $LIBRECATHOME to build layer in $LOCAL_LAYER"
