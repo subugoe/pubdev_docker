@@ -1,0 +1,19 @@
+diff --git a/views/topbar.tt b/views/topbar.tt
+index 890ec8d..b5c5908 100644
+--- a/views/topbar.tt
++++ b/views/topbar.tt
+@@ -21,9 +21,12 @@
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse navbar-ex1-collapse">
+             <ul class="nav navbar-nav">
+-                [% style = h.extract_params.style; sort = h.extract_params.item('sort') %]
+-                <li class="helpme" data-placement="bottom" title="[% h.loc("help.brand") %]"><a href="/[% IF session.user %]librecat?[% IF style %]style=[% style %]&[% END %][% IF sort AND sort.0 %][% FOREACH s IN sort %]sort=[% s %]&[% END %][% END %][% END %]"><span class="glyphicon glyphicon-home"></span>[% IF session.role == 'super_admin' %]<span class="hidden-sm">[% END %][% h.loc("header.brand") %][% IF session.role == 'super_admin' %]</span>[% END %]</a></li>
+                 [%- IF session.user %]
++                [% style = h.extract_params.style; sort = h.extract_params.item('sort') %]
++                <li class="helpme" data-placement="bottom" title="[% h.loc("help.brand") %]">
++                    <a href="/[% IF session.user %]librecat?[% IF style %]style=[% style %]&[% END %][% IF sort AND sort.0 %][% FOREACH s IN sort %]sort=[% s %]&[% END %][% END %][% END %]"><span class="glyphicon glyphicon-home"></span>[% IF session.role == 'super_admin' %]<span class="hidden-sm">[% END %][% thisPerson.first_name %] [% thisPerson.last_name %][% IF session.role == 'super_admin' %]</span>[% END %]</a>
++                </li>
++
+                 <li class="helpme" data-placement="bottom" title="[% h.loc("help.my_author_page") %]"><a href="/person/[% session.personNumber %]"><span class="glyphicon glyphicon-list-alt"></span>[% h.loc("header.my_author_page") %]</a></li>
+                 [%- END %]
+                 [%- IF session.role && session.role == 'super_admin' %]
