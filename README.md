@@ -10,6 +10,12 @@ as well. Here you can find the **Release-Notes**:
 Release Notes
 =============
 
+2017.03.03
+----------
+The Infrastructure was updated to version 0.4.0. Developers now has the
+possibility to debug Elasticsearch queries. The usage of the right Elasticsearch 
+Perl module is now enforced by the build system. 
+
 2017.02.22
 ----------
 
