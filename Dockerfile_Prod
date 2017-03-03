@@ -11,6 +11,8 @@ RUN mkdir -p ${LOCAL_LAYER}
 # Prepare our changes layer
 RUN mkdir -p ${SETTINGS_LAYER}
 COPY settings ${SETTINGS_LAYER}
+# Get rid of debugginga
+RUN sed -i '/logs\/es/d' settings/config/store.yml
 COPY robonils.sh .
 COPY patches .
 COPY goettingenfy.py .
