@@ -17,8 +17,6 @@ ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
 ENV PERL5LIB ${LIBRECATHOME}/local/lib/perl5:${LIBRECATHOME}/lib
-# Maybe this can speed up carton (Doesn't really help: https://github.com/perl-carton/carton/issues/203)
-# ENV PERL_CPANM_OPT ”–skip-installed –notest –auto-cleanup=0″
 
 ENV REQ_BUILD sudo \
     zlib1g \
@@ -82,12 +80,13 @@ RUN curl -sL ${NODEJS_URL} > /tmp/nodejs_preinstall \
     && apt install --assume-yes --no-install-recommends nodejs \
     && rm /tmp/nodejs_preinstall
 
-# Sets the version of LibreCat to check out
+# Sets the version of LibreCat and repository location to check out
 ARG LIBRECAT_VERSION=0.4.0
+ARG LIBRECAT_LOCATION=https://github.com/LibreCat/LibreCat.git
 
 # Clone LibreCat
 RUN mkdir -p ${LIBRECATHOME} \
-     && git clone https://github.com/LibreCat/LibreCat.git ${LIBRECATHOME} \
+     && git clone ${LIBRECAT_LOCATION} ${LIBRECATHOME} \
      && echo "${LIBRECAT_VERSION}" > ${LIBRECATHOME}/.librecat-version
 
 #   Installing Perl-Modules and compiling everything
