@@ -1,0 +1,158 @@
+---
+_id: '1'
+name: 1Universität Göttingen
+display: Universität Göttingen
+layer: 1
+tree: []
+...
+---
+_id: '101'
+name: 101Philosophische Fakultät
+display: Philosophische Fakultät
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '102'
+name: 102Theologische Fakultät
+display: Theologische Fakultät
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '103'
+name: 103Medizinische Fakultät
+display: Medizinische Fakultät
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '104'
+name: 104Biologische Fakultät inkl. Psychologie
+display: Biologische Fakultät inkl. Psychologie
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '105'
+name: 105Fakultät für Agrarwissenschaften
+display: Fakultät für Agrarwissenschaften
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '106'
+name: 106Fakultät für Chemie
+display: Fakultät für Chemie
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '107'
+name: 107Fakultät für Forstwissenschaften und Waldökologie
+display: Fakultät für Forstwissenschaften und Waldökologie
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '108'
+name: 108Fakultät für Geowissenschaften und Geographie
+display: Fakultät für Geowissenschaften und Geographie
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '109'
+name: 109Fakultät für Mathematik und Informatik
+display: Fakultät für Mathematik und Informatik
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '110'
+name: 110Fakultät für Physik
+display: Fakultät für Physik
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '111'
+name: 111Juristische Fakultät
+display: Juristische Fakultät
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '112'
+name: 112Sozialwissenschaftliche Fakultät
+display: Sozialwissenschaftliche Fakultät
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '113'
+name: 113Wirtschaftswissenschaftliche Fakultät
+display: Wirtschaftswissenschaftliche Fakultät
+layer: 2
+tree:
+- _id: '1'
+...
+---
+_id: '2'
+name: 2Max-Planck-Gesellschaft
+display: Max-Planck-Gesellschaft
+layer: 1
+tree: []
+...
+---
+_id: '201'
+name: 201Max-Planck-Institut für biophysikalische Chemie
+display: Max-Planck-Institut für biophysikalische Chemie
+layer: 2
+tree:
+- _id: '2'
+...
+---
+_id: '202'
+name: 202Max-Planck-Institut für Dynamik und Selbstorganisation
+display: Max-Planck-Institut für Dynamik und Selbstorganisation
+layer: 2
+tree:
+- _id: '2'
+...
+---
+_id: '203'
+name: 203Max-Planck-Institut für Experimentelle Medizin
+display: Max-Planck-Institut für Experimentelle Medizin
+layer: 2
+tree:
+- _id: '2'
+...
+---
+_id: '204'
+name: 204Max-Planck-Institut für Sonnensystemforschung
+display: Max-Planck-Institut für Sonnensystemforschung
+layer: 2
+tree:
+- _id: '2'
+...
+---
+_id: '205'
+name: 205Max-Planck-Institut zur Erforschung multireligiöser und multiethnischer Gesellschaften
+display: Max-Planck-Institut zur Erforschung multireligiöser und multiethnischer Gesellschaften
+layer: 2
+tree:
+- _id: '2'
+...
