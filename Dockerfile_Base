@@ -17,8 +17,10 @@ ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
 ENV PERL5LIB ${LIBRECATHOME}/local/lib/perl5:${LIBRECATHOME}/lib
-#RUN locale-gen en_US.UTF-8  
+RUN locale-gen en_US.UTF-8  
 ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 
 ENV REQ_BUILD sudo \
     zlib1g \
