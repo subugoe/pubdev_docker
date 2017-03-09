@@ -36,12 +36,13 @@ RUN cpanm -n -l ./local Devel::Camelcadedb && \
 WORKDIR ${LIBRECATHOME}
 RUN mkdir -p logsa && \
     echo "" > devel/project.yml
-COPY ugoe-structure.yml devel/department.yml
+COPY department-goe.yml devel/department.yml
 COPY researcher.yml devel/researcher.yml
 COPY layers.yml .
 COPY boot.sh .
 COPY gearman-entrypoint.sh .
 COPY docker-entrypoint.sh .
+RUN sed -i 's/department tree devel\/department-tree.yml/department add devel\/department.yml/' index.sh
 
 RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
 
