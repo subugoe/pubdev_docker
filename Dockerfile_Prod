@@ -31,9 +31,11 @@ COPY docker-entrypoint_Prod.sh .
 RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
 
 # Clean up
+RUN npm uninstall -g node-sass
+
 # As a result the created image would be much smaller. It's our recommendation to
 # uncomment the few lines below in a production environment.
-RUN apt purge -y ${PRE_BUILD} \
+RUN apt purge -y ${PRE_BUILD} ${PRE_BUILD} nodejs \
     && apt --purge autoremove -y \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
