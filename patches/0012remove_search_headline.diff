@@ -1,15 +1,14 @@
 diff --git a/views/search_box.tt b/views/search_box.tt
-index ea124c2..26989e2 100644
+index a2aa106..5280f61 100644
 --- a/views/search_box.tt
 +++ b/views/search_box.tt
-@@ -14,8 +14,8 @@
+@@ -14,8 +14,7 @@
  [%- END -%]
  
  [%- UNLESS request.path.match('marked') %]
 -<h3[%- IF qp.q.size == 0 %] class="margin-top0"[% END %]>[% h.loc("facets.search") %]</h3>
--<form action="#" method="get" role="form" class="helpme helpme-md" data-placement="left" title="[% h.loc("help.search") %]">
-+<!-- <h3[%- IF qp.q.size == 0 %] class="margin-top0"[% END %]>[% h.loc("facets.search") %]</h3> -->
-+<form action="#" method="get" role="form" class="helpme helpme-md" data-placement="left" title="[% h.loc("help.search") %]" style="margin-top: 1em">
+-<form action="#" method="get" role="form" class="helpme helpme-md" data-placement="left" title="[% h.loc("help.search") | html %]">
++<form action="#" method="get" role="form" class="helpme helpme-md" data-placement="left" title="[% h.loc("help.search") | html %]" style="margin-top: 1em">
    <span class="input-group">
-     <input type="text" class="form-control" name="q" value="[% qp.q %]" placeholder="[% h.loc("facets.search") %]" />
+     <input type="text" class="form-control" name="q" value="[% qp.q | html %]" placeholder="[% h.loc("facets.search") | html %]" />
      <span class="input-group-btn">
