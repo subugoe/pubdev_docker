@@ -1,0 +1,65 @@
+diff --git a/views/department/list.tt b/views/department/list.tt
+index d3955fb..a7f4661 100644
+--- a/views/department/list.tt
++++ b/views/department/list.tt
+@@ -17,7 +17,7 @@
+           <li><a href="/publication[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.publications") %]</a></li>
+           <!-- <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li> -->
+           <li><a href="/person">[% h.loc("tabs.authors") %]</a></li>
+-          <li><a href="/project">[% h.loc("tabs.projects") %]</a></li>
++          <!-- <li><a href="/project">[% h.loc("tabs.projects") %]</a></li> -->
+           <li class="active"><a href="/department">[% h.loc("tabs.departments") %]</a></li>
+         </ul>
+       </div>
+diff --git a/views/index.tt b/views/index.tt
+index 7747c8a..638c031 100644
+--- a/views/index.tt
++++ b/views/index.tt
+@@ -19,7 +19,7 @@
+           <li><a href="/publication[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.publications") %]</a></li>
+           <!-- <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li> -->
+           <li><a href="/person">[% h.loc("tabs.authors") %]</a></li>
+-          <li><a href="/project">[% h.loc("tabs.projects") %]</a></li>
++          <!-- <li><a href="/project">[% h.loc("tabs.projects") %]</a></li> -->
+           <li><a href="/department">[% h.loc("tabs.departments") %]</a></li>
+         </ul>
+       </div>
+diff --git a/views/person/list.tt b/views/person/list.tt
+index dd2e912..c773552 100644
+--- a/views/person/list.tt
++++ b/views/person/list.tt
+@@ -17,7 +17,7 @@
+           <li><a href="/publication[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.publications") %]</a></li>
+           <!-- <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li> -->
+           <li class="active"><a href="/person">[% h.loc("tabs.authors") %]</a></li>
+-          <li><a href="/project">[% h.loc("tabs.projects") %]</a></li>
++          <!-- <li><a href="/project">[% h.loc("tabs.projects") %]</a></li> -->
+           <li><a href="/department">[% h.loc("tabs.departments") %]</a></li>
+         </ul>
+       </div>
+diff --git a/views/project/list.tt b/views/project/list.tt
+index c1c6169..d059197 100644
+--- a/views/project/list.tt
++++ b/views/project/list.tt
+@@ -19,7 +19,7 @@
+           <li><a href="/publication[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.publications") %]</a></li>
+           <!-- <li><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li> -->
+           <li><a href="/person">[% h.loc("tabs.authors") %]</a></li>
+-          <li class="active"><a href="/project">[% h.loc("tabs.projects") %]</a></li>
++          <!-- <li class="active"><a href="/project">[% h.loc("tabs.projects") %]</a></li> -->
+           <li><a href="/department">[% h.loc("tabs.departments") %]</a></li>
+         </ul>
+       </div>
+diff --git a/views/publication/list.tt b/views/publication/list.tt
+index 4bbb8a3..3449d9f 100644
+--- a/views/publication/list.tt
++++ b/views/publication/list.tt
+@@ -17,7 +17,7 @@
+           <li [% IF path.match('publication')%]class="active"[% END %]><a href="/publication[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.publications") %]</a></li>
+           <!-- <li [% IF path.match('data')%]class="active"[% END %]><a href="/data[% IF qp.style OR qp.limit %]?[% END %][% IF qp.style %]style=[% qp.style %][% IF qp.limit %]&[% END %][% END %][% IF qp.limit %]limit=[% qp.limit %][% END %]">[% h.loc("tabs.data_publications") %]</a></li> -->
+           <li><a href="/person">[% h.loc("tabs.authors") %]</a></li>
+-          <li><a href="/project">[% h.loc("tabs.projects") %]</a></li>
++          <!-- <li><a href="/project">[% h.loc("tabs.projects") %]</a></li> -->
+           <li><a href="/department">[% h.loc("tabs.departments") %]</a></li>
+         </ul>
+       </div>
