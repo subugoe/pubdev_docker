@@ -1,0 +1,12 @@
+diff --git a/views/topbar.tt b/views/topbar.tt
+index b5c5908..ddba0fe 100644
+--- a/views/topbar.tt
++++ b/views/topbar.tt
+@@ -79,6 +79,7 @@
+         </div>
+     </div>
+ </header>
++<div style="width: 200px; background: #589bba; position: absolute; font-weight: bold; font-size: 125%; text-align: center; line-height: 50px; letter-spacing: 2px; color: #f0f0f0; top: 105px; right: -65px; left: auto; z-index: -1; transform: rotate(45deg); -webkit-transform: rotate(45deg);">BETA</div>
+ <main class="front"[% IF backend %] class="backend"[% END %]>
+     <div class="container[% IF title OR name %] title[%END %][% IF _id %] publication[% END %]">
+ <!-- END navbar.tt -->
