@@ -71,6 +71,10 @@ do
     fi
 done
 
+
+# Run the SASS tool
+node-sass --output-style expanded --source-map-embed scss/main.scss public/css/main.css
+
 # Extract changes and move them to layer
 # Move Patched files into the layer and restore the originals from Git
 for change in `git status --porcelain --untracked-files=no | cut -d ' ' -f 3`
@@ -83,7 +87,7 @@ do
         mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
     fi
 done
-   
+
 # Find Changes, that haven't been there before (additions)   
 for change in `git ls-files --others --exclude-standard`
 do 
