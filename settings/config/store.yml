@@ -42,8 +42,8 @@ metrics:
 search:
   package: ElasticSearch
   options:
-    log_to:   ['File', '/srv/LibreCat/logs/es.log']
-    trace_to: ['File','/srv/LibreCat/logs/es-trace.log']
+#    log_to:   ['File', '/srv/LibreCat/logs/es.log']
+#    trace_to: ['File','/srv/LibreCat/logs/es-trace.log']
     nodes:
         - searchnode:9200
     bags:
