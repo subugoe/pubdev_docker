@@ -35,7 +35,7 @@ RUN npm uninstall -g node-sass && rm -rf /usr/lib/node_modules
 
 # As a result the created image would be much smaller. It's our recommendation to
 # uncomment the few lines below in a production environment.
-RUN apt purge -y ${PRE_BUILD} ${PRE_BUILD} nodejs \
+RUN apt purge -y ${PRE_BUILD} nodejs \
     && apt --purge autoremove -y \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
