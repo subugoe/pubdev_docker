@@ -11,7 +11,7 @@ RUN mkdir -p ${LOCAL_LAYER}
 # Prepare our changes layer
 RUN mkdir -p ${SETTINGS_LAYER}
 COPY settings ${SETTINGS_LAYER}
-# Get rid of debugginga
+# Get rid of debugging
 RUN sed -i '/logs\/es/d' settings/config/store.yml
 COPY robonils.sh .
 COPY patches .
@@ -31,7 +31,7 @@ COPY docker-entrypoint_Prod.sh .
 RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
 
 # Clean up
-RUN npm uninstall -g node-sass
+RUN npm uninstall -g node-sass && rm -rf /usr/lib/node_modules
 
 # As a result the created image would be much smaller. It's our recommendation to
 # uncomment the few lines below in a production environment.
