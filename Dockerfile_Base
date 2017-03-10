@@ -85,7 +85,7 @@ RUN curl -sL ${NODEJS_URL} > /tmp/nodejs_preinstall \
     && rm /tmp/nodejs_preinstall
 
 # Sets the version of LibreCat and repository location to check out
-ARG LIBRECAT_VERSION=0.5.0
+ARG LIBRECAT_VERSION=0.5.1
 ARG LIBRECAT_LOCATION=https://github.com/LibreCat/LibreCat.git
 
 # Clone LibreCat
