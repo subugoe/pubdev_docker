@@ -1,0 +1,22 @@
+diff --git a/views/index.tt b/views/index.tt
+index 638c031..3aeb151 100644
+--- a/views/index.tt
++++ b/views/index.tt
+@@ -63,7 +63,7 @@
+                   <p>Export publication lists for individuals, departments or schools, automatically update your publication lists on websites and for applications, follow up on citations and use in social media. Discover collaboration networks and research profiles.</p>
+                 </div>
+               </div>
+-              <div class="row" style="margin-top: 2em">
++              <!-- <div class="row" style="margin-top: 2em">
+                 <div class="col-md-6">
+                   <h2>Access without boundaries</h2>
+                   <p>Get directly to publications and data sets, download and reuse them directly. Find zzz Open Access publications from yyy authors and monitor the transition of Göttingen Campus to transparency and openness.</p>
+@@ -71,7 +71,7 @@
+                 <div class="col-md-6">
+                   (image)
+                 </div>
+-              </div>
++              </div> -->
+               <!-- <div class="row margin-top2">
+                 <div class="col-md-12">
+                   <p class="h3"><span class="fa fa-check fa-1x"></span> <span class="statalign">[% stats.publications %]</span> <a href="/publication">[% h.loc("home.stats.publications") %]</a></p>
