@@ -104,7 +104,8 @@ RUN git checkout ${LIBRECAT_VERSION} && \
     carton install && \
     rm -rf local/lib/perl5/Search/ && \
     cpanm -nl ./local Search::Elasticsearch@1.19 && \
-    rm -rf /root/.cpanm/work
+    rm -rf /root/.cpanm/work && \
+    sed -e "s/Version: \(.*\)/Version: ${LIBRECAT_VERSION}/" public/version.txt 
 
 #Prepare LibreCat
 RUN perl bin/librecat generate forms
