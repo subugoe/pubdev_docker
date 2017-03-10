@@ -12,7 +12,7 @@ RUN mkdir -p ${LOCAL_LAYER}
 RUN mkdir -p ${SETTINGS_LAYER}
 COPY settings ${SETTINGS_LAYER}
 # Get rid of debugging
-RUN sed -i '/logs\/es/d' settings/config/store.yml
+#RUN sed -i '/logs\/es/d' settings/config/store.yml
 COPY robonils.sh .
 COPY patches .
 COPY goettingenfy.py .
