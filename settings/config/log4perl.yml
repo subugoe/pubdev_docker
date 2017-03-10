@@ -12,3 +12,4 @@ log4perl: |
   log4perl.appender.FILE.filename=logs/app.log
   log4perl.appender.FILE.layout=PatternLayout
   log4perl.appender.FILE.layout.ConversionPattern=%d [%P] - %c[%L] : %m%n
+  log4perl.appender.FILE.utf8=1
