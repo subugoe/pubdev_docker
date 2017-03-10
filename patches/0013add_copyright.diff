@@ -1,10 +1,10 @@
 diff --git a/views/footer.tt b/views/footer.tt
-index 6abb8a4..646d6d6 100644
+index d15e888..f45c6c6 100644
 --- a/views/footer.tt
 +++ b/views/footer.tt
 @@ -23,6 +23,13 @@
+         </div>
      </div>
-   </div>
  </footer>
 +<div class="container" style="margin-top: 1em">
 +    <div class="row">
