@@ -22,11 +22,6 @@ COPY robonils.sh .
 # This is used to replace some Strings with Göttingen specific ones and apply the patches
 RUN bash robonils.sh && python goettingenfy.py -s  . && rm robonils.sh goettingenfy.py *.patch *.diff
 
-# Commented this one out, since it fails after the reset of the goefis layer
-# npm related workflow
-#WORKDIR ${LOCAL_LAYER}
-#RUN npm install && npm run build-css prefix-css
-
 #Add debugger here, since it is development related
 #Install perl debug module: https://github.com/Camelcade/Perl5-IDEA/wiki
 RUN cpanm -n -l ./local Devel::Camelcadedb && \
@@ -46,13 +41,7 @@ RUN sed -i 's/department tree devel\/department-tree.yml/department add devel\/d
 
 RUN chown -R librecat:librecat ${LIBRECATHOME} ${LOCAL_LAYER} ${SETTINGS_LAYER}
 
-# Clean up
-# As a result the created image would be much smaller. It's our recommendation to
-# uncomment the few lines below in a production environment.
-#RUN apt purge -y ${PRE_BUILD} \
-#    && apt --purge autoremove -y \
-#    && apt clean \
-#    && rm -rf /var/lib/apt/lists/*
+# Clean up isn't used for Dev image
 
 USER librecat:librecat
 
