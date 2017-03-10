@@ -1,14 +1,15 @@
-From 1991a8643f862d82e0335d5c3aa12fa4b6c9f550 Mon Sep 17 00:00:00 2001
+From 351992df67d25fb8ca4c36ba65ec4fd4a53fc4cf Mon Sep 17 00:00:00 2001
 From: Nils Windisch <mail@nilswindisch.de>
-Date: Sun, 12 Feb 2017 11:34:10 +0100
-Subject: [PATCH] 0015adapt_footer
+Date: Fri, 10 Mar 2017 15:47:09 +0100
+Subject: [PATCH] Patch 0015
 
 ---
  public/images/logo_sub_goettingen_white.png | Bin 0 -> 4161 bytes
  public/images/logo_uni_goettingen_white.png | Bin 0 -> 7463 bytes
  scss/custom.scss                            |   8 ++++++++
  scss/main.scss                              |   1 +
- 6 files changed, 25 insertions(+), 6 deletions(-)
+ views/footer.tt                             |  10 +++++-----
+ 5 files changed, 14 insertions(+), 5 deletions(-)
  create mode 100644 public/images/logo_sub_goettingen_white.png
  create mode 100644 public/images/logo_uni_goettingen_white.png
  create mode 100644 scss/custom.scss
@@ -272,5 +273,29 @@ index b6384dd..e307303 100644
  @import "font-awesome";
 +@import "custom";
  // @import "mypub";
---
+diff --git a/views/footer.tt b/views/footer.tt
+index 9ae46dc..447dcb9 100644
+--- a/views/footer.tt
++++ b/views/footer.tt
+@@ -8,13 +8,13 @@
+     <div class="container">
+         <div class="row">
+             <div class="col-sm-12">
+-                <div class="col-md-4" style="text-align: center">
+-                    <p><a href="https://www.uni-goettingen.de"><img src="/images/logo_uni_goettingen.png" alt=""></a></p>
++                <div class="col-md-4" style="text-align: center; margin-top: 2em">
++                    <p><a href="https://www.uni-goettingen.de"><img src="/images/logo_uni_goettingen_white.png" alt=""></a></p>
+                 </div>
+-                <div class="col-md-4" style="text-align: center">
+-                    <p><a href="https://www.sub.uni-goettingen.de"><img src="/images/logo_sub_goettingen.png" alt=""></a></p>
++                <div class="col-md-4" style="text-align: center; margin-top: 1em">
++                    <p><a href="https://www.sub.uni-goettingen.de"><img src="/images/logo_sub_goettingen_white.png" alt="" width="300px"></a></p>
+                 </div>
+-                <div class="col-md-4" style="text-align: center">
++                <div class="col-md-4" style="text-align: center; margin-top: 2em">
+                     <p>[% h.loc("footer.powered_by") %]&nbsp;&nbsp;<a href="//librecat.org/"><img src="/images/librecat_logo.png" alt="" height="50px"></a></p>
+                 </div>
+             </div>
+-- 
 2.10.1 (Apple Git-78)
+
