@@ -1,24 +1,24 @@
 diff --git a/views/footer.tt b/views/footer.tt
-index 408be3c..09bd36b 100644
+index 447dcb9..fb65655 100644
 --- a/views/footer.tt
 +++ b/views/footer.tt
-@@ -6,6 +6,19 @@
- 
- <footer class="panel-footer">
-   <div class="container">
-+      <div class="row">
-+          <div class="col-sm-12">
-+              <h3>Contact</h3>
-+              <address>
-+                <strong>Support Team</strong><br>
-+                Daniel Beucke<br>
-+                <a href="tel:+495513912432">+49 551 39 12 432</a><br>
-+                <a href="mailto:support-gro@sub.uni-goettingen.de">support-gro@sub.uni-goettingen.de</a>
-+              </address>
-+          </div>
-+      </div>
-+  </div>
-+  <div class="container">
-     <div class="row">
-       <div class="col-sm-12">
-         <div class="col-md-4" style="text-align: center; margin-top: 2em">
+@@ -8,6 +8,19 @@
+     <div class="container">
+         <div class="row">
+             <div class="col-sm-12">
++                <h3>Contact</h3>
++                <address>
++                    <strong>Support Team</strong><br>
++                    Daniel Beucke<br>
++                    <a href="tel:+495513912432">+49 551 39 12 432</a><br>
++                    <a href="mailto:support-gro@sub.uni-goettingen.de">support-gro@sub.uni-goettingen.de</a>
++                </address>
++            </div>
++        </div>
++    </div>
++    <div class="container">
++        <div class="row">
++            <div class="col-sm-12">
+                 <div class="col-md-4" style="text-align: center; margin-top: 2em">
+                     <p><a href="https://www.uni-goettingen.de"><img src="/images/logo_uni_goettingen_white.png" alt=""></a></p>
+                 </div>
