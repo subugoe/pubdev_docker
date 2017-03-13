@@ -65,6 +65,8 @@ do
     	if [[ $file == 9$LIBRECAT_PATCH_LEVEL* ]] ; then
     	    echo "LibreCat is at $LIBRECAT_PATCH_LEVEL, patch $file will be applied"
     	    git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
+    	    echo -n ' + ' >> public/version.txt
+    	    grep 'From ' "$file" | cut -d ' ' -f 2 >> public/version.txt
     	fi
     else
         git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
@@ -87,6 +89,9 @@ do
         mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
     fi
 done
+# Move the version file: Since it's changed by the Docker base image to the actual version,
+# the lop above doesn't identify it as a part of the layer.
+cp public/version.txt $LOCAL_LAYER/public
 
 # Find Changes, that haven't been there before (additions)   
 for change in `git ls-files --others --exclude-standard`
