@@ -1,11 +1,22 @@
---2017-03-13 16:30:56--  https://github.com/LibreCat/LibreCat/commit/115460a64d435d0177d71c27ce656ac08c694f0f.patch
-Auflösen des Hostnamens github.com… 192.30.253.112, 192.30.253.113
-Verbindungsaufbau zu github.com|192.30.253.112|:443 … verbunden.
-HTTP-Anforderung gesendet, auf Antwort wird gewartet … 200 OK
-Länge: nicht spezifiziert [text/plain]
-Wird in »115460a64d435d0177d71c27ce656ac08c694f0f.patch« gespeichert.
+From 115460a64d435d0177d71c27ce656ac08c694f0f Mon Sep 17 00:00:00 2001
+From: Vitali Peil <vitali.peil@uni-bielefeld.de>
+Date: Fri, 10 Mar 2017 14:28:25 +0100
+Subject: [PATCH] fix count for department publications, GH #195
 
-     0K                                                        13,0M=0s
+---
+ lib/LibreCat/Cmd/generate.pm | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-2017-03-13 16:30:57 (13,0 MB/s) - »115460a64d435d0177d71c27ce656ac08c694f0f.patch« gespeichert [834]
-
+diff --git a/lib/LibreCat/Cmd/generate.pm b/lib/LibreCat/Cmd/generate.pm
+index 3c9540a..d8929d9 100644
+--- a/lib/LibreCat/Cmd/generate.pm
++++ b/lib/LibreCat/Cmd/generate.pm
+@@ -190,7 +190,7 @@ sub _generate_departments {
+             }
+ 
+             my $id    = $item->{_id};
+-            my $hits  = $pubs->search(query => "department:$id" );
++            my $hits  = $pubs->search(cql_query => "department=$id" );
+             my $total = $hits->{total};
+ 
+             $root->{tree}->{$id}->{name}    = $item->{name};
