@@ -34,13 +34,6 @@ fi
 #./index.sh drop
 #./index.sh create
 
-####### Development specific - start  ##
-cd ${LOCAL_LAYER}
-sudo chown -R librecat:librecat ${LOCAL_LAYER}
-/usr/bin/npm install 2>&1 >> /srv/LibreCat/logs/npm.log &
-/usr/bin/npm run build-css prefix-css 2>&1 >> /srv/LibreCat/logs/npm.log &
-####### Development specific - end  ##
-
 # Starting librecat
 cd ${LIBRECATHOME}
 ./boot.sh starman

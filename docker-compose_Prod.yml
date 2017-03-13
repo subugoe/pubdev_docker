@@ -1,9 +1,6 @@
 version: '2'
 services:
     librecat:
-        build:
-            context: .
-            dockerfile: Dockerfile_Dev
         image: librecat:latest
         ports:
             - "5001:5001"
