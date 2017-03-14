@@ -156,3 +156,10 @@ layer: 2
 tree:
 - _id: '2'
 ...
+---
+_id: '3'
+name: 3Deutsches Primatenzentrum
+display: Deutsches Primatenzentrum
+layer: 1
+tree: []
+...
