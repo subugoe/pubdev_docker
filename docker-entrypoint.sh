@@ -33,7 +33,7 @@ fi
 # creating 1st scripts
 ./index.sh drop
 
-bin/librecat import YAML to  backup --bag info < /devel/info-bag.yml
+bin/librecat import YAML to  backup --bag info < devel/info-bag.yml
 # TODO: User our own approach to create the data to be able to hook data in here
 ./index.sh create
 
