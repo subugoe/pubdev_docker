@@ -18,7 +18,6 @@ COPY settings ${SETTINGS_LAYER}
 COPY patches .
 COPY goettingenfy.py .
 COPY robonils.sh .
-
 # This is used to replace some Strings with Göttingen specific ones and apply the patches
 RUN bash robonils.sh && python goettingenfy.py -s  . && rm robonils.sh goettingenfy.py *.patch *.diff
 
@@ -33,6 +32,7 @@ RUN mkdir -p logs && \
     echo "" > devel/project.yml
 COPY department-goe.yml devel/department.yml
 COPY researcher.yml devel/researcher.yml
+COPY info-bag.yml devel/info-bag.yml
 COPY layers.yml .
 COPY boot.sh .
 COPY gearman-entrypoint.sh .

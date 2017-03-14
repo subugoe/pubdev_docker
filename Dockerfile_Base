@@ -122,6 +122,4 @@ RUN wget https://github.com/mathjax/MathJax/archive/v2.6-latest.zip && \
     cd public/javascripts/commonmarkjs/dist/ && \
     wget --no-check-certificate https://raw.githubusercontent.com/jgm/commonmark.js/master/dist/commonmark.min.js
 
-COPY info-bag.yml devel/
-
 ENTRYPOINT ["./docker-entrypoint.sh"]
