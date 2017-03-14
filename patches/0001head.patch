@@ -6,7 +6,7 @@ index 4e969a52..0416464f 100644
      <link rel="stylesheet" type="text/css" href="/css/ltIE10.css" />
      <![endif]-->
      <link rel="stylesheet" href="/css/main.css">
-+    <link rel="stylesheet" href="/css/bootstrap-select.min.css">
++    <!-- <link rel="stylesheet" href="/css/bootstrap-select.min.css"> -->
 +    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
      <script src="/javascripts/jquery.min.js"></script>
      <script src="/javascripts/jquery-ui-1.10.4.custom.min.js"></script>
