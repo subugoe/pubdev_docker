@@ -1,0 +1,12 @@
+diff --git a/views/embed/javascript.tt b/views/embed/javascript.tt
+index 660deb9e..b28d1b26 100644
+--- a/views/embed/javascript.tt
++++ b/views/embed/javascript.tt
+@@ -1,6 +1,7 @@
+ <!-- BEGIN embed/javascript.tt -->
+ [% qp = request.params.hash %]
+ document.write ('<ul[% IF qp.listyle %] style="[% qp.listyle %]"[% END %]>') ;
++[%- style = qp.style %]
+ [%- FOREACH entry IN hits %]
+ document.write('<li>');
+   [%- IF entry.citation.$style %]
