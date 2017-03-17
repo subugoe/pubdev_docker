@@ -1,0 +1,19 @@
+diff --git a/config/features.yml b/config/features.yml
+index c896d0f7..6c40e043 100644
+--- a/config/features.yml
++++ b/config/features.yml
+@@ -9,6 +9,14 @@ views:
+       facets:
+         - - template: facets/popular_science
+             facet: popular_science
++          - template: facets/type
++            facet: type
++          - template: facets/author
++            facet: author
++          - template: facets/editor
++            facet: editor
++          - template: facets/year
++            facet: year
+           - template: facets/extern
+             facet: extern
+             min: 1
