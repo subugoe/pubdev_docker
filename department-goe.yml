@@ -1,7 +1,7 @@
 ---
 _id: '1'
-name: 1Universität Göttingen
-display: Universität Göttingen
+name: 1Georg-August-Universität Göttingen
+display: Georg-August-Universität Göttingen
 layer: 1
 tree: []
 ...
@@ -23,16 +23,16 @@ tree:
 ...
 ---
 _id: '103'
-name: 103Medizinische Fakultät
-display: Medizinische Fakultät
+name: 103Universitätsmedizin Göttingen
+display: Universitätsmedizin Göttingen
 layer: 2
 tree:
 - _id: '1'
 ...
 ---
 _id: '104'
-name: 104Biologische Fakultät inkl. Psychologie
-display: Biologische Fakultät inkl. Psychologie
+name: 104Fakultät für Biologie und Psychologie
+display: Fakultät für Biologie und Psychologie
 layer: 2
 tree:
 - _id: '1'
