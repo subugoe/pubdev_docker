@@ -1,0 +1,12 @@
+diff --git a/lib/LibreCat/App/Search/Route/publication.pm b/lib/LibreCat/App/Search/Route/publication.pm
+index d6dc9aa1..3e21b8f3 100644
+--- a/lib/LibreCat/App/Search/Route/publication.pm
++++ b/lib/LibreCat/App/Search/Route/publication.pm
+@@ -74,6 +74,7 @@ get '/embed' => sub {
+     push @{$p->{cql}}, ("status=public");
+ 
+     $p->{start} = params->{start};
++    $p->{limit} = h->config->{maximum_page_size};
+ 
+     my $hits = LibreCat->searcher->search('publication', $p);
+ 
