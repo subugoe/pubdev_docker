@@ -51,6 +51,8 @@ echo "Ignoring existing files: $EXISTING_CHANGES"
 
 DOCKER_CHANGES=`ls *.patch *.diff *.py robonils.sh .librecat-version`
 
+VERSIONFILE=public/version.txt
+
 for file in `ls *.patch *.diff`
 do
     echo "Trying git for $file"
@@ -66,14 +68,19 @@ do
     	    echo "LibreCat is at $LIBRECAT_PATCH_LEVEL, patch $file will be applied"
     	    git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
     	    echo -n ' + ' >> public/version.txt
-    	    grep 'From ' "$file" | cut -d ' ' -f 2 >> public/version.txt
+    	    VERSION=`grep 'From ' "$file" | cut -d ' ' -f 2`
+    	    if [[ -z "${VERSION// }" ]] ; then
+    	    	VERSION=$file
+    	    fi
+    	    echo $VERSION >> $VERSIONFILE
     	fi
     else
         git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
     fi
 done
 
-
+echo "Generated Version file is:"
+cat $VERSIONFILE
 # Run the SASS tool
 node-sass --output-style expanded --source-map-embed scss/main.scss public/css/main.css
 
@@ -84,14 +91,13 @@ do
     if [[ ! ${EXISTING_CHANGES[*]} =~ "$change" ]] ; then
         PATH_COMPONENT=`dirname $change`
         echo "Moving patched file $change to $LOCAL_LAYER/$PATH_COMPONENT"
-                
         mkdir -p "$LOCAL_LAYER/$PATH_COMPONENT"
         mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
     fi
 done
 # Move the version file: Since it's changed by the Docker base image to the actual version,
-# the lop above doesn't identify it as a part of the layer.
-cp public/version.txt $LOCAL_LAYER/public
+# the loop above doesn't identify it as a part of the layer.
+cp $VERSIONFILE $LOCAL_LAYER/public
 
 # Find Changes, that haven't been there before (additions)   
 for change in `git ls-files --others --exclude-standard`
@@ -103,5 +109,5 @@ do
         mv "$change" $LOCAL_LAYER/$PATH_COMPONENT
     fi
 done
-# Reset and remove new created but untracked files
+# Reset and (TODO) remove new created but untracked files
 git reset --hard $GIT_TAG # && git clean -fd
