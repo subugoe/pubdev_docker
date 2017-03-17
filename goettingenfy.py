@@ -74,6 +74,7 @@ replacements['L6000-0538'] = ''
 replacements['24060-6'] = '2020450-4'
 replacements['helpdesk@librecat.org'] = 'epu@sub.uni-goettingen.de'
 replacements['PEVZ-ID'] = 'GRO-ID'
+replacements['appname: "LibreCat"'] = 'appname: "Göttingen Research Online"'
 #This lines are used to set up the CSL thing
 replacements['engine: none'] = 'engine: csl'
 replacements['  url: \'http://localhost:8085\''] = '  url: \'http://citeproc:8080\''
