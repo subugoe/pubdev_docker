@@ -11,7 +11,7 @@ index 695d9d35..148b86f7 100644
      my ($c) = splat;
  
 -    my $cql = $c ? ["lastname=" . lc $c . "*"] : '';
-+    my $cql = $c ? ["last_name=" . lc $c . "*"] : '';
++    my $cql = $c ? ["lastname=" . lc $c . "*"] : '';
      my %search_params = (
          cql => $cql,
          start => 0,
