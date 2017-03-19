@@ -107,7 +107,7 @@ RUN git checkout ${LIBRECAT_VERSION} && \
     rm -rf /root/.cpanm/work && \
     sed -i -e "s/Version: \(.*\)/Version: ${LIBRECAT_VERSION}/" public/version.txt && \
     rm -fr local/lib/perl5/Catmandu/Store/ElasticSearch* && \
-    cpanm -nl ./local Catmandu::Store::ElasticSearch@0.054
+    cpanm -nl ./local Catmandu::Store::ElasticSearch@0.0504
 
 #Prepare LibreCat
 RUN perl bin/librecat generate forms
