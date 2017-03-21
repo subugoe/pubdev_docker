@@ -1,0 +1,26 @@
+diff --git a/views/backend/generator/fields/author.tt b/views/backend/generator/fields/author.tt
+index f977506..7a4cb6f 100644
+--- a/views/backend/generator/fields/author.tt
++++ b/views/backend/generator/fields/author.tt
+@@ -15,7 +15,7 @@
+         <input type="hidden" id="orig_last_name_0" value="" />
+ 
+ 	<!-- 1 -->
+-        <div class="form-group col-md-3 col-xs-11">
++        <div class="form-group col-md-10 col-xs-11">
+           <div class="input-group sticky{% IF fields.basic_fields.author.mandatory OR fields.basic_fields.author_secondary.mandatory %} mandatory{% END %}">
+             <div class="input-group-addon">
+               <span class="hidden-xs hidden-sm">[% lf.$type.field.author.first_name.label || lf.$type.field.author_secondary.first_name.label %]</span>
+@@ -24,11 +24,10 @@
+             <input type="text" id="first_name_0" name="author.0.first_name" placeholder="[% lf.$type.field.author.first_name.placeholder || lf.$type.field.author_secondary.first_name.placeholder %]" class="sticky form-control{% IF fields.basic_fields.author.mandatory OR fields.basic_fields.author_secondary.mandatory %} required{% END %}" value="" />
+             <div class="input-group-addon hidden-lg hidden-md[% IF loop.first %]  helpme" data-placement="top" title="[% h.loc("forms.forms.form_add_field") %][% END %]" onclick="add_field('creator');"><span class="glyphicon glyphicon-plus"></span></div>
+             <div class="input-group-addon hidden-lg hidden-md" onclick="remove_field(this);"><span class="glyphicon glyphicon-minus"></span></div>
+-            <div class="input-group-addon hidden-xs hidden-sm"></div>
+           </div>
+         </div>
+ 	<!-- 2 -->
+-        <div class="form-group col-md-7 col-xs-11">
++        <div class="form-group col-md-10 col-xs-11">
+           <div class="input-group sticky{% IF fields.basic_fields.author.mandatory OR fields.basic_fields.author_secondary.mandatory %} mandatory{% END %}">
+             <div class="input-group-addon">
+               <span class="hidden-xs hidden-sm">[% lf.$type.field.author.last_name.label || lf.$type.field.author_secondary.last_name.label %]</span>
