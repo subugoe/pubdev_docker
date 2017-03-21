@@ -78,6 +78,9 @@ replacements['appname: "LibreCat"'] = 'appname: "Göttingen Research Online"'
 #This lines are used to set up the CSL thing
 replacements['engine: none'] = 'engine: csl'
 replacements['  url: \'http://localhost:8085\''] = '  url: \'http://citeproc:8080\''
+# This is a special case, that only applies to one file
+replacements['PUB'] = {'to': 'GRO', 'files': ['views/embed/links_js.tt']}
+
 
 #List to count if all replacements have been made
 replaced = []
@@ -98,9 +101,17 @@ def change_file (file, edit, verbose):
             position = "File: " + file + ":" + str(linenr) + ": "
             for fro, to in replacements.items():
                 if isinstance(fro, str):
-                    search = fro
-                    newline = line.replace(fro, to)
+                    if isinstance(to, str):
+                        search = fro
+                        newline = line.replace(fro, to)
+                    elif isinstance(to, dict):
+                        search = to['to']
+                        if file in to['files']:
+                            print "Got matching file: " + file + " for specific change of " + search
+                            newline = line.replace(fro, to['to'])
                 elif isinstance(fro, re._pattern_type):
+                    if isinstance(to, dict):
+                        print "Regex searches can't handle specific files, I will die by Type Errors"
                     search = fro.pattern
                     regex = fro
                     newline = regex.sub(to, line)
