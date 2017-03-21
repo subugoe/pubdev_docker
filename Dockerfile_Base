@@ -87,7 +87,7 @@ RUN curl -sL ${NODEJS_URL} > /tmp/nodejs_preinstall \
 RUN npm -g install node-sass
 
 # Sets the version of LibreCat and repository location to check out
-ARG LIBRECAT_VERSION=0.5.2
+ARG LIBRECAT_VERSION=0.5.3
 ARG LIBRECAT_LOCATION=https://github.com/LibreCat/LibreCat.git
 
 # Clone LibreCat
@@ -101,13 +101,14 @@ RUN mkdir -p ${LIBRECATHOME} \
 # Building LibreCat
 WORKDIR ${LIBRECATHOME}
 RUN git checkout ${LIBRECAT_VERSION} && \
-    carton install && \
-    rm -rf local/lib/perl5/Search/ && \
-    cpanm -nl ./local Search::Elasticsearch@1.19 && \
-    rm -rf /root/.cpanm/work && \
-    sed -i -e "s/Version: \(.*\)/Version: ${LIBRECAT_VERSION}/" public/version.txt && \
-    rm -fr local/lib/perl5/Catmandu/Store/ElasticSearch* && \
-    cpanm -nl ./local Catmandu::Store::ElasticSearch@0.0504
+    carton install 
+# This was needed before 0.5.3
+#    rm -rf local/lib/perl5/Search/ && \
+#    cpanm -nl ./local Search::Elasticsearch@1.19 && \
+#    rm -rf /root/.cpanm/work && \
+#    sed -i -e "s/Version: \(.*\)/Version: ${LIBRECAT_VERSION}/" public/version.txt && \
+#    rm -fr local/lib/perl5/Catmandu/Store/ElasticSearch* && \
+#    cpanm -nl ./local Catmandu::Store::ElasticSearch@0.0504
 
 #Prepare LibreCat
 RUN perl bin/librecat generate forms

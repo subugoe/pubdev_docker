@@ -63,7 +63,7 @@ do
     #fi
     #Test if we have an version specific patch
     if [[ $file == 9* ]] ; then
-        echo "Got version dependent patch $file"
+        echo "Got version dependent patch $file, checking if patch level ($LIBRECAT_PATCH_LEVEL) is right..."
     	if [[ $file == 9$LIBRECAT_PATCH_LEVEL* ]] ; then
     	    echo "LibreCat is at $LIBRECAT_PATCH_LEVEL, patch $file will be applied"
     	    git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
@@ -73,6 +73,8 @@ do
     	    	VERSION=$file
     	    fi
     	    echo $VERSION >> $VERSIONFILE
+    	else
+    	    echo "Patch $file won't be applied"
     	fi
     else
         git apply --binary -v --ignore-space-change --ignore-whitespace < "$file"
