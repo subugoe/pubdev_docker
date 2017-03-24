@@ -6,7 +6,7 @@ index 9efe03c..7747c8a 100644
      </div>
      <div class="row margin-top1">
        <div class="col-md-12">
-+          <p>Scientific communication takes place in publications and publications tell the profile of Göttingen Campus. What topics do our researchers work on, where do they publish and with whom? Learn more about the power of Göttingen Campus on our public research database Göttingen Research Online that contains information of [% stats.publications %] publications and XXX [% stats.authors %] authors.</p>
++          <p>Scientific communication takes place in publications and publications tell the profile of Göttingen Campus. What topics do our researchers work on, where do they publish and with whom? Learn more about the power of Göttingen Campus on our public research database Göttingen Research Online that contains information of [% stats.publications %] publications and [% stats.researchers %] authors.</p>
 +      </div>
 +      <div class="col-md-12">
          <ul class="nav nav-tabs" id="indexTab">

@@ -1,0 +1,21 @@
+diff --git a/lib/LibreCat/App/Helper.pm b/lib/LibreCat/App/Helper.pm
+index 367ffed8..eaa92425 100644
+--- a/lib/LibreCat/App/Helper.pm
++++ b/lib/LibreCat/App/Helper.pm
+@@ -280,12 +280,15 @@ sub get_statistics {
+             ]
+         }
+     );
++    my $researcherhits = LibreCat->searcher->search('researcher',
++        {cql => []});
+ 
+     return {
+         publications => $hits->{total},
+         researchdata => $reshits->{total},
+         oahits       => $oahits->{total},
+-        projects => $self->project->count(),
++        projects     => $self->project->count(),
++        researchers  => $researcherhits->{total},
+     };
+ 
+ }
