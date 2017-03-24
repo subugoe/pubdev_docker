@@ -37,7 +37,6 @@ ENV PRE_BUILD build-essential \
     imagemagick \
     libexpat1-dev \
     libssl-dev \
-    libxml2-dev \
     libxslt1-dev \
     libgdbm-dev \
     libyaz-dev \
@@ -64,7 +63,8 @@ RUN apt install --assume-yes --no-install-recommends cpanminus \
     libmodule-install-perl \
     libyaml-perl \
     libb-utils-perl \
-    carton
+    carton \
+    libxml2-dev
 # Workers' Manager
 RUN apt install --assume-yes --no-install-recommends gearman \
     gearman-server \
