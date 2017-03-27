@@ -1,0 +1,30 @@
+diff --git a/scss/custom.scss b/scss/custom.scss
+index ff520a7..d6ab8af 100644
+--- a/scss/custom.scss
++++ b/scss/custom.scss
+@@ -11,10 +11,22 @@
+     margin-right: 0.33em;
+ }
+ 
+-.navbar {
++.navbar-brand img {
++    width: 200px;
++}
++
++.navbar-collapse {
++    box-shadow: none;
++    border-top: 0;
++    background-color: #163776;
++    z-index: 999;
++    border-color: none;
++}
++
++.navbar-header {
+     height: 85px;
+ }
+ 
+-.navbar-brand img {
+-    width: 200px;
++.navbar-inverse {
++    border-color: none;
+ }
