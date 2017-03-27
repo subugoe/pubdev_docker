@@ -1,0 +1,36 @@
+From 3a0b0f283feca92f1f2d54d5cf58feab354eb870 Mon Sep 17 00:00:00 2001
+From: Vitali Peil <vitali.peil@uni-bielefeld.de>
+Date: Wed, 22 Mar 2017 10:25:39 +0100
+Subject: [PATCH] fix mark/unmark, GH #221
+
+---
+ public/javascripts/frontend.js | 2 +-
+ views/mark_all_js.tt           | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/public/javascripts/frontend.js b/public/javascripts/frontend.js
+index d4490f6..73ae45a 100644
+--- a/public/javascripts/frontend.js
++++ b/public/javascripts/frontend.js
+@@ -1,5 +1,5 @@
+ $(function () {
+-    ('.mark').click(function(evt) {
++    $('.mark').click(function(evt) {
+         evt.preventDefault();
+         var a = $(this);
+         var marked = a.data('marked');
+diff --git a/views/mark_all_js.tt b/views/mark_all_js.tt
+index 049104c..7158b63 100644
+--- a/views/mark_all_js.tt
++++ b/views/mark_all_js.tt
+@@ -30,8 +30,8 @@ $(function () {
+             prev = "[% IF qp.person AND qp.person != "" %][% qp.delete('person')%][% request.uri_for("/person/$qp.person", qp) %][% ELSIF qp.department AND qp.department != "" %][% qp.delete('department') %][% request.uri_for("/department/$qp.department", qp) %][% ELSIF qp.publication AND qp.publication != "" %][% qp.delete('publication') %][% request.uri_for("/publication/$qp.publication", qp) %][% END %]  ";
+             // TODO post requests shouldn't contain url params
+             $.ajax({
+-                type: '/marked?x-tunneled-method=DELETE',
+-                url: url,
++                type: 'POST',
++                url: "/marked?x-tunneled-method=DELETE",
+                 dataType: 'json',
+                 success: function(res) {
+                     if(prev){
