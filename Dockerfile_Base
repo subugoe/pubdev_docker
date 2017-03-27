@@ -102,6 +102,8 @@ RUN mkdir -p ${LIBRECATHOME} \
 # Building LibreCat
 WORKDIR ${LIBRECATHOME}
 RUN git checkout ${LIBRECAT_VERSION} && \
+    sed -i "s/requires 'Catmandu', '>=1.0306';/requires 'Catmandu', '==1.0306';/g" cpanfile && \
+    sed -i "s/requires 'Catmandu::Store::MongoDB', '>=0.0403';/requires 'Catmandu::Store::MongoDB', '==0.0403';/g" cpanfile && \
     carton install 
 # This was needed before 0.5.3
 #    rm -rf local/lib/perl5/Search/ && \
