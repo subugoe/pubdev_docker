@@ -24,7 +24,7 @@ replacements = collections.OrderedDict()
 
 # Small history
 # 30.1.: Some changes from 894b3660d750cefbe1ce13ea2dbb800bf498ae4d integrated
-# 28.3.: Strings from older versions removed new added
+# 28.3.: Strings from older versions removed new added and adapt email adresses
 replacements['http://ekvv.uni-bielefeld.de/pers_publ/publ/PersonDetail.jsp?personId='] = ''
 replacements['https://ekvv.uni-bielefeld.de/pers_publ/publ/PersonDetail.jsp?personId='] = ''
 replacements[r'fix: [\"add_field(\'host\',\'http://localhost:5001\')\"]'] = r'fix: [\"add_field(\'host\',\'http://pub-dev.sub.uni-goettingen.de\')\"]'
@@ -54,7 +54,7 @@ replacements['LibreCat Herausgeber'] = 'Göttinger Herausgeber'
 replacements['Ehemalige LibreCat Autoren'] = 'Ehemalige Göttinger Autoren'
 replacements[r'local_brand: "LibreCat"'] = 'local_brand: "GRO"'
 #replacements['LibreCat Only'] = 'GRO Only'
-replacements['helpdesk@librecat.org'] = 'beucke@sub.uni-goettingen.de'
+replacements['helpdesk@librecat.org'] = 'support-gro@sub.uni-goettingen.de'
 replacements['Publications at LibreCat University'] = 'Publications at Göttingen University'
 replacements['Former LibreCat University Researcher'] = 'Former Göttingen University Researcher'
 replacements['LibreCat Authors'] = 'Göttingen Authors'
@@ -71,7 +71,7 @@ replacements['I herewith place this document at LibreCat University'] = 'I herew
 replacements['Activate if LibreCat author.'] = 'Activate if Göttingen author.'
 replacements['L6000-0538'] = ''
 replacements['24060-6'] = '2020450-4'
-replacements['helpdesk@librecat.org'] = 'epu@sub.uni-goettingen.de'
+replacements['helpdesk@librecat.org'] = 'support-gro@sub.uni-goettingen.de'
 replacements['PEVZ-ID'] = 'GRO-ID'
 replacements['appname: "LibreCat"'] = 'appname: "Göttingen Research Online"'
 replacements['Open Data PUB'] = 'Open Data GRO'
@@ -122,7 +122,7 @@ def change_file (file, edit, verbose):
                         print "(Warning, no replacement for  \"" + search+ "\")"
                     result = True
                     if verbose:
-                        print "Change \"" + line + "\" to \"" + newline + "\"" 
+                        print "Change \"" + line + "\" to \"" + newline + "\""
                     line = newline
                     if fro not in replaced:
                         replaced.append(fro)
@@ -135,7 +135,7 @@ def change_file (file, edit, verbose):
         with open(resultfile, 'w') as new_file:
             new_file.write(content)
         print "File " + resultfile + " written"
-            
+
 def main(argv):
     help = 'goettingenfy.py -s <srcdir>'
     test = False
@@ -145,7 +145,7 @@ def main(argv):
     except getopt.GetoptError:
        print help
        sys.exit(2)
- 
+
     for opt, arg in opts:
       if opt == '-h':
          print help
