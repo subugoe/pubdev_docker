@@ -1,0 +1,12 @@
+diff --git a/views/index.tt b/views/index.tt
+index c0ff22b..7c3e9c6 100644
+--- a/views/index.tt
++++ b/views/index.tt
+@@ -12,6 +12,7 @@
+     <div class="row margin-top1">
+       <div class="col-md-12">
+           <p>Scientific communication takes place in publications and publications tell the profile of Göttingen Campus. What topics do our researchers work on, where do they publish and with whom? Learn more about the power of Göttingen Campus on our public research database Göttingen Research Online that contains information of [% stats.publications %] publications and [% stats.researchers %] authors.</p>
++          <p>Our service is currently under construction and will include more authors, their publications and also multiple Göttingen Campus or external affiliations over time. Please get in touch with us if you wish to have your publication list included with special priority.</p>
+       </div>
+       <div class="col-md-12">
+         <ul class="nav nav-tabs" id="indexTab">
