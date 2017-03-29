@@ -1,12 +1,12 @@
-diff --git a/views/person/list.tt b/views/person/list.tt
-index 2576eb1..e900252 100644
+only in patch2:
+unchanged:
 --- a/views/person/list.tt
 +++ b/views/person/list.tt
-@@ -9,6 +9,7 @@
-   <div class="col-md-11 col-sm-12"><!-- main content -->
-     <div id="banner">
-       <h1>[% h.loc("header.title") %]</h1>
-+      <p>By now, [% stats.researchers %] authors are listed on individual author pages in GRO, with more to come. Please use the character tabs for browsing through the available authors. Publication data in GRO stems from several sources such as author homepages, authoritative databases such as Web of Science or CrossRef and have been carefully curated by a library team. Authors on GRO can export their publication lists in multiple formats or embed the lists dynamically on external websites.</p>
-     </div>
-     <div class="row margin-top1">
-       <div class="col-md-12">
+@@ -1,6 +1,7 @@
+ [%- path = request.path %]
+ [%- qp = request.params.hash %]
+ [%- qp.delete('splat') %]
++[%- stats = h.get_statistics %]
+ [%- PROCESS header.tt %]
+ 
+ <!-- BEGIN person/list.tt -->
