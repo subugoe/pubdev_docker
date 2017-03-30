@@ -1,0 +1,12 @@
+diff --git a/config/schemas.yml b/config/schemas.yml
+index f0741ad0..5458442a 100644
+--- a/config/schemas.yml
++++ b/config/schemas.yml
+@@ -903,6 +903,7 @@ researcher:
+            - lncs
+            - mla
+            - wels
++           - short
+        description: "Preferred citation style"
+     alias:
+       type: string
