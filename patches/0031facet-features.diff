@@ -1,12 +1,14 @@
 diff --git a/config/features.yml b/config/features.yml
-index c896d0f7..6c40e043 100644
+index c896d0f7..2db77c97 100644
 --- a/config/features.yml
 +++ b/config/features.yml
-@@ -9,6 +9,14 @@ views:
+@@ -7,8 +7,14 @@ views:
+   frontend:
+     publication:
        facets:
-         - - template: facets/popular_science
-             facet: popular_science
-+          - template: facets/type
+-        - - template: facets/popular_science
+-            facet: popular_science
++        - - template: facets/type
 +            facet: type
 +          - template: facets/author
 +            facet: author
