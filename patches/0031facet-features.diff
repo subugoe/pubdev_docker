@@ -1,8 +1,8 @@
 diff --git a/config/features.yml b/config/features.yml
-index c896d0f7..2db77c97 100644
+index c896d0f7..899add1a 100644
 --- a/config/features.yml
 +++ b/config/features.yml
-@@ -7,8 +7,14 @@ views:
+@@ -7,17 +7,20 @@ views:
    frontend:
      publication:
        facets:
@@ -19,3 +19,12 @@ index c896d0f7..2db77c97 100644
            - template: facets/extern
              facet: extern
              min: 1
+           - template: facets/open_access
+             facet: open_access
+             min: 1
+-          - template: facets/isi_pmid
+-            facet: [isi, pmid]
+-            min: 1
+   backend:
+     publication:
+       facets:
