@@ -13,7 +13,7 @@ LIBRECAT_TAG=`grep LIBRECAT_VERSION Dockerfile_Base | head -1 | cut -d '=' -f 2`
 
 # Check if there are arguments, this can change the directory where a copy of LibreCat
 # will be placed.
-echo "Using LibreCat installation at $LIBRECATHOME"
+echo "Using LibreCat installation at $LIBRECATHOME Version $LIBRECAT_TAG"
 
 # Set call to the cpanm script here if guessing doesn't work
 #CPANM=
@@ -51,6 +51,7 @@ if [ -n "$LIBRECAT_TAG" ]; then
     cd $LIBRECATHOME
     echo "Checking out tag $LIBRECAT_TAG"
     git checkout $LIBRECAT_TAG
+    echo "$LIBRECAT_TAG" > .librecat-version
     cd $WD
 fi
 
@@ -78,14 +79,16 @@ echo $(perl -version | sed '2,2!d') > $PERL_VERSION_FILE
 
 # Build a fully patched version for development
 cd $LIBRECATHOME
+echo "Copy patches"
 cp $WD/patches/*.patch .
 cp $WD/patches/*.diff .
+echo "Copy scripts"
 cp $WD/robonils.sh .
 cp $WD/goettingenfy.py .
 LOCAL_LAYER=$LIBRECATHOME
 export LIBRECATHOME LOCAL_LAYER
 echo "Using sources from $LIBRECATHOME to build layer in $LOCAL_LAYER"
 bash ./robonils.sh
-echo "Running goettingenfy"
+echo "Running goettingenfy.py"
 python goettingenfy.py -s  .
 rm *.patch *.diff robonils.sh goettingenfy.py
