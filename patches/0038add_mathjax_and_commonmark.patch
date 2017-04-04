@@ -1,0 +1,32 @@
+--- src/views/footer.tt	2017-04-04 16:24:23.000000000 +0200
++++ src2/views/footer.tt	2017-04-04 16:29:07.000000000 +0200
+@@ -49,6 +49,29 @@
+         </div>
+     </div>
+ </div>
++
++<script src="/javascripts/commonmarkjs/dist/commonmark.min.js"></script>
++<script>
++var reader = new commonmark.Parser();
++var writer = new commonmark.HtmlRenderer();
++$(document).ready(function () {
++    $('.cmark').each(function () {
++    var text = $(this).html();
++    parsed = reader.parse(text);
++    var result = writer.render(parsed); // result is a String
++    var r = result.replace(/<p>(.*?)<\/p>/g,"$1");
++    $(this).html("");
++    $(this).html(r);
++  });
++});
++</script>
++<script type="text/x-mathjax-config">
++  MathJax.Hub.Config({
++    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
++  });
++</script>
++<script async src="/javascripts/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
++
+ </body>
+ 
+ <!-- END footer.tt -->
