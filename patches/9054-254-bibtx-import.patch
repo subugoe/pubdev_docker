@@ -1,0 +1,24 @@
+From 4abc34f54a6c1a59fe25e48791aa93056f2eb798 Mon Sep 17 00:00:00 2001
+From: Najko Jahn <najko.jahn@gmail.com>
+Date: Tue, 4 Apr 2017 13:44:26 +0200
+Subject: [PATCH] typo in issn/isbn mapping
+
+---
+ fixes/bibtex_mapping.fix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/fixes/bibtex_mapping.fix b/fixes/bibtex_mapping.fix
+index d62f0d7..dfd057a 100644
+--- a/fixes/bibtex_mapping.fix
++++ b/fixes/bibtex_mapping.fix
+@@ -12,8 +12,8 @@ move_field(keywords, keyword)
+ move_field(abstract, abstract.0.text)
+ move_field(number, issue)
+ move_field(address, place)
+-move_field(issn, 'publication_identifier.isbn.$append')
+-move_field(isbn, 'publication_identifier.issn.$append')
++move_field(issn, 'publication_identifier.issn.$append')
++move_field(isbn, 'publication_identifier.isbn.$append')
+ move_field(journal, publication)
+ move_field(series, series_title)
+ move_field(booktitle, publication)
