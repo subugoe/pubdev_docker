@@ -25,6 +25,7 @@ WORKDIR ${LIBRECATHOME}
 RUN mkdir -p logs
 COPY layers.yml .
 COPY boot.sh .
+RUN sed -i 's/development/deployment/' boot.sh
 COPY gearman-entrypoint.sh .
 COPY docker-entrypoint_Prod.sh .
 
