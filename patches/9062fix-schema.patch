@@ -1,0 +1,15 @@
+diff --git a/config/schemas.yml b/config/schemas.yml
+index f0741ad0..477d17f7 100644
+--- a/config/schemas.yml
++++ b/config/schemas.yml
+@@ -501,9 +501,7 @@ publication:
+       type: string
+       description: "Publisher"
+     year:
+-      oneOf:
+-        - type: string
+-        - type: integer
++      type: string
+       description: "Publication year"
+     extern:
+       oneOf:
