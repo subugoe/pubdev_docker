@@ -17,7 +17,6 @@ ENV LIBRECATHOME /srv/LibreCat
 ENV MYSQL_USER root
 ENV NODEJS_URL https://deb.nodesource.com/setup_6.x
 ENV PERL5LIB ${LIBRECATHOME}/local/lib/perl5:${LIBRECATHOME}/lib
-RUN locale-gen en_US.UTF-8  
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
@@ -25,7 +24,8 @@ ENV LC_ALL en_US.UTF-8
 ENV REQ_BUILD sudo \
     zlib1g \
     libaio1 
-ENV PRE_BUILD build-essential \
+ENV PRE_BUILD locales \
+    build-essential \
     ca-certificates \
     wget \
     g++ \
@@ -55,7 +55,9 @@ RUN apt clean \
     && apt upgrade -y \
     && apt dist-upgrade -y \
     && apt install --assume-yes --no-install-recommends ${PRE_BUILD} ${REQ_BUILD}
-# Perl
+RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && locale-gen en_US.UTF-8
+
+# Perl, Workers, MySQL
 RUN apt install --assume-yes --no-install-recommends cpanminus \
     libcapture-tiny-perl \
     libdbd-mysql-perl \
@@ -64,28 +66,23 @@ RUN apt install --assume-yes --no-install-recommends cpanminus \
     libb-utils-perl \
     carton \
     libxml2-dev \
-    libxslt1-dev
-
-# Workers' Manager
-RUN apt install --assume-yes --no-install-recommends gearman \
+    libxslt1-dev \
+    gearman \
     gearman-server \
     gearman-tools \
-    libgearman-dev
-# MySQL
-RUN apt install --assume-yes --no-install-recommends mysql-client \
+    libgearman-dev \
+    mysql-client \
     libmysqlclient-dev
 
 # NodeJS
-#RUN curl -sL ${NODEJS_URL} | sudo -E bash - \
 RUN curl -sL ${NODEJS_URL} > /tmp/nodejs_preinstall \
     && sed -i 's/apt\-get/apt/g' /tmp/nodejs_preinstall \
     && sed -i 's/apt\ install\ -y/apt\ install\ \-\-assume\-yes\ \-\-no\-install\-recommends/g' /tmp/nodejs_preinstall \
     && chmod +x /tmp/nodejs_preinstall \
     && bash - /tmp/nodejs_preinstall \
     && apt install --assume-yes --no-install-recommends nodejs \
-    && rm /tmp/nodejs_preinstall
-
-RUN npm -g install node-sass
+    && rm /tmp/nodejs_preinstall \
+    && npm -g install node-sass
 
 # Sets the version of LibreCat and repository location to check out
 ARG LIBRECAT_VERSION=0.6.2
