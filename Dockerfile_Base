@@ -86,7 +86,7 @@ RUN curl -sL ${NODEJS_URL} > /tmp/nodejs_preinstall \
     && npm -g install node-sass
 
 # Sets the version of LibreCat and repository location to check out
-ARG LIBRECAT_VERSION=0.6.2
+ARG LIBRECAT_VERSION=0.7.0
 ARG LIBRECAT_LOCATION=https://github.com/LibreCat/LibreCat.git
 
 # Clone LibreCat
