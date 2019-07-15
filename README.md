@@ -137,7 +137,7 @@ the end of September. Besides, the volumes(=external folders) per default in the
 2016.09.26
 ----------
 
-For now we abondoned the notion of having **OpenSSH-Server** inside docker.
+For now we abandoned the notion of having **OpenSSH-Server** inside docker.
 Right now having a working system based on orignal development of [LibreCat
 Core-Developers](https://github.com/LibreCat/LibreCat) is highly prioritized.
 Thus in the new version the git-repository of LibreCat -not our fork!- will be
